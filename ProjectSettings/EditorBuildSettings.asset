@@ -5,15 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/HauntedHouse.unity
+    path: Assets/EveryScene/HauntedHouse.unity
     guid: bbca8767782a249c28ede86abc70fffd
   - enabled: 1
-    path: Assets/Warehouse.unity
+    path: Assets/EveryScene/Warehouse.unity
     guid: 74464c2c834a946c6a22647e970dd98b
+  - enabled: 1
+    path: Assets/EveryScene/Welcome.unity
+    guid: 24e6be67628d143d3b0fbb0dbde18f70
+  - enabled: 1
+    path: Assets/EveryScene/KemasSampleScene.unity
+    guid: 49c32cfaa4b9fbb4b8b1f5615fed2cb9
+  - enabled: 1
+    path: Assets/EveryScene/Bakery.unity
+    guid: b0a3a0a55ec293747b57dec2449a9129
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

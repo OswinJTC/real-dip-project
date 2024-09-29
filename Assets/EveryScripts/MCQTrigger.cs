@@ -53,9 +53,9 @@ public class MCQTrigger : MonoBehaviour
         // Start the conversation dialogue after the video
         DialogueManager.DialogueLine[] lines = new DialogueManager.DialogueLine[]
         {
-            new DialogueManager.DialogueLine { speaker = "Player", text = "What happened here?" },
-            new DialogueManager.DialogueLine { speaker = "Boss", text = "The warehouse has been abandoned for years." },
-            new DialogueManager.DialogueLine { speaker = "Player", text = "Let's search for clues." },
+            new DialogueManager.DialogueLine { speaker = "Player", text = "00001" },
+            new DialogueManager.DialogueLine { speaker = "Boss", text = "00002" },
+            new DialogueManager.DialogueLine { speaker = "Player", text = "00003" },
             new DialogueManager.DialogueLine { speaker = "Boss", text = "Be careful, it's not safe." }
         };
 
