@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/RandomHouseTestScene.unity
+    guid: 45b866b387ac4a449b7cc2f174d12434
+  - enabled: 1
+    path: Assets/Scenes/BBLivingroomScene.unity
+    guid: 7c3bd9927332c7e40800bd3d11e7af3f
+  - enabled: 1
+    path: Assets/Scenes/KitchenScene.unity
+    guid: b2d39a88c6d792d4488800133e104eb1
+  - enabled: 1
+    path: Assets/Scenes/BedroomScene.unity
+    guid: 39fb915c286b7d441928438f1f101d5f
+  - enabled: 1
+    path: Assets/Scenes/BakeryScene.unity
+    guid: de95ca8ab834b0148b82f822262fac9b
+  - enabled: 1
+    path: Assets/Scenes/TutBasementScene.unity
+    guid: 9ebc8b5e588d7544999532f4d0d3beac
+  - enabled: 1
+    path: Assets/Scenes/TutLRoomCScene.unity
+    guid: d261a72135fec45469ef8251441a972d
+  - enabled: 1
+    path: Assets/Scenes/TutLRoomDScene.unity
+    guid: d20b1aaa6df61834995a246ad4b7807e
+  - enabled: 1
+    path: Assets/Scenes/TutStudyCScene.unity
+    guid: 1ba2aa7ccd4240a448c347b0e549e66d
+  - enabled: 1
+    path: Assets/Scenes/TutStudyDScene.unity
+    guid: 7c7a69967480e7045914f0d36f708d84
+  - enabled: 1
+    path: Assets/Scenes/TutBRoomCScene.unity
+    guid: 5b81509ca226abf428ad94632ab87e7e
+  - enabled: 1
+    path: Assets/Scenes/TutBRoomDScene.unity
+    guid: 83c2bf5ce0321d146adddc60fadb0bec
+  - enabled: 1
+    path: Assets/Scenes/TutKitchenCScene.unity
+    guid: b17d4c6cf99b43248b6262aa6bce6005
+  - enabled: 1
+    path: Assets/Scenes/TutKitchenDScene.unity
+    guid: ce1b269a51a75b740b85ba55b4cf2110
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

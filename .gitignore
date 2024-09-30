@@ -1,0 +1,22 @@
+# Ignore Unity-generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Uu]ser[Ss]ettings/
+
+# Ignore meta files (if not collaborating on asset structure)
+*.meta
+
+# Ignore 3D models and large textures (optional, or use Git LFS)
+# *.fbx
+# *.png
+# *.jpg
+
+# Ignore Visual Studio project files
+*.csproj
+*.sln
+
