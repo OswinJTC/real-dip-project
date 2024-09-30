@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 726ae143185b3914e85c146ac9670351
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 116296
+  packageName: Pixel Perfect Retro Camera
+  packageVersion: 1.1
+  assetPath: Assets/Wolv Interactive/Pixel Perfect Retro Camera/Animations/Knight
+    Idle.controller
+  uploadId: 244362

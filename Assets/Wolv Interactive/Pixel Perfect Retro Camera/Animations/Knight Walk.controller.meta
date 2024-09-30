@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 364e734f657cd9b49a62c121dc980963
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 116296
+  packageName: Pixel Perfect Retro Camera
+  packageVersion: 1.1
+  assetPath: Assets/Wolv Interactive/Pixel Perfect Retro Camera/Animations/Knight
+    Walk.controller
+  uploadId: 244362
