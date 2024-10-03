@@ -23,6 +23,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/EveryScene/Bakery.unity
     guid: b0a3a0a55ec293747b57dec2449a9129
+  - enabled: 1
+    path: Assets/EveryScene/TutBRoomCScene.unity
+    guid: 63aba358b85661c43977ef5685c5ef67
+  - enabled: 1
+    path: Assets/EveryScene/TutKitchenCScene.unity
+    guid: bbbc99f897062e4479c1b7e44088e38b
+  - enabled: 1
+    path: Assets/EveryScene/TutLRoomCScene.unity
+    guid: 0b393cf1ea647874cb8eb0216c393de2
+  - enabled: 1
+    path: Assets/EveryScene/TutStudyCScene.unity
+    guid: 09dcd47581ce9414fae71ea760929018
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
