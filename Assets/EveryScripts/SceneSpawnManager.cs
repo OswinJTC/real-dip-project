@@ -2,10 +2,17 @@ using UnityEngine;
 
 public class SceneSpawnManager : MonoBehaviour
 {
-    public Transform doorToStudySpawnPoint;    // Set spawn points for each door
+    // Set spawn points for each door (both for leaving and returning to the original room)
+    public Transform doorToStudySpawnPoint;
     public Transform doorToKitchenSpawnPoint;
     public Transform doorToRoomSpawnPoint;
-    public GameObject playerPrefab;            // Reference to the player prefab if you instantiate them
+    
+    // Spawn points when returning to the original room
+    public Transform doorToLivingRoomFromStudy;
+    public Transform doorToLivingRoomFromKitchen;
+    public Transform doorToLivingRoomFromRoom;
+
+    public GameObject playerPrefab;  // Reference to the player prefab if needed
 
     void Start()
     {
@@ -17,9 +24,10 @@ public class SceneSpawnManager : MonoBehaviour
             player = Instantiate(playerPrefab);
         }
 
-        // Set the player's position based on the last entered door
+        // Adjust player position based on the last entered door
         switch (lastEnteredDoor)
         {
+            // For entering other rooms
             case "doortostudy":
                 player.transform.position = doorToStudySpawnPoint.position;
                 player.transform.rotation = doorToStudySpawnPoint.rotation;
@@ -32,6 +40,21 @@ public class SceneSpawnManager : MonoBehaviour
                 player.transform.position = doorToRoomSpawnPoint.position;
                 player.transform.rotation = doorToRoomSpawnPoint.rotation;
                 break;
+
+            // For returning to the original room (living room)
+            case "doorToLivingRoomFromStudy":
+                player.transform.position = doorToLivingRoomFromStudy.position;
+                player.transform.rotation = doorToLivingRoomFromStudy.rotation;
+                break;
+            case "doorToLivingRoomFromKitchen":
+                player.transform.position = doorToLivingRoomFromKitchen.position;
+                player.transform.rotation = doorToLivingRoomFromKitchen.rotation;
+                break;
+            case "doorToLivingRoomFromRoom":
+                player.transform.position = doorToLivingRoomFromRoom.position;
+                player.transform.rotation = doorToLivingRoomFromRoom.rotation;
+                break;
+
             default:
                 Debug.Log("Spawn position not found for door: " + lastEnteredDoor);
                 break;

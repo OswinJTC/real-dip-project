@@ -776,6 +776,7 @@ GameObject:
   - component: {fileID: 834909359}
   - component: {fileID: 834909358}
   - component: {fileID: 834909361}
+  - component: {fileID: 834909362}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -818,10 +819,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0005567968
-    y: 0.01263538
-    width: 0.9988864
-    height: 0.97472924
+    x: 0
+    y: 0.14705881
+    width: 1
+    height: 0.7058824
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 70
@@ -871,6 +872,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   referenceHeight: 180
   pixelsPerUnit: 32
+--- !u!114 &834909362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834909357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2749e7a6473c643148eefa557c3d3a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1067772695}
+  distance: 10
+  height: 5
 --- !u!1001 &853120980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1043,7 +1059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   turningSpeed: 1
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 834909359}
 --- !u!136 &1067772692
 CapsuleCollider:
   m_ObjectHideFlags: 0
