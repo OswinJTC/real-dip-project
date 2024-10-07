@@ -1,42 +1,69 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterChase : MonoBehaviour
 {
-    public Transform player;               // Reference to the player
-    public float chaseSpeed = 5f;          // Speed of the monster
-    public float detectionRadius = 10f;    // Radius where the monster starts chasing the player
-    public float cameraDistanceInFront = 3f; // Distance in front of the player for the camera
-    public float cameraHeight = 2f;        // Height of the camera above the player
-    public Camera mainCamera;              // Reference to the main camera
-    public Camera2D5DFollow cameraFollowScript; // Reference to your existing Camera2D5DFollow script
-    private bool isChasing = false;        // Flag to track if monster is chasing the player
+    public Transform player;                   // Reference to the player
+    public float chaseSpeed = 5f;              // Speed of the monster when chasing
+    public float roamRadius = 5f;              // Radius within which the monster roams
+    public float detectionRadius = 10f;        // Radius where the monster starts chasing the player
+    public float roamSpeed = 2f;               // Speed of the monster when roaming
+    public Camera2D5DFollow cameraFollowScript; // Reference to the 2.5D camera follow script
+    private Vector3 roamPosition;              // The target position for roaming
+    private bool isChasing = false;            // Flag to track if the monster is chasing the player
 
-    private Vector3 initialCameraPosition; // Original camera position
-    private Quaternion initialCameraRotation; // Original camera rotation
+    public Renderer monsterRenderer;           // Renderer to change the monster's color
+    public Color normalColor = Color.green;    // Default color when roaming
+    public Color chaseColor = Color.red;       // Color when chasing the player
+
+    public Text healthText;                    // UI Text element to display health
 
     void Start()
     {
-        // Store the initial camera position and rotation for when the chase ends
-        initialCameraPosition = mainCamera.transform.position;
-        initialCameraRotation = mainCamera.transform.rotation;
+        roamPosition = GetRoamingPosition();   // Set initial roaming position
+        UpdateHealthUI();                      // Initialize health display with global health value
+        monsterRenderer.material.color = normalColor; // Set initial monster color
     }
 
     void Update()
     {
-        // Check if the player is within the detection radius to start the chase
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        
+
+        // Change color and start chasing when the player is close
         if (distanceToPlayer <= detectionRadius && !isChasing)
         {
-            StartChase(); // Start the chase when the player enters the detection radius
+            StartChase(); // Start the chase
         }
 
-        // If the monster is chasing, move towards the player
+        // Handle roaming when not chasing
+        if (!isChasing)
+        {
+            Roam();
+        }
+
+        // Move towards the player if chasing
         if (isChasing)
         {
             ChasePlayer();
-            MoveCameraInFrontOfPlayer(); // Move the camera dynamically in front of the player
         }
+    }
+
+    void Roam()
+    {
+        if (Vector3.Distance(transform.position, roamPosition) < 1f)
+        {
+            roamPosition = GetRoamingPosition();  // Get new random position
+        }
+
+        // Move towards the roaming position
+        Vector3 direction = (roamPosition - transform.position).normalized;
+        transform.position += direction * roamSpeed * Time.deltaTime;
+    }
+
+    Vector3 GetRoamingPosition()
+    {
+        // Calculate a random point within a small radius
+        return transform.position + (Random.insideUnitSphere * roamRadius);
     }
 
     void StartChase()
@@ -44,8 +71,8 @@ public class MonsterChase : MonoBehaviour
         isChasing = true;
         Debug.Log("Monster started chasing the player!");
 
-        // Disable the 2.5D follow script to take direct control of the camera
-        cameraFollowScript.enabled = false;
+        // Change the monster's color to indicate chase
+        monsterRenderer.material.color = chaseColor;
     }
 
     void ChasePlayer()
@@ -54,33 +81,37 @@ public class MonsterChase : MonoBehaviour
         Vector3 direction = (player.position - transform.position).normalized;
         transform.position += direction * chaseSpeed * Time.deltaTime;
 
-        // Optionally, rotate the monster to face the player
+        // Rotate the monster to face the player
         Quaternion lookRotation = Quaternion.LookRotation(player.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * chaseSpeed);
     }
 
-    void MoveCameraInFrontOfPlayer()
+    private void OnCollisionEnter(Collision collision)
     {
-        // Calculate the position in front of the player
-        Vector3 cameraPosition = player.position + player.forward * cameraDistanceInFront + Vector3.up * cameraHeight;
-        
-        // Move the camera to that position
-        mainCamera.transform.position = cameraPosition;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Monster touches the player, reduce global health from GameManager
+            GameManager.instance.playerHealth -= 3;
+            UpdateHealthUI();
 
-        // Make the camera look at the player's face
-        mainCamera.transform.LookAt(player.position + Vector3.up * cameraHeight);
+            if (GameManager.instance.playerHealth <= 0)
+            {
+                EndChase(); // End the chase if health is 0
+            }
+        }
     }
 
-    public void StopChase()
+    void EndChase()
     {
         isChasing = false;
         Debug.Log("Monster stopped chasing the player!");
+        // Reset monster's color back to normal
+        monsterRenderer.material.color = normalColor;
+    }
 
-        // Reset the camera to its original position and rotation
-        mainCamera.transform.position = initialCameraPosition;
-        mainCamera.transform.rotation = initialCameraRotation;
-
-        // Re-enable the 2.5D follow script to resume normal camera behavior
-        cameraFollowScript.enabled = true;
+    void UpdateHealthUI()
+    {
+        // Update the health display in the UI using global health from GameManager
+        healthText.text = "Health: " + GameManager.instance.playerHealth.ToString();
     }
 }

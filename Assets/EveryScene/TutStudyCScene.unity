@@ -3003,11 +3003,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!1001 &1581728408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3416,10 +3416,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.00044208765
-    y: 0.14705881
-    width: 0.9991158
-    height: 0.7058824
+    x: 0
+    y: 0.12577963
+    width: 1
+    height: 0.74844074
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 70
@@ -3483,7 +3483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1579944794}
   distance: 10
-  height: 10
+  height: 7
 --- !u!1 &1700116092
 GameObject:
   m_ObjectHideFlags: 0
