@@ -9,32 +9,35 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/EveryScene/HauntedHouse.unity
+    path: Assets/EveryScene/test/HauntedHouse.unity
     guid: bbca8767782a249c28ede86abc70fffd
   - enabled: 1
-    path: Assets/EveryScene/Warehouse.unity
+    path: Assets/EveryScene/test/Warehouse.unity
     guid: 74464c2c834a946c6a22647e970dd98b
   - enabled: 1
     path: Assets/EveryScene/Welcome.unity
     guid: 24e6be67628d143d3b0fbb0dbde18f70
   - enabled: 1
-    path: Assets/EveryScene/KemasSampleScene.unity
+    path: Assets/EveryScene/test/KemasSampleScene.unity
     guid: 49c32cfaa4b9fbb4b8b1f5615fed2cb9
   - enabled: 1
-    path: Assets/EveryScene/Bakery.unity
+    path: Assets/EveryScene/puzzles/Bakery.unity
     guid: b0a3a0a55ec293747b57dec2449a9129
   - enabled: 1
-    path: Assets/EveryScene/TutBRoomCScene.unity
+    path: Assets/EveryScene/tut/TutBRoomCScene.unity
     guid: 63aba358b85661c43977ef5685c5ef67
   - enabled: 1
-    path: Assets/EveryScene/TutKitchenCScene.unity
+    path: Assets/EveryScene/tut/TutKitchenCScene.unity
     guid: bbbc99f897062e4479c1b7e44088e38b
   - enabled: 1
-    path: Assets/EveryScene/TutLRoomCScene.unity
+    path: Assets/EveryScene/tut/TutLRoomCScene.unity
     guid: 0b393cf1ea647874cb8eb0216c393de2
   - enabled: 1
-    path: Assets/EveryScene/TutStudyCScene.unity
+    path: Assets/EveryScene/tut/TutStudyCScene.unity
     guid: 09dcd47581ce9414fae71ea760929018
+  - enabled: 1
+    path: Assets/EveryScene/KemasEnvironmentShaderProblem.unity
+    guid: 3482bb6143d54784c85900a4a4fbfa2f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

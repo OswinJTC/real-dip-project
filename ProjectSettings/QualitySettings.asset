@@ -20,7 +20,10 @@ QualitySettings:
     shadowmaskMode: 0
     skinWeights: 2
     globalTextureMipmapLimit: 0
-    textureMipmapLimitSettings: []
+    textureMipmapLimitSettings:
+    - serializedVersion: 0
+      limitBiasMode: 0
+      limitBias: 0
     anisotropicTextures: 1
     antiAliasing: 0
     softParticles: 0
@@ -73,7 +76,10 @@ QualitySettings:
     shadowmaskMode: 1
     skinWeights: 4
     globalTextureMipmapLimit: 0
-    textureMipmapLimitSettings: []
+    textureMipmapLimitSettings:
+    - serializedVersion: 0
+      limitBiasMode: 1
+      limitBias: 0
     anisotropicTextures: 2
     antiAliasing: 0
     softParticles: 0
@@ -113,7 +119,8 @@ QualitySettings:
     excludedTargetPlatforms:
     - Android
     - iPhone
-  m_TextureMipmapLimitGroupNames: []
+  m_TextureMipmapLimitGroupNames:
+  - New Group
   m_PerPlatformDefaultQuality:
     Android: 0
     GameCoreScarlett: 1
