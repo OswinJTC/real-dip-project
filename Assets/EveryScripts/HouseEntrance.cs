@@ -1,33 +1,21 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;  // For scene loading
+using UnityEngine.SceneManagement;
 
 public class HouseEntrance : MonoBehaviour
 {
-    private bool isPlayerNear = false;  // Flag to track if the player is near the house
-
-    void OnTriggerEnter(Collider other)
-    {
-        // Check if the object entering the trigger is the player
-        if (other.CompareTag("Player"))
-        {
-            isPlayerNear = true;  // Set the flag when the player is near
-            Debug.Log("Player is near the house. Press E to enter.");
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        // Reset the flag when the player leaves the trigger area
-        if (other.CompareTag("Player"))
-        {
-            isPlayerNear = false;
-        }
-    }
+    public float detectionRadius = 5f;  // Set a custom detection radius
+    public Transform player;            // Reference to the player's transform
 
     void Update()
     {
-        // Check if the player is near the house and presses the "E" key
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        // Calculate the distance between the player and the house
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        // Log the current distance for debugging purposes
+        Debug.Log("Current distance to player: " + distanceToPlayer);
+
+        // Check if the player is within the detection radius and presses the "E" key
+        if (distanceToPlayer <= detectionRadius && Input.GetKeyDown(KeyCode.E))
         {
             EnterHouse();
         }
@@ -36,6 +24,14 @@ public class HouseEntrance : MonoBehaviour
     void EnterHouse()
     {
         Debug.Log("Entering the house...");
-        SceneManager.LoadScene("TutLRoomCScene");  // Load the HAHAHA scene
+        SceneManager.LoadScene("TutLRoomDScene");  // Load the scene
+    }
+
+    // Optional: Visualize the detection radius in the scene editor
+    void OnDrawGizmosSelected()
+    {
+        // Draw a wireframe sphere in the Scene view to visualize the detection radius
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }
 }

@@ -36,6 +36,6 @@ public class WelcomeToIntro : MonoBehaviour
         yield return new WaitForSeconds((float)videoPlayer.length);
 
         // After the video ends, load the next scene
-        SceneManager.LoadScene("KemasSampleScene");
+        SceneManager.LoadScene("KemasEnvironmentShaderProblem");
     }
 }
