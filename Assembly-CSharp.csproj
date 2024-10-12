@@ -1,21 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="Current">
   <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <BaseIntermediateOutputPath>Temp\obj\$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
   </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Include="Unity" />
+  </ItemGroup>
   <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9.0</LangVersion>
+    <Configurations>Debug;Release</Configurations>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FAF19922-D86E-A6A4-525A-2A939E243352}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,23 +44,21 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <NoConfig>true</NoConfig>
+    <NoStandardLibraries>true</NoStandardLibraries>
     <NoStdLib>true</NoStdLib>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
-    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
+    <NoConfig>true</NoConfig>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
-    <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
+    <UnityProjectGeneratorStyle>SDK</UnityProjectGeneratorStyle>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>6000.0.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
@@ -66,28 +69,29 @@
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\ButtonImageChanger.cs" />
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scenes\Example\Spin.cs" />
-    <Compile Include="Assets\EveryScripts\DialogueManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\16- FramePerfect Rotation\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExampleCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\FlickeringImage.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\SceneSwitchGen.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow.cs" />
-    <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\MouseLook.cs" />
     <Compile Include="Assets\EveryScripts\MainMenu.cs" />
+    <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\MouseLook.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\Game1HouseInteraction.cs" />
+    <Compile Include="Assets\EveryScripts\KitchenBloodElimination.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\2- Basic Movement and Gravity\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\BalloonPuzzle\Balloon Puzzle\ColourScript.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\Teleporter.cs" />
-    <Compile Include="Assets\EveryScripts\Game1HouseInteraction.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Z Axis -1\Drawer_Pull_Zopp.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\c- Wall Jumping\MyCharacterController.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\MCQTrigger.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipR.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\ExampleAIController.cs" />
+    <Compile Include="Assets\EveryScripts\RoomBloodElimination.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\7- Orienting towards arbitrary up direction\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\10- Multiple movement states setup\Scripts\MyPlayer.cs" />
-    <Compile Include="Assets\EveryScripts\SceneSpawnManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\4- Landing and leaving ground\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Drawer\X Axis\Drawer_Pull_X.cs" />
-    <Compile Include="Assets\EveryScripts\DialogueTrigger.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\FirstIntroduceStory.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\KinematicCharacterSystem.cs" />
     <Compile Include="Assets\Bakery\AddButtons.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\c- Wall Jumping\MyPlayer.cs" />
@@ -99,6 +103,7 @@
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\6- Crouching\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\16- FramePerfect Rotation\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\EveryScripts\StudyRoomBloodElimination.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\PlayableMover.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\5- Adding velocities and impulses\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\13- Swimming state\Scripts\MyPlayer.cs" />
@@ -107,12 +112,13 @@
     <Compile Include="Assets\KinematicCharacterController\Core\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\EveryScripts\Camera2D5DFollow.cs" />
     <Compile Include="Assets\EveryScripts\HouseEntrance.cs" />
-    <Compile Include="Assets\EveryScripts\Game1SuitcaseInteraction.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\15- Root motion example\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\7- Orienting towards arbitrary up direction\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\13- Swimming state\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExamplePlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\1- Player Camera Character Setup\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\DialogueManager.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\DialogueTrigger.cs" />
     <Compile Include="Assets\NewPunch\ShirtlessZombieFree\Scripts\FreeZombie_EyesGlow.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\FrameratePanel.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\10- Multiple movement states setup\Scripts\MyCharacterController.cs" />
@@ -130,21 +136,22 @@
     <Compile Include="Assets\EveryScripts\ButtonHover.cs" />
     <Compile Include="Assets\EveryScripts\WelcomeToIntro.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\BuildManager.cs" />
+    <Compile Include="Assets\EveryScripts\ElectricBoxLightControl.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\KCCSettings.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\TimeTravelController.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\PlayerMovement.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\a- Simple Jumping\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\15- Root motion example\Scripts\MyPlayer.cs" />
-    <Compile Include="Assets\EveryScripts\FirstIntroduceStory.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\PlanetManager.cs" />
     <Compile Include="Assets\EveryScripts\PlayerMovementOutside.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyLadder.cs" />
-    <Compile Include="Assets\EveryScripts\PlayerMovement.cs" />
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scenes\Example\MoveCamera.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseStallDoor.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\12- NoClip state\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\ICharacterController.cs" />
+    <Compile Include="Assets\EveryScripts\TransitionManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\PhysicsMover.cs" />
     <Compile Include="Assets\EveryScripts\GameManager.cs" />
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scripts\SnapToPixel.cs" />
@@ -155,22 +162,24 @@
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\ExampleMovingPlatform.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\9- Custom collision filtering\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\PrefabLauncher.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\Game1SuitcaseInteraction.cs" />
     <Compile Include="Assets\LogicPuzzle\LogicScript.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Closet\ClosetopencloseDoor.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\2- Basic Movement and Gravity\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\1- Player Camera Character Setup\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\EveryScripts\ItemActivation.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow1.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\IMoverController.cs" />
-    <Compile Include="Assets\EveryScripts\TimeTravelController.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Windows\opencloseWindowApt.cs" />
     <Compile Include="Assets\EveryScripts\CapsuleMovement.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\b- Double Jumping\MyCharacterController.cs" />
     <Compile Include="Assets\PhonePuzzle\Phonepuzzle.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\11- Charging state\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExampleCharacterCamera.cs" />
-    <Compile Include="Assets\EveryScripts\MCQTrigger.cs" />
+    <Compile Include="Assets\EveryScripts\LivingRoomBloodElimination.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\OvenOpen\OvenFlip.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\11- Charging state\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\PlayerMovement.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyMovingPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1367,13 +1376,16 @@
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Remove="LaunchProfiles" />
+    <ProjectCapability Remove="SharedProjectReferences" />
+    <ProjectCapability Remove="ReferenceManagerSharedProjects" />
+    <ProjectCapability Remove="ProjectReferences" />
+    <ProjectCapability Remove="ReferenceManagerProjects" />
+    <ProjectCapability Remove="COMReferences" />
+    <ProjectCapability Remove="ReferenceManagerCOM" />
+    <ProjectCapability Remove="AssemblyReferences" />
+    <ProjectCapability Remove="ReferenceManagerAssemblies" />
+  </ItemGroup>
 </Project>
