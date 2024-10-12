@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 936e7269d998c6647b25d04b93ef68d4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 116296
+  packageName: Pixel Perfect Retro Camera
+  packageVersion: 1.1
+  assetPath: Assets/Wolv Interactive/Pixel Perfect Retro Camera/Scenes/Example/Spin.cs
+  uploadId: 244362
