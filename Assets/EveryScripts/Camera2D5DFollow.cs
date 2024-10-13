@@ -6,6 +6,19 @@ public class Camera2D5DFollow : MonoBehaviour
     public float distance = 10.0f; // Fixed distance from the player
     public float height = 5.0f; // Fixed height of the camera
 
+    void Start()
+    {
+        // Automatically find the player prefab if the target is not set manually in the Inspector
+        if (target == null)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                target = player.transform; // Assign the player's transform to the camera's target
+            }
+        }
+    }
+
     void LateUpdate()
     {
         if (target != null)

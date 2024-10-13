@@ -3222,6 +3222,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6342062413248217533, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2056306013}
+    - targetCorrespondingSourceObject: {fileID: 6342062413248217533, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2056306014}
   m_SourcePrefab: {fileID: 100100000, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
 --- !u!1001 &1613652984
 PrefabInstance:
@@ -3417,9 +3420,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.12577963
+    y: 0
     width: 1
-    height: 0.74844074
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 70
@@ -3872,7 +3875,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e35b29f182114506abd207ccd4d5ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: TutLRoomCScene
+  nextSceneDirty: TutLRoomDScene
+  nextSceneClean: TutLRoomCScene
+  doorNameForReturning: doortolroom
 --- !u!1 &2056306010 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6342062413248217533, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
@@ -3893,7 +3898,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -3911,6 +3916,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d980428fe9a83af449ed8a8204e846af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2056306014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056306010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e35b29f182114506abd207ccd4d5ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneDirty: TutBRoomDScene
+  nextSceneClean: TutBRoomCScene
+  doorNameForReturning: doortoroom
 --- !u!1001 &2079588616
 PrefabInstance:
   m_ObjectHideFlags: 0

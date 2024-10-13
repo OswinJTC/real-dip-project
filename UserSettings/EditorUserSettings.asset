@@ -9,45 +9,44 @@ EditorUserSettings:
       value: 18134705175a055722080a3115371d4a0d55006876786860616b0471b8b07a68ffab74f9ee2a3a30300cea1a11320d0beb1a0c25f7060f494b4cc80018eb09361fc211cb1f862d19c51d19dcc413d6ade0d8ddfcddf9f4d9d29195fcfde6ebeae6f0a9c9afa6f8c5b89ff7a1aacececac4eba4d7c9d28bda
       flags: 0
     RecentlyUsedSceneGuid-0:
-      value: 5654060453540f095f5e5e7b412207444f154a7f2d7875637f2a4967bab9616d
+      value: 0253075400065802595a0e2713700744434f192b287c7e647c781835e4b7656d
       flags: 0
     RecentlyUsedSceneGuid-1:
-      value: 50050c5407575f0a595d087744740744154f4d737c7827642c7d1b31e4e1663e
+      value: 015356055c0c0f0354595c7442260b44414e1b7b2e7f23647979456be7b36c3a
       flags: 0
     RecentlyUsedSceneGuid-2:
-      value: 010155550405080e580b0f704970084441154d7d282d2562797d4432bbb16661
+      value: 5308500501015e0e555f0f2749770e4410161d7d7d2d27677b794461bbb06560
       flags: 0
     RecentlyUsedSceneGuid-3:
-      value: 5a5757560101590a5d0c0e24427b5d44434e4c7a7b7a23677f2b4565b7b5353a
+      value: 5502550404065c030f56597446725c44454e4f7d292e7366757c1e66e7e6626f
       flags: 0
     RecentlyUsedSceneGuid-4:
-      value: 5654015455565d08545a5c7141770c11104f197b7e7f20652b781f65e3b6673e
+      value: 50065205530550020e5a0e7a47760a44474e48292a7e72642e7b1e36b2b4633a
       flags: 0
     RecentlyUsedSceneGuid-5:
-      value: 5a05520400055d08595c0e2413770f43104e1d7b787924312b7c4b67b2b5646d
-      flags: 0
-    RecentlyUsedSceneGuid-6:
-      value: 5652015755075a59085c082445275944474e4f7d7c7f746628784a6ae7b7613b
-      flags: 0
-    RecentlyUsedSceneGuid-7:
       value: 0608565353015e0d5b5e087149220d4443161d7a2e7874352c704d30bbe5616f
       flags: 0
+    RecentlyUsedSceneGuid-6:
+      value: 005052520700500b5e0a0872127b5e4412154c79292a70322c7e4c60b3e1316b
+      flags: 0
+    RecentlyUsedSceneGuid-7:
+      value: 50050c5407575f0a595d087744740744154f4d737c7827642c7d1b31e4e1663e
+      flags: 0
     RecentlyUsedSceneGuid-8:
-      value: 0707005e55500f08555a0a264622594412151b2f797923347a7b1c66b1b73069
+      value: 5105515007505f0c5b5c542641770c144515482c2e2a76342f2d1862bae66368
       flags: 0
     RecentlyUsedSceneGuid-9:
-      value: 5353075f56560f0a080f5a76477b08441515402f2e7874617b2a4e6ab1e4316a
+      value: 50050d0456500a035c0d5a7142200b4410151b297d2923697d7e1c66b4e2663d
       flags: 0
     lightmappingBakingProfile:
       value: 51
- 
       flags: 0
   m_VCAutomaticAdd: 1
   m_VCDebugCom: 0
   m_VCDebugCmd: 0
   m_VCDebugOut: 0
   m_SemanticMergeMode: 2
-  m_DesiredImportWorkerCount: 2
+  m_DesiredImportWorkerCount: 3
   m_StandbyImportWorkerCount: 2
   m_IdleImportWorkerShutdownDelay: 60000
   m_VCShowFailedCheckout: 1

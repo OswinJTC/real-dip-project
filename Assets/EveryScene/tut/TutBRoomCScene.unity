@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 58714396}
   - component: {fileID: 58714395}
   - component: {fileID: 58714394}
+  - component: {fileID: 58714399}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -296,9 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b860af6b1384b19b140d6ee95065ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 6
   turningSpeed: 1
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 1762076448}
 --- !u!136 &58714395
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -384,12 +385,39 @@ Transform:
   m_GameObject: {fileID: 58714393}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.26, y: 5.17, z: 7.2}
+  m_LocalPosition: {x: -1.89, y: 2.88, z: 16.73}
   m_LocalScale: {x: 2, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &58714399
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58714393}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &274192626
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,7 +766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6342062413248217533, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
       propertyPath: m_Name
-      value: doortolroom (1)
+      value: doortoBroom
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -770,7 +798,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d980428fe9a83af449ed8a8204e846af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: TutStudyCScene
 --- !u!65 &675019001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -786,7 +813,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1014,6 +1041,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6342062413248217533, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 924174280}
+    - targetCorrespondingSourceObject: {fileID: 6342062413248217533, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 924174281}
   m_SourcePrefab: {fileID: 100100000, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
 --- !u!1 &924174278 stripped
 GameObject:
@@ -1035,7 +1065,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1053,7 +1083,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d980428fe9a83af449ed8a8204e846af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: TutLRoomCScene
+--- !u!114 &924174281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924174278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e35b29f182114506abd207ccd4d5ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneDirty: TutLRoomDScene
+  nextSceneClean: TutLRoomCScene
+  doorNameForReturning: doortolroom
 --- !u!1 &932549488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1433,10 +1477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af0972091c28a498eacc9b503abb04bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorToStudySpawnPoint: {fileID: 932549489}
-  doorToKitchenSpawnPoint: {fileID: 1404097531}
-  doorToRoomSpawnPoint: {fileID: 274192627}
-  playerPrefab: {fileID: 58714393}
 --- !u!4 &1669377121
 Transform:
   m_ObjectHideFlags: 0
@@ -1610,6 +1650,7 @@ GameObject:
   - component: {fileID: 1762076448}
   - component: {fileID: 1762076447}
   - component: {fileID: 1762076450}
+  - component: {fileID: 1762076451}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1652,10 +1693,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.0005567968
-    y: 0.01263538
-    width: 0.9988864
-    height: 0.97472924
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 70
@@ -1705,6 +1746,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   referenceHeight: 180
   pixelsPerUnit: 32
+--- !u!114 &1762076451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762076446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2749e7a6473c643148eefa557c3d3a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 58714398}
+  distance: 10
+  height: 5
 --- !u!1 &1781947591
 GameObject:
   m_ObjectHideFlags: 0

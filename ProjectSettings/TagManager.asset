@@ -8,6 +8,7 @@ TagManager:
   - Puzzl
   - Sphere
   - Logic
+  - Blood
   layers:
   - Default
   - TransparentFX

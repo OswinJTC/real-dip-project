@@ -778,14 +778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 705696541}
   chaseSpeed: 5
-  roamRadius: 5
   detectionRadius: 10
-  roamSpeed: 2
-  cameraFollowScript: {fileID: 1672858800}
-  monsterRenderer: {fileID: 479007398}
-  normalColor: {r: 0, g: 1, b: 0, a: 1}
-  chaseColor: {r: 1, g: 0, b: 0, a: 1}
-  healthText: {fileID: 1146723323}
 --- !u!65 &479007397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1958,6 +1951,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5666291664394432004, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5853624981177429370, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
       propertyPath: m_LocalScale.x
       value: 7
@@ -2050,7 +2047,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -2080,7 +2077,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e35b29f182114506abd207ccd4d5ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: TutBRoomCScene
+  nextSceneDirty: TutBRoomDScene
+  nextSceneClean: TutBRoomCScene
+  doorNameForReturning: doortoroom
 --- !u!1 &990174316 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7624070237541074139, guid: 2d5da6ebed3d1dc4db41b66b5eac1997, type: 3}
@@ -2773,7 +2772,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e35b29f182114506abd207ccd4d5ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: TutKitchenCScene
+  nextSceneDirty: TutKitchenDScene
+  nextSceneClean: TutKitchenCScene
+  doorNameForReturning: doortokitchen
 --- !u!1001 &1179380718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2964,6 +2965,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5666291664394432004, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5853624981177429370, guid: 0c447d68afe357744b28e7c773cd345b, type: 3}
       propertyPath: m_LocalScale.x
       value: 7
@@ -3086,7 +3091,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e35b29f182114506abd207ccd4d5ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: TutStudyCScene
+  nextSceneDirty: TutStudyDScene
+  nextSceneClean: TutStudyCScene
+  doorNameForReturning: doortostudy
 --- !u!1001 &1336329390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3896,51 +3903,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5790c7c1e7865114f93ccdd869db3056, type: 3}
---- !u!1 &1938671266
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1938671268}
-  - component: {fileID: 1938671267}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1938671267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938671266}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e043e95e0a534dc59c7811cc0c247c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: 5
---- !u!4 &1938671268
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938671266}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8, y: 2.05, z: 33.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1991353616
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4354,6 +4316,5 @@ SceneRoots:
   - {fileID: 1782278952}
   - {fileID: 479007400}
   - {fileID: 1522192063}
-  - {fileID: 1938671268}
   - {fileID: 723815375}
   - {fileID: 1524866367}
