@@ -53,6 +53,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/EveryScene/tut/TutKitchenDScene.unity
     guid: ab32e31944bec38458aad48411eff715
+  - enabled: 1
+    path: Assets/EveryScene/tut/TutBasementScene.unity
+    guid: 1ad9ec5185ea9024ba5a84f603bf62eb
+  - enabled: 1
+    path: Assets/EveryScene/puzzles/LogicPuzzle.unity
+    guid: d6480ef384fd6af4dbce51ed72a537d1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
