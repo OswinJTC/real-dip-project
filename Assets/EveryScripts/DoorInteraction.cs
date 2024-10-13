@@ -5,15 +5,36 @@ public class DoorInteraction : MonoBehaviour
 {
     public string nextSceneDirty;        // The dirty version of the next scene
     public string nextSceneClean;        // The clean version of the next scene
+    public string trapDoorScene;         // The scene for the trap door (for basement)
     public string doorNameForReturning;  // The name to set when returning from the next scene
     private bool isPlayerNear = false;   // Flag to check if the player is near
+    private bool isTrapDoor = false;     // Flag to check if this is the trap door
     private static string lastEnteredDoor = "";  // Static variable to track the last entered door
+
+    private TrapdoorVideoManager videoManager;  // Reference to the TrapdoorVideoManager
+
+    void Start()
+    {
+        videoManager = FindObjectOfType<TrapdoorVideoManager>();
+        if (videoManager == null)
+        {
+            Debug.LogError("TrapdoorVideoManager not found!");
+        }
+    }
 
     void Update()
     {
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
-            // Check if the lights are on before allowing the player to enter
+            // If it's a trap door interaction, play video and load the basement
+            if (isTrapDoor)
+            {
+                Debug.Log("Player entering the trap door to basement.");
+                StartCoroutine(videoManager.PlayVideoAndChangeScene(trapDoorScene));  // Use VideoManager to play video and change scene
+                return;
+            }
+
+            // Check if the lights are on before allowing the player to enter other doors
             if (!GameManager.instance.isLightOn)
             {
                 Debug.LogWarning("The lights are still off! You cannot enter the door until the lights are on.");
@@ -68,6 +89,12 @@ public class DoorInteraction : MonoBehaviour
         {
             isPlayerNear = true;  // Player is near the door
             Debug.Log("Player is near the door: " + gameObject.name);
+
+            // Check if the door is a trap door
+            if (gameObject.name == "trapdoor") // You can customize this based on the actual name of the trap door object
+            {
+                isTrapDoor = true;  // Set the flag for trap door
+            }
         }
     }
 

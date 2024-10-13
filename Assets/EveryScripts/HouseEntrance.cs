@@ -24,7 +24,17 @@ public class HouseEntrance : MonoBehaviour
     void EnterHouse()
     {
         Debug.Log("Entering the house...");
-        SceneManager.LoadScene("TutLRoomDScene");  // Load the scene
+
+        // Use the TransitionManager to fade out and change scenes
+        if (TransitionManager.instance != null)
+        {
+            TransitionManager.instance.ChangeScene("TutLRoomDScene");  // Call the fade transition to change scene
+        }
+        else
+        {
+            Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
+            SceneManager.LoadScene("TutLRoomDScene");  // Fallback to direct scene loading if TransitionManager is not available
+        }
     }
 
     // Optional: Visualize the detection radius in the scene editor

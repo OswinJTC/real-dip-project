@@ -539,9 +539,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.24431819
+    y: 0
     width: 1
-    height: 0.5113636
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 70
@@ -900,8 +900,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b99def94bc39a349915c82b0e5f1806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foldedVersion1: {fileID: 3705295804783517919, guid: d8f7344e8ac80d046a214a41da61df3f, type: 3}
-  foldedVersion2: {fileID: 1511966100782545907, guid: 70922e0312025d04fbd7a70b3065cf96, type: 3}
 --- !u!54 &540144490
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1791,7 +1789,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1828,7 +1826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e365dc928a87ae4ebf7af966de7c641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sweptawayVersion: {fileID: 6709313897014247631, guid: dd3c89007fbd1b34281c6a02ddac86d2, type: 3}
 --- !u!1001 &1660855000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2116,7 +2113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d980428fe9a83af449ed8a8204e846af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: KitchenScene
 --- !u!1001 &2000850213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2203,7 +2199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d980428fe9a83af449ed8a8204e846af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: BBLivingRoomScene
 --- !u!1001 &8997543208792975934
 PrefabInstance:
   m_ObjectHideFlags: 0
