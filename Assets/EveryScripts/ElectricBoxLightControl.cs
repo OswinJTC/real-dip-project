@@ -1,4 +1,5 @@
-using UnityEngine;  // This is the required namespace for Unity components
+using UnityEngine;
+using UnityEngine.SceneManagement;  // Add this for scene management
 
 public class ElectricBoxLightControl : MonoBehaviour
 {
@@ -13,65 +14,61 @@ public class ElectricBoxLightControl : MonoBehaviour
 
     void Start()
     {
-    // Check if lights are already on globally when the scene starts
         if (GameManager.instance.isLightOn)
         {
-        // If lights are already on, turn on the bright lights immediately
-            TurnOnBrightLights();
+            TurnOnBrightLights();  // If lights are already on, turn on the bright lights immediately
         }
         else
         {
-        // Start with the room being dark and only the player's spotlight on
             darkDirectionalLight.enabled = true;
             lightDirectionalLight.enabled = false;
             playerSpotlight.enabled = true;
         }
     }
 
-
     void Update()
     {
         if (!isLightOn && player != null)
         {
-            // Make the spotlight follow the player's position while the room is dark
             playerSpotlight.transform.position = player.position + new Vector3(0, spotlightHeight, 0);
         }
 
-        // Calculate distance between player and the electric box
         if (player != null)
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-            // Check if the player is near the electric box and presses "E" to turn on the lights
             if (distanceToPlayer <= detectionRadius && !isLightOn)
             {
-                Debug.Log("Player is near the electric box. Press E to turn on the lights.");
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Debug.Log("E key pressed. Turning on room lights!");
+                    Debug.Log("E key pressed. Going to puzzle scene.");
+                    GoToPuzzleScene();  // Call the method to transition to the puzzle scene
                     TurnOnBrightLights();
                 }
             }
         }
     }
 
-    void TurnOnBrightLights()
+    // Method to change the scene to the puzzle
+    void GoToPuzzleScene()
     {
-    // Turn off the dark directional light and the player's spotlight
+        // Load the puzzle scene (replace "LogicPuzzleScene" with your puzzle scene's actual name)
+        SceneManager.LoadScene("LogicPuzzle");
+    }
+
+    // Make the method public so it can be called from another script
+    public void TurnOnBrightLights()
+    {
         darkDirectionalLight.enabled = false;
         playerSpotlight.enabled = false;
-
-    // Turn on the light that brightens the room
         lightDirectionalLight.enabled = true;
 
-    // Update the global GameManager isLightOn variable
+        isLightOn = true;
         GameManager.instance.isLightOn = true;
 
         Debug.Log("Room lights are now on.");
     }
 
-
-    // Optional: Visualize the detection radius in the scene editor
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
