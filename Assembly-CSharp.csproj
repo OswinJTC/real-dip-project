@@ -73,6 +73,7 @@
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow.cs" />
     <Compile Include="Assets\EveryScripts\MainMenu.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\MouseLook.cs" />
+    <Compile Include="Assets\EveryScripts\video manager\MainMenuVideoManager.cs" />
     <Compile Include="Assets\EveryScripts\testing scripts\Game1HouseInteraction.cs" />
     <Compile Include="Assets\EveryScripts\KitchenBloodElimination.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\2- Basic Movement and Gravity\Scripts\MyCharacterController.cs" />
@@ -174,9 +175,11 @@
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\11- Charging state\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExampleCharacterCamera.cs" />
     <Compile Include="Assets\EveryScripts\LivingRoomBloodElimination.cs" />
+    <Compile Include="Assets\EveryScripts\video manager\StudyRoomVideoManager.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\OvenOpen\OvenFlip.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\11- Charging state\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\testing scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\EveryScripts\video manager\TrapdoorVideoManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyMovingPlatform.cs" />
   </ItemGroup>
   <ItemGroup>
