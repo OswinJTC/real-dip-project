@@ -1,12 +1,15 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI;  // Required for UI elements
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;  // Singleton instance
     public Text timerText;               // Reference to the UI Text to show the timer
+    public GameObject hourglassUIIcon;   // Persistent reference to the hourglass icon in the UI
 
     private float timer = 0f;            // Tracks the elapsed time
+    private List<string> inventory = new List<string>();  // Simple inventory to track collected items
 
     // Global variables to track if the blood has been eliminated in each room
     public bool isLivingRoomClean = false;
@@ -30,6 +33,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (hourglassUIIcon != null)
+        {
+            hourglassUIIcon.SetActive(false);  // Initially hide the hourglass icon
+        }
+    }
+
     private void Update()
     {
         // Increment the timer
@@ -44,6 +55,20 @@ public class GameManager : MonoBehaviour
         {
             timerText.text = string.Format("{00:00}:{01:00}", minutes, seconds);
         }
+    }
+
+    public void AddToInventory(string itemName)
+    {
+        if (!inventory.Contains(itemName))
+        {
+            inventory.Add(itemName);
+            Debug.Log(itemName + " added to inventory.");
+        }
+    }
+
+    public bool HasItem(string itemName)
+    {
+        return inventory.Contains(itemName);
     }
 
     public void ResetTimer()

@@ -28,7 +28,8 @@ public class HouseEntrance : MonoBehaviour
         // Use the TransitionManager to fade out and change scenes
         if (TransitionManager.instance != null)
         {
-            TransitionManager.instance.ChangeScene("TutLRoomDScene");  // Call the fade transition to change scene
+            // Call the fade transition to change scene to "TutLRoomDScene"
+            TransitionManager.instance.ChangeScene("TutLRoomDScene");
         }
         else
         {
