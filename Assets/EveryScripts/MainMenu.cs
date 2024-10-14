@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;  // Add this to use SceneManager
 public class MainMenu : MonoBehaviour
 {
     public MainMenuVideoManager videoManager;  // Reference to the video manager
-    public string scene_a = "KemasEnvironmentShaderProblem";  // Set your new game scene name in the Inspector
-    public string scene_b = "KemasEnvironmentShaderProblem";  // Set your continue scene name in the Inspector
+    public string scene_a = "outsideTerrain";  // Set your new game scene name in the Inspector
+    public string scene_b = "outsideTerrain";  // Set your continue scene name in the Inspector
 
     void Start()
     {

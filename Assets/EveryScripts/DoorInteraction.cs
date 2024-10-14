@@ -18,7 +18,7 @@ public class DoorInteraction : MonoBehaviour
         videoManager = FindObjectOfType<TrapdoorVideoManager>();
         if (videoManager == null)
         {
-            Debug.LogError("TrapdoorVideoManager not found!");
+            Debug.LogError("Now in this room scene; TrapdoorVideoManager not found!");
         }
     }
 
