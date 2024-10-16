@@ -159,6 +159,7 @@
     <Compile Include="Assets\EveryScripts\GameManager.cs" />
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scripts\SnapToPixel.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\6- Crouching\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\EveryScripts\SilhouetteButtons.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipL.cs" />
     <Compile Include="Assets\EveryScripts\ThirdPersonCameraFollow.cs" />
     <Compile Include="Assets\PuzzlePieces\PiecesScript.cs" />
