@@ -2214,7 +2214,7 @@ GameObject:
   - component: {fileID: 930642394}
   - component: {fileID: 930642393}
   - component: {fileID: 930642392}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TimeCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4382,7 +4382,7 @@ GameObject:
   - component: {fileID: 1767335675}
   - component: {fileID: 1767335677}
   - component: {fileID: 1767335676}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5169,7 +5169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2043858818
 MonoBehaviour:
   m_ObjectHideFlags: 0

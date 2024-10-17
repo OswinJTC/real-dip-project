@@ -496,14 +496,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 21300000, guid: 24429265e027a8a4084d9c2ed21bbc4a, type: 3}
+  hoverImage: {fileID: 21300000, guid: 553c0f734a24c3d419e3d17792ae066d, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
-  hoverSize: {x: 80, y: 100}
+  hoverSize: {x: 130, y: 130}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 21300000, guid: 24429265e027a8a4084d9c2ed21bbc4a, type: 3}
+  buttonPressImage: {fileID: 21300000, guid: 553c0f734a24c3d419e3d17792ae066d, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
-  secondImagePressSize: {x: 100, y: 25}
+  secondImagePressSize: {x: 200, y: 50}
   targetText: {fileID: 524418132}
   hoverText: Phone
   originalText: Original Text
@@ -733,16 +733,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 21300000, guid: e0ea288dd84021c4f8a4a3619f7f83ca, type: 3}
-  originalImage: {fileID: 21300000, guid: e0ea288dd84021c4f8a4a3619f7f83ca, type: 3}
+  hoverImage: {fileID: 21300000, guid: d8bd1482b213cfa46ab044478e012c39, type: 3}
+  originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
-  hoverSize: {x: 50, y: 50}
+  hoverSize: {x: 30, y: 70}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 21300000, guid: e0ea288dd84021c4f8a4a3619f7f83ca, type: 3}
+  buttonPressImage: {fileID: 21300000, guid: d8bd1482b213cfa46ab044478e012c39, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
-  secondImagePressSize: {x: 100, y: 20}
+  secondImagePressSize: {x: 40, y: 20}
   targetText: {fileID: 524418132}
-  hoverText: Coin
+  hoverText: Key
   originalText: Original Text
 --- !u!1 &145712070
 GameObject:
@@ -1196,7 +1196,7 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 200}
   targetText: {fileID: 524418132}
-  hoverText: Hovered!
+  hoverText: Toy 2
   originalText: Original Text
 --- !u!1 &242281860
 GameObject:
@@ -1606,6 +1606,142 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371621491}
+  m_CullTransparentMesh: 1
+--- !u!1 &404623866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 404623867}
+  - component: {fileID: 404623871}
+  - component: {fileID: 404623870}
+  - component: {fileID: 404623869}
+  - component: {fileID: 404623868}
+  m_Layer: 5
+  m_Name: SilhouetteButton (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &404623867
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404623866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.7741954, y: 13.047335, z: 3.6581993}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 587474340}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 625, y: 174}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &404623868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404623866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e727ddb943e7b41a50d76782a5fb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 910208315}
+  originalText: Pick a hint
+  hoverText: Description of Balloon
+--- !u!114 &404623869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404623866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 404623870}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &404623870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404623866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 782d6c86a09660d4aa350ab942b63b0c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &404623871
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 404623866}
   m_CullTransparentMesh: 1
 --- !u!1 &419410235
 GameObject:
@@ -2166,6 +2302,10 @@ RectTransform:
   - {fileID: 1889143682}
   - {fileID: 1600741391}
   - {fileID: 1988233833}
+  - {fileID: 1999254697}
+  - {fileID: 1236971787}
+  - {fileID: 656057296}
+  - {fileID: 404623867}
   m_Father: {fileID: 1267044111}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2383,6 +2523,142 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646015450}
+  m_CullTransparentMesh: 1
+--- !u!1 &656057295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 656057296}
+  - component: {fileID: 656057300}
+  - component: {fileID: 656057299}
+  - component: {fileID: 656057298}
+  - component: {fileID: 656057297}
+  m_Layer: 5
+  m_Name: SilhouetteButton (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &656057296
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656057295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.6893164, y: 7.945034, z: 2.227621}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 587474340}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 276, y: 356}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &656057297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656057295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e727ddb943e7b41a50d76782a5fb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 910208315}
+  originalText: Pick a hint
+  hoverText: Description of rotten cake and knife
+--- !u!114 &656057298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656057295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 656057299}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &656057299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656057295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 89da9cff5710b454dbc08f20a9d65312, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &656057300
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656057295}
   m_CullTransparentMesh: 1
 --- !u!1 &659891287
 GameObject:
@@ -2949,14 +3225,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: b5cd52b44504ff249b03ae55d99029a7, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
-  hoverSize: {x: 100, y: 100}
+  hoverSize: {x: 200, y: 200}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: b5cd52b44504ff249b03ae55d99029a7, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
-  secondImagePressSize: {x: 200, y: 200}
+  secondImagePressSize: {x: 400, y: 70}
   targetText: {fileID: 524418132}
   hoverText: Letter of Eviction
   originalText: Original Text
@@ -3219,8 +3495,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -281, y: -365}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 3, y: -317}
+  m_SizeDelta: {x: 600, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910208315
 MonoBehaviour:
@@ -3242,7 +3518,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dialogue
+  m_text: Pick a hint
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3528,6 +3804,142 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074485656}
+  m_CullTransparentMesh: 1
+--- !u!1 &1236971786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1236971787}
+  - component: {fileID: 1236971791}
+  - component: {fileID: 1236971790}
+  - component: {fileID: 1236971789}
+  - component: {fileID: 1236971788}
+  m_Layer: 5
+  m_Name: SilhouetteButton (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1236971787
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236971786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.448828, y: 11.517097, z: 3.2291532}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 587474340}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -290, y: 331}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1236971788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236971786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e727ddb943e7b41a50d76782a5fb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 910208315}
+  originalText: Pick a hint
+  hoverText: Description of Phone
+--- !u!114 &1236971789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236971786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1236971790}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1236971790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236971786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 553c0f734a24c3d419e3d17792ae066d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1236971791
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236971786}
   m_CullTransparentMesh: 1
 --- !u!1 &1267044107
 GameObject:
@@ -3844,16 +4256,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 21300000, guid: 8856ac84af2e84d49a645aae036bc47d, type: 3}
+  hoverImage: {fileID: 21300000, guid: 89da9cff5710b454dbc08f20a9d65312, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
-  hoverSize: {x: 30, y: 100}
+  hoverSize: {x: 120, y: 80}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 21300000, guid: 8856ac84af2e84d49a645aae036bc47d, type: 3}
+  buttonPressImage: {fileID: 21300000, guid: 89da9cff5710b454dbc08f20a9d65312, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
-  secondImagePressSize: {x: 45, y: 28}
+  secondImagePressSize: {x: 200, y: 30}
   targetText: {fileID: 524418132}
-  hoverText: Knife
+  hoverText: RottenCake & Knife
   originalText: Original Text
 --- !u!1 &1471755832
 GameObject:
@@ -4010,7 +4422,7 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 200}
   targetText: {fileID: 524418132}
-  hoverText: Cleaning Kit
+  hoverText: Toy 1
   originalText: Original Text
 --- !u!1 &1480583611
 GameObject:
@@ -4800,16 +5212,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: e0ea288dd84021c4f8a4a3619f7f83ca, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
   hoverSize: {x: 50, y: 50}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: e0ea288dd84021c4f8a4a3619f7f83ca, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
-  secondImagePressSize: {x: 200, y: 200}
+  secondImagePressSize: {x: 100, y: 20}
   targetText: {fileID: 524418132}
-  hoverText: Bread
+  hoverText: Coin
   originalText: Original Text
 --- !u!1 &1736838049
 GameObject:
@@ -5093,16 +5505,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 21300000, guid: d8bd1482b213cfa46ab044478e012c39, type: 3}
+  hoverImage: {fileID: 21300000, guid: 373ca348d4ecfd448911967272f1f612, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
-  hoverSize: {x: 30, y: 70}
+  hoverSize: {x: 150, y: 150}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 21300000, guid: d8bd1482b213cfa46ab044478e012c39, type: 3}
+  buttonPressImage: {fileID: 21300000, guid: 373ca348d4ecfd448911967272f1f612, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
-  secondImagePressSize: {x: 40, y: 20}
+  secondImagePressSize: {x: 250, y: 40}
   targetText: {fileID: 524418132}
-  hoverText: Key
+  hoverText: Cleaning Kit
   originalText: Original Text
 --- !u!1 &1889143681
 GameObject:
@@ -5470,14 +5882,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: 782d6c86a09660d4aa350ab942b63b0c, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
-  hoverSize: {x: 100, y: 100}
+  hoverSize: {x: 150, y: 150}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: 782d6c86a09660d4aa350ab942b63b0c, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
-  secondImagePressSize: {x: 200, y: 200}
+  secondImagePressSize: {x: 300, y: 50}
   targetText: {fileID: 524418132}
   hoverText: Balloon
   originalText: Original Text
@@ -5789,7 +6201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -0.8}
+  m_AnchoredPosition: {x: 2, y: 0.1}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1969108386
@@ -5961,6 +6373,142 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988233832}
+  m_CullTransparentMesh: 1
+--- !u!1 &1999254696
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1999254697}
+  - component: {fileID: 1999254701}
+  - component: {fileID: 1999254700}
+  - component: {fileID: 1999254699}
+  - component: {fileID: 1999254698}
+  m_Layer: 5
+  m_Name: SilhouetteButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1999254697
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999254696}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.7799087, y: 17.777311, z: 4.9843855}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 587474340}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -688, y: 163}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1999254698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999254696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0e727ddb943e7b41a50d76782a5fb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: {fileID: 910208315}
+  originalText: Pick a hint
+  hoverText: Description of Letter of Eviction
+--- !u!114 &1999254699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999254696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1999254700}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1999254700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999254696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b5cd52b44504ff249b03ae55d99029a7, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1999254701
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999254696}
   m_CullTransparentMesh: 1
 --- !u!1 &2042936239
 GameObject:
@@ -6265,16 +6813,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: eae9556e92bec804380f21eaa1a7b5a5, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
-  hoverSize: {x: 50, y: 50}
+  hoverSize: {x: 100, y: 100}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: eae9556e92bec804380f21eaa1a7b5a5, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
-  secondImagePressSize: {x: 200, y: 200}
+  secondImagePressSize: {x: 200, y: 40}
   targetText: {fileID: 524418132}
-  hoverText: Rotten Cake
+  hoverText: Bread
   originalText: Original Text
 --- !u!1 &2099062191
 GameObject:
@@ -6500,7 +7048,7 @@ MonoBehaviour:
   hoverImage: {fileID: 21300000, guid: 3ff3506f888de5c47b5998d59f3fdd34, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
-  hoverSize: {x: 150, y: 150}
+  hoverSize: {x: 100, y: 100}
   secondTargetImage: {fileID: 1969108386}
   buttonPressImage: {fileID: 21300000, guid: 8bb55e713a7ee9f4b878e6d29b043ae4, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
