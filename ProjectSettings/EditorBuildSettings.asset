@@ -62,6 +62,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/EveryScene/outsideTerrain.unity
     guid: 5185ee06760037444b0462d036474f57
+  - enabled: 1
+    path: Assets/EveryScene/After MCQ.unity
+    guid: 77b2e911d83fca34daee77520d747a88
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
