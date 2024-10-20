@@ -2,47 +2,68 @@ using UnityEngine;
 
 public class MonsterChase : MonoBehaviour
 {
-    public Transform player;               // Reference to the player
-    public float chaseSpeed = 5f;          // Speed of the monster
-    public float detectionRadius = 10f;    // Radius where the monster starts chasing the player
-    private bool isChasing = false;        // Flag to track if monster is chasing the player
+    public float speed = 3f;  // Speed at which the monster moves
+    private Transform player;  // Reference to the player's transform
+
+    void Start()
+    {
+        // Get the player from the GameManager
+        if (GameManager.instance != null && GameManager.instance.player != null)
+        {
+            player = GameManager.instance.player.transform;
+            Debug.Log("Player reference obtained from GameManager.");
+        }
+        else
+        {
+            Debug.LogWarning("Player reference in GameManager is null! Attempting to find the player.");
+            // Try to find the player in case it's not yet assigned in GameManager
+            FindPlayer();
+        }
+    }
 
     void Update()
     {
-        // Check if the player is within the detection radius to start the chase
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= detectionRadius && !isChasing)
+        // Check if the monster should chase the player
+        if (!GameManager.instance.isMonsterSpawned)
         {
-            StartChase(); // Start the chase when the player enters the detection radius
+            // If isMonsterSpawned is false, do not chase
+            return;
         }
 
-        // If the monster is chasing, move towards the player
-        if (isChasing)
+        // Ensure the player reference is not null
+        if (player == null)
         {
-            ChasePlayer();
+            // Try to get the player reference again
+            if (GameManager.instance != null && GameManager.instance.player != null)
+            {
+                player = GameManager.instance.player.transform;
+            }
+            else
+            {
+                FindPlayer();
+                if (player == null)
+                {
+                    // Player not found, return
+                    return;
+                }
+            }
         }
+
+        // Move towards the player's position
+        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
     }
 
-    void StartChase()
+    void FindPlayer()
     {
-        isChasing = true;
-        Debug.Log("Monster started chasing the player!");
-    }
-
-    void ChasePlayer()
-    {
-        // Move the monster towards the player
-        Vector3 direction = (player.position - transform.position).normalized;
-        transform.position += direction * chaseSpeed * Time.deltaTime;
-
-        // Optionally, stop the chase when the monster gets close enough
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer < 1f) // If the monster is close enough to the player
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        if (playerObject != null)
         {
-            Debug.Log("Monster caught the player!");
-            isChasing = false; // Stop chasing after reaching the player (optional)
+            player = playerObject.transform;
+            Debug.Log("Player found by MonsterChase script.");
+        }
+        else
+        {
+            Debug.LogWarning("Player GameObject not found in the scene by MonsterChase script!");
         }
     }
 }

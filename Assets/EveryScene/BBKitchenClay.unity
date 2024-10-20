@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 235734306}
   - component: {fileID: 235734305}
   m_Layer: 0
-  m_Name: doortolroom
+  m_Name: kitchendoortolroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,6 +205,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+<<<<<<< Updated upstream:Assets/EveryScene/BBKitchenClay.unity
+=======
+--- !u!114 &235734307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235734304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2139334294d2bbb4a863c38cd732550a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScenePixel: BBLivingroomScene
+  nextSceneClay: BBLRoomClay
+  doorNameForReturning: kitchendoortolroom
+--- !u!65 &235734308
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235734304}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.7700014, y: 4.3299994, z: 0.20000005}
+  m_Center: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes:Assets/EveryScene/baby/clay/BBKitchenClay.unity
 --- !u!1 &550368548
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,8 +979,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1457732619}
   - component: {fileID: 1457732618}
+  - component: {fileID: 1457732621}
+  - component: {fileID: 1457732620}
   m_Layer: 0
-  m_Name: doortoroom
+  m_Name: kithcendoortombroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1017,6 +1058,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1457732620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457732617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2139334294d2bbb4a863c38cd732550a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScenePixel: BedroomScene
+  nextSceneClay: BBBedroomClay
+  doorNameForReturning: kithcendoortombroom
+--- !u!65 &1457732621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457732617}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.77, y: 4.3299994, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1543680719
 PrefabInstance:
   m_ObjectHideFlags: 0

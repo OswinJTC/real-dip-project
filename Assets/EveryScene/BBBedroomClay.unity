@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 581726637}
   - component: {fileID: 581726636}
   m_Layer: 0
-  m_Name: doortolroom
+  m_Name: bedroomdoortolroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -851,6 +851,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream:Assets/EveryScene/BBBedroomClay.unity
+=======
+--- !u!114 &581726638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581726635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2139334294d2bbb4a863c38cd732550a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScenePixel: BBLivingroomScene
+  nextSceneClay: BBLRoomClay
+  doorNameForReturning: bedroomdoortolroom
+--- !u!65 &581726639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581726635}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.77, y: 4.3299994, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+>>>>>>> Stashed changes:Assets/EveryScene/baby/clay/BBBedroomClay.unity
 --- !u!1 &598270917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,8 +1856,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1251858865}
   - component: {fileID: 1251858864}
+  - component: {fileID: 1251858867}
+  - component: {fileID: 1251858866}
   m_Layer: 0
-  m_Name: doortokitchen
+  m_Name: bedroomdoortokitchen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1894,6 +1935,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1251858866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251858863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2139334294d2bbb4a863c38cd732550a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScenePixel: KitchenScene
+  nextSceneClay: BBKitchenClay
+  doorNameForReturning: bedroomdoortokitchen
+--- !u!65 &1251858867
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251858863}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.77, y: 4.3299994, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1274447917
 GameObject:
   m_ObjectHideFlags: 0
