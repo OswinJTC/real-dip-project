@@ -264,17 +264,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
   hoverSize: {x: 50, y: 50}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: 8bb55e713a7ee9f4b878e6d29b043ae4, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 200}
   targetText: {fileID: 524418132}
-  hoverText: Hovered!
-  originalText: Original Text
+  hoverText: 
+  originalText: Select an item
 --- !u!1 &110774866
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,8 +505,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 50}
   targetText: {fileID: 524418132}
-  hoverText: Phone
-  originalText: Original Text
+  hoverText: Unlock the phone
+  originalText: Select an item
 --- !u!1 &129174843
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,8 +742,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 40, y: 20}
   targetText: {fileID: 524418132}
-  hoverText: Key
-  originalText: Original Text
+  hoverText: Used to unlock houses
+  originalText: Select an item
 --- !u!1 &145712070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,17 +1187,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
   hoverSize: {x: 50, y: 50}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: 8bb55e713a7ee9f4b878e6d29b043ae4, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 200}
   targetText: {fileID: 524418132}
-  hoverText: Toy 2
-  originalText: Original Text
+  hoverText: 
+  originalText: Select an item
 --- !u!1 &242281860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,7 +1660,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: {fileID: 910208315}
   originalText: Pick a hint
-  hoverText: Description of Balloon
+  hoverText: "Something\u2019s wrong with these balloons... maybe the colours are
+    off."
 --- !u!114 &404623869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1889,17 +1890,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
   hoverSize: {x: 50, y: 50}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: 8bb55e713a7ee9f4b878e6d29b043ae4, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 200}
   targetText: {fileID: 524418132}
-  hoverText: Hovered!
-  originalText: Original Text
+  hoverText: 
+  originalText: Select an item
 --- !u!1 &469278670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,8 +2010,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.4, y: -18.7}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 0.2, y: -17}
+  m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &524418132
 MonoBehaviour:
@@ -2032,10 +2033,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 'Select an item
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dee4f3f9a6e86c343b0c61513713427e, type: 2}
+  m_sharedMaterial: {fileID: 1646150484558541715, guid: dee4f3f9a6e86c343b0c61513713427e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2066,7 +2069,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2577,7 +2580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: {fileID: 910208315}
   originalText: Pick a hint
-  hoverText: Description of rotten cake and knife
+  hoverText: The cards might tell a story. I can't wait to find out.
 --- !u!114 &656057298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3234,8 +3237,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 400, y: 70}
   targetText: {fileID: 524418132}
-  hoverText: Letter of Eviction
-  originalText: Original Text
+  hoverText: Find and assemble the missing pieces of the letter
+  originalText: Select an item
 --- !u!1 &837258254
 GameObject:
   m_ObjectHideFlags: 0
@@ -3495,8 +3498,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3, y: -317}
-  m_SizeDelta: {x: 600, y: 50}
+  m_AnchoredPosition: {x: 27, y: -302}
+  m_SizeDelta: {x: 580, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &910208315
 MonoBehaviour:
@@ -3520,8 +3523,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Pick a hint
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dee4f3f9a6e86c343b0c61513713427e, type: 2}
+  m_sharedMaterial: {fileID: 1646150484558541715, guid: dee4f3f9a6e86c343b0c61513713427e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3545,8 +3548,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3858,7 +3861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: {fileID: 910208315}
   originalText: Pick a hint
-  hoverText: Description of Phone
+  hoverText: "I wonder what\u2019s locked inside... what hidden secrets await?"
 --- !u!114 &1236971789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4265,8 +4268,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 30}
   targetText: {fileID: 524418132}
-  hoverText: RottenCake & Knife
-  originalText: Original Text
+  hoverText: Flip cards to find matching pairs
+  originalText: Select an item
 --- !u!1 &1471755832
 GameObject:
   m_ObjectHideFlags: 0
@@ -4413,17 +4416,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
   hoverSize: {x: 50, y: 50}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: 8bb55e713a7ee9f4b878e6d29b043ae4, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 200}
   targetText: {fileID: 524418132}
-  hoverText: Toy 1
-  originalText: Original Text
+  hoverText: 
+  originalText: Select an item
 --- !u!1 &1480583611
 GameObject:
   m_ObjectHideFlags: 0
@@ -5055,17 +5058,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
   hoverSize: {x: 50, y: 50}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: 8bb55e713a7ee9f4b878e6d29b043ae4, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 200}
   targetText: {fileID: 524418132}
-  hoverText: Hovered!
-  originalText: Original Text
+  hoverText: 
+  originalText: Select an item
 --- !u!1 &1679953272
 GameObject:
   m_ObjectHideFlags: 0
@@ -5221,8 +5224,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 100, y: 20}
   targetText: {fileID: 524418132}
-  hoverText: Coin
-  originalText: Original Text
+  hoverText: Used to purchase items in the shop
+  originalText: Select an item
 --- !u!1 &1736838049
 GameObject:
   m_ObjectHideFlags: 0
@@ -5514,8 +5517,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 250, y: 40}
   targetText: {fileID: 524418132}
-  hoverText: Cleaning Kit
-  originalText: Original Text
+  hoverText: Clean up blood
+  originalText: Select an item
 --- !u!1 &1889143681
 GameObject:
   m_ObjectHideFlags: 0
@@ -5891,8 +5894,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 300, y: 50}
   targetText: {fileID: 524418132}
-  hoverText: Balloon
-  originalText: Original Text
+  hoverText: Tap balloons to change their color
+  originalText: Select an item
 --- !u!1 &1949530351
 GameObject:
   m_ObjectHideFlags: 0
@@ -6427,7 +6430,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: {fileID: 910208315}
   originalText: Pick a hint
-  hoverText: Description of Letter of Eviction
+  hoverText: "These pieces seem important... I\u2019m curious to uncover the secrets
+    they hold."
 --- !u!114 &1999254699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6656,17 +6660,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 110774868}
-  hoverImage: {fileID: 0}
+  hoverImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalImage: {fileID: 21300000, guid: d0e28effa9f8e7744befd2153ce45422, type: 3}
   originalSize: {x: 100, y: 100}
   hoverSize: {x: 50, y: 50}
   secondTargetImage: {fileID: 1969108386}
-  buttonPressImage: {fileID: 0}
+  buttonPressImage: {fileID: 21300000, guid: 8bb55e713a7ee9f4b878e6d29b043ae4, type: 3}
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 200}
   targetText: {fileID: 524418132}
-  hoverText: Hovered!
-  originalText: Original Text
+  hoverText: 
+  originalText: Select an item
 --- !u!1 &2058682162
 GameObject:
   m_ObjectHideFlags: 0
@@ -6822,8 +6826,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 200, y: 40}
   targetText: {fileID: 524418132}
-  hoverText: Bread
-  originalText: Original Text
+  hoverText: Item available for purchase in the shop
+  originalText: Select an item
 --- !u!1 &2099062191
 GameObject:
   m_ObjectHideFlags: 0
@@ -7054,9 +7058,8 @@ MonoBehaviour:
   secondImageOriginalSize: {x: 100, y: 100}
   secondImagePressSize: {x: 150, y: 25}
   targetText: {fileID: 524418132}
-  hoverText: Hour Glass                                                                               
-    Description only
-  originalText: 
+  hoverText: 'Travel back to the past (usable only in houses)   '
+  originalText: Select an item
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
