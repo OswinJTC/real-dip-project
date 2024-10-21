@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/EveryScene/test/Warehouse.unity
     guid: 74464c2c834a946c6a22647e970dd98b
   - enabled: 1
-    path: Assets/EveryScene/Welcome.unity
+    path: Assets/EveryScene/test/Welcome.unity
     guid: 24e6be67628d143d3b0fbb0dbde18f70
   - enabled: 1
     path: Assets/EveryScene/test/KemasSampleScene.unity
@@ -36,7 +36,7 @@ EditorBuildSettings:
     path: Assets/EveryScene/tut/TutStudyCScene.unity
     guid: 09dcd47581ce9414fae71ea760929018
   - enabled: 1
-    path: Assets/EveryScene/KemasEnvironmentShaderProblem.unity
+    path: Assets/EveryScene/test/KemasEnvironmentShaderProblem.unity
     guid: 3482bb6143d54784c85900a4a4fbfa2f
   - enabled: 1
     path: Assets/EveryScene/Main Menu.unity
@@ -65,6 +65,36 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/EveryScene/After MCQ.unity
     guid: 77b2e911d83fca34daee77520d747a88
+  - enabled: 1
+    path: Assets/EveryScene/baby/BBLivingroomScene.unity
+    guid: d65c5c3262e87184ba70b6c19a3e6dd8
+  - enabled: 1
+    path: Assets/EveryScene/baby/BedroomScene.unity
+    guid: 5e2b6af220291a849b25a0332c448955
+  - enabled: 1
+    path: Assets/EveryScene/baby/KitchenScene.unity
+    guid: caf4b5903dd0b8a4db43eb6ba7131ae3
+  - enabled: 1
+    path: Assets/EveryScene/baby/BakeryScene.unity
+    guid: 9c8056cf5e590fc46b90f6143da85abb
+  - enabled: 1
+    path: Assets/EveryScene/baby/hide/BBHideBRoom.unity
+    guid: f0609fd80e83e494fa5976ff02af0092
+  - enabled: 1
+    path: Assets/EveryScene/baby/hide/BBHideLRoom.unity
+    guid: 80982b3e5b8b9d2408843d6e62653346
+  - enabled: 1
+    path: Assets/EveryScene/baby/clay/BBBedroomClay.unity
+    guid: 4440868706f91c74cb25feda5ebb018e
+  - enabled: 1
+    path: Assets/EveryScene/baby/clay/BBKitchenClay.unity
+    guid: 2da521ff8c7bf7b4e9d740900271f4a4
+  - enabled: 1
+    path: Assets/EveryScene/baby/clay/BBLRoomClay.unity
+    guid: e9e1fee61cab9144395b80add511de0b
+  - enabled: 1
+    path: Assets/EveryScene/MCQ.unity
+    guid: c3a60e79f8240d7469476f90f2788e10
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

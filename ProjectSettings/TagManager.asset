@@ -9,6 +9,18 @@ TagManager:
   - Sphere
   - Logic
   - Blood
+  - ClosedEye1
+  - ClosedEye2
+  - ClosedEye3
+  - ClosedEye4
+  - ClosedEye5
+  - OpenEye1
+  - OpenEye2
+  - OpenEye3
+  - OpenEye4
+  - OpenEye5
+  - Monster
+  - Fuel
   layers:
   - Default
   - TransparentFX

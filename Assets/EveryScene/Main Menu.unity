@@ -3085,8 +3085,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   videoManager: {fileID: 0}
-  scene_a: KemasEnvironmentShaderProblem
-  scene_b: KemasEnvironmentShaderProblem
+  scene_a: outsideTerrain
+  scene_b: outsideTerrain
 --- !u!1 &1273150667
 GameObject:
   m_ObjectHideFlags: 0
@@ -3856,7 +3856,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1 &1618681939
 GameObject:
@@ -5169,7 +5169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2043858818
 MonoBehaviour:
   m_ObjectHideFlags: 0

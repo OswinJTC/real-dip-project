@@ -1,36 +1,79 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Camera2D5DFollow : MonoBehaviour
 {
-    public Transform target; // Reference to the player
-    public float distance = 10.0f; // Fixed distance from the player
-    public float height = 5.0f; // Fixed height of the camera
+    public Transform target;
+    public float distance = 10.0f;
+    public float height = 5.0f;
 
     void Start()
     {
-        // Automatically find the player prefab if the target is not set manually in the Inspector
+        // Find the player if the target is not set
         if (target == null)
         {
             GameObject player = GameObject.FindWithTag("Player");
             if (player != null)
             {
-                target = player.transform; // Assign the player's transform to the camera's target
+                target = player.transform;
             }
         }
+
+        // Adjust distance and height based on the initial scene
+        AdjustCameraDistanceAndHeight(SceneManager.GetActiveScene().name);
+
+        // Subscribe to scene changes to adjust distance and height
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void LateUpdate()
     {
-        if (target != null)
+        if (target != null && gameObject.activeSelf) // Ensure the camera is active
         {
-            // Set the camera's position based on the player's position, but keep it at a fixed distance and height
-            Vector3 desiredPosition = new Vector3(target.position.x, target.position.y + height, target.position.z - distance);
-            
-            // Move the camera to the desired position
+            Vector3 desiredPosition = new Vector3(
+                target.position.x, 
+                target.position.y + height, 
+                target.position.z - distance
+            );
             transform.position = desiredPosition;
-
-            // Keep the camera's rotation fixed (facing straight in 2.5D)
-            transform.rotation = Quaternion.Euler(30f, 0f, 0f); // Adjust the rotation as needed for your 2.5D angle
+            transform.rotation = Quaternion.Euler(30f, 0f, 0f);
         }
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        AdjustCameraDistanceAndHeight(scene.name);
+    }
+
+    void AdjustCameraDistanceAndHeight(string sceneName)
+    {
+        if (sceneName == "outsideTerrain")
+        {
+            // Set distance and height for the outsideTerrain scene
+            distance = 2.5f;
+            height = 2f;
+            gameObject.SetActive(true); // Ensure the camera is active
+            Debug.Log("Camera distance and height adjusted for outsideTerrain.");
+        }
+        else if (sceneName == "BBHideBRoom" || sceneName == "BBHideLRoom")
+        {
+            // Disable the camera in the hiding scenes
+            gameObject.SetActive(false);
+            Debug.Log("Camera disabled for BBHideBRoom or BBHideLRoom.");
+        }
+        else
+        {
+            // Set distance and height for any other scene
+            distance = 10f;
+            height = 8f;
+            gameObject.SetActive(true); // Ensure the camera is active
+            Debug.Log("Camera distance and height adjusted for other scenes.");
+        }
+    }
+
+    void OnDestroy()
+    {
+        // Unsubscribe from the scene load event to avoid memory leaks
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

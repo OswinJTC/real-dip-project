@@ -12,7 +12,7 @@ public class HouseEntrance : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // Log the current distance for debugging purposes
-        Debug.Log("Current distance to player: " + distanceToPlayer);
+        //Debug.Log("Current distance to player: " + distanceToPlayer);
 
         // Check if the player is within the detection radius and presses the "E" key
         if (distanceToPlayer <= detectionRadius && Input.GetKeyDown(KeyCode.E))
