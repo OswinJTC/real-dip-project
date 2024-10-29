@@ -5,7 +5,6 @@ public class RoomBloodElimination : MonoBehaviour
 {
     public float detectionRadius = 2f;
     public GameObject[] bloodObjects;
-    private ItemActivation itemActivation;
     private int bloodCount = 0;
 
     void Start()
@@ -21,12 +20,12 @@ public class RoomBloodElimination : MonoBehaviour
         }
 
         bloodObjects = GameObject.FindGameObjectsWithTag("Blood");
-        itemActivation = FindObjectOfType<ItemActivation>();
     }
 
     void Update()
     {
-        if (itemActivation.IsItemEquipped())
+        // Check if the cleaning kit is available instead of item activation
+        if (GameManager.instance.isCleaningKit)
         {
             foreach (GameObject blood in bloodObjects)
             {

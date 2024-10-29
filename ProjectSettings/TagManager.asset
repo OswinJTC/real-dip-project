@@ -21,6 +21,7 @@ TagManager:
   - OpenEye5
   - Monster
   - Fuel
+  - TutPlayer
   layers:
   - Default
   - TransparentFX

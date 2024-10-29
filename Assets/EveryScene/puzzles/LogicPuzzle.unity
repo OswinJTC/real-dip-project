@@ -222,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 60152259}
   serializedVersion: 2
   m_LocalRotation: {x: -0.048434675, y: -0.050107952, z: 0.6890813, w: 0.72132546}
-  m_LocalPosition: {x: -3.52, y: -3.95, z: 5.3405833}
+  m_LocalPosition: {x: -3.2, y: -3.9, z: 5.4}
   m_LocalScale: {x: 1, y: 3.0836105, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -332,7 +332,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 12.3, y: 13.48, z: 53.612854}
-  m_LocalScale: {x: 13, y: 12, z: 12}
+  m_LocalScale: {x: 12, y: 12, z: 12}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1332,8 +1332,8 @@ Transform:
   m_GameObject: {fileID: 584486558}
   serializedVersion: 2
   m_LocalRotation: {x: 0.04553767, y: 0.04174431, z: 0.63511264, w: 0.7699452}
-  m_LocalPosition: {x: -0.97, y: -2.88, z: 5.87}
-  m_LocalScale: {x: 1, y: -6.8416286, z: 1}
+  m_LocalPosition: {x: -0.8, y: -2.9, z: 5.8}
+  m_LocalScale: {x: 1, y: -5.7192597, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2904,7 +2904,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2929,7 +2929,7 @@ Transform:
   m_GameObject: {fileID: 1328323526}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.71, y: 0.65, z: -28.03}
+  m_LocalPosition: {x: 4.5, y: 0.1, z: -28.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3256,13 +3256,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428463518}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.039237548, y: -0.05759449, z: 0.8014056, w: 0.5940475}
-  m_LocalPosition: {x: 0.51, y: 4.24, z: 12.87}
-  m_LocalScale: {x: 1, y: 10.358403, z: 1}
+  m_LocalRotation: {x: -0.046612907, y: -0.064531535, z: 0.750819, w: 0.6556933}
+  m_LocalPosition: {x: 2, y: 4.6, z: 13.1}
+  m_LocalScale: {x: 1, y: 9.222397, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 2.619, y: -7.554, z: 106.731}
+  m_LocalEulerAnglesHint: {x: 2.05, y: -8.901, z: 97.579}
 --- !u!1 &1460895180
 GameObject:
   m_ObjectHideFlags: 0
@@ -4247,6 +4247,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1930482573
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1930482575}
+  - component: {fileID: 1930482574}
+  m_Layer: 0
+  m_Name: ElectricBoxLightControlManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1930482574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930482573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d2a3f664b8ef4f5eb7f1a47316f38fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  darkDirectionalLight: {fileID: 0}
+  lightDirectionalLight: {fileID: 0}
+  playerSpotlight: {fileID: 0}
+  player: {fileID: 0}
+  detectionRadius: 20
+  spotlightHeight: 5
+--- !u!4 &1930482575
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930482573}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 31.968596, y: 15.40484, z: 17.510464}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1933900537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4510,3 +4560,4 @@ SceneRoots:
   - {fileID: 121456901}
   - {fileID: 499275814}
   - {fileID: 60666480}
+  - {fileID: 1930482575}

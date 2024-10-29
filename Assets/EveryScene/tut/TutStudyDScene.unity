@@ -1670,7 +1670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &751958582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3792,8 +3792,6 @@ MonoBehaviour:
   nextSceneClean: TutBRoomCScene
   trapDoorScene: 
   doorNameForReturning: doortoroom
-  videoPlayer: {fileID: 0}
-  canvas: {fileID: 0}
 --- !u!1001 &1613652984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4561,7 +4559,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  turningSpeed: 1
   mainCamera: {fileID: 1675648313}
 --- !u!136 &1939756844
 CapsuleCollider:
@@ -4802,8 +4799,6 @@ MonoBehaviour:
   nextSceneClean: TutLRoomCScene
   trapDoorScene: 
   doorNameForReturning: doorToLivingRoomFromStudy
-  videoPlayer: {fileID: 0}
-  canvas: {fileID: 0}
 --- !u!1 &2063963513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4820,7 +4815,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2063963514
 MonoBehaviour:
   m_ObjectHideFlags: 0

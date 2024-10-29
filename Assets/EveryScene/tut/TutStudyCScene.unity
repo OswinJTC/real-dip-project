@@ -1540,7 +1540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e2a8e210fce5ca942bcf577bb0b303f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.99
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e2a8e210fce5ca942bcf577bb0b303f9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2598,6 +2598,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 60756554652723938, guid: 141d9336c44a64a4c8ba3afff7a69b97, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3099289074693528319, guid: 141d9336c44a64a4c8ba3afff7a69b97, type: 3}
       propertyPath: m_Name
       value: trapdoor
@@ -2612,7 +2616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7218251187231105970, guid: 141d9336c44a64a4c8ba3afff7a69b97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8
+      value: 6.83
       objectReference: {fileID: 0}
     - target: {fileID: 7218251187231105970, guid: 141d9336c44a64a4c8ba3afff7a69b97, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3033,7 +3037,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
-  turningSpeed: 1
   mainCamera: {fileID: 1675648313}
 --- !u!136 &1579944791
 CapsuleCollider:
@@ -3733,7 +3736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1700116093
 BoxCollider:
   m_ObjectHideFlags: 0

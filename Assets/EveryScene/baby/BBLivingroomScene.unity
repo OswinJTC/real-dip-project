@@ -5691,6 +5691,7 @@ MonoBehaviour:
   isMonsterSpawned: 0
   monster: {fileID: 0}
   player: {fileID: 0}
+  tutPlayer: {fileID: 0}
 --- !u!4 &979949773
 Transform:
   m_ObjectHideFlags: 0

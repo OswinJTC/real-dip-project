@@ -29,26 +29,34 @@ public class GameManager : MonoBehaviour
     // Global states
     public bool isLightOn = false;
     public bool isInClayStatus = false;
+    public bool isCleaningKit = true; // New variable initialized to true
 
     // Monster state
     public bool isMonsterSpawned = false;
     public GameObject monster; // Reference to the monster GameObject
 
-    // Player reference
+    // Player references
     public GameObject player; // Reference to the player GameObject
     private Vector3 playerEntryPosition; // Entry position for the player
 
+    // Tutorial Player references
+    public GameObject tutPlayer; // Reference to the tutorial player GameObject
+    private Vector3 tutPlayerEntryPosition; // Entry position for the tutorial player
+
+    public Vector3? savedPlayerPosition = null; // Nullable to indicate no saved position by default
+
     private void Awake()
     {
-        // Set up Singleton instance
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("GameManager instance set");
         }
         else
         {
             Destroy(gameObject);
+            Debug.Log("Duplicate GameManager destroyed");
             return;
         }
 
@@ -85,65 +93,140 @@ public class GameManager : MonoBehaviour
 
     private void UpdateReferences()
     {
-        // Check if the player reference is missing and we are in the BBLivingroomScene
-        if (player == null && SceneManager.GetActiveScene().name == "BBLivingroomScene")
+        // Define the list of scenes where only the player should not persist
+        List<string> playerNonPersistentScenes = new List<string>
         {
-            FindPlayer();
-        }
+            "TutLRoomDScene",
+            "TutStudyDScene",
+            "TutKitchenDScene",
+            "TutStudyCScene",
+            "TutLRoomCScene",
+            "TutKitchenCScene",
+            "TutBRoomDScene",
+            "TutBRoomCScene",
+            "TutBasementScene",
+            "LogicPuzzle",
+            "Balloon Puzzle",
+            "Phone Puzzle"
+        };
 
-        // Check if the monster reference is missing and we are in the BedroomScene
-        if (monster == null && SceneManager.GetActiveScene().name == "BedroomScene")
+        // Check if the current scene is one where the player should not persist
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        bool isPlayerNonPersistentScene = playerNonPersistentScenes.Contains(currentSceneName);
+
+        if (isPlayerNonPersistentScene)
         {
-            FindMonster();
-        }
-    }
-
-    private void FindPlayer()
-{
-    // Find a player object with the "Player" tag
-    GameObject initialPlayer = GameObject.FindWithTag("Player");
-
-    // Check if the GameManager already has a player reference
-    if (player == null)
-    {
-        if (initialPlayer != null)
-        {
-            player = initialPlayer;
-            DontDestroyOnLoad(player);
-            Debug.Log("Player GameObject found and set as persistent in GameManager.");
+            MakePlayerNonPersistent();
         }
         else
         {
-            Debug.LogWarning("Player GameObject not found!");
+            FindTutPlayer();
+            FindPlayer();
+            FindMonster();
+
+            if (player != null && !player.activeSelf)
+            {
+                player.SetActive(true);
+                Debug.Log("Persistent player re-enabled.");
+            }
+
+            if (tutPlayer != null && !tutPlayer.activeSelf)
+            {
+                tutPlayer.SetActive(true);
+                Debug.Log("Persistent tutPlayer re-enabled.");
+            }
         }
     }
-    else
+
+    private void MakePlayerNonPersistent()
     {
-        // If the initial scene also has a player object that is not the persistent one, destroy it
-        if (initialPlayer != null && initialPlayer != player)
+        if (player != null)
         {
-            initialPlayer.SetActive(false);
-            Debug.Log("Duplicate initial player destroyed to prevent duplication.");
+            player.SetActive(false);
+            Debug.Log("Persistent player disabled in non-persistent scene.");
+        }
+
+        if (tutPlayer != null)
+        {
+            tutPlayer.SetActive(false);
+            Debug.Log("Persistent tutPlayer disabled in non-persistent scene.");
         }
     }
-}
 
+    private void FindTutPlayer()
+    {
+        GameObject initialTutPlayer = GameObject.FindWithTag("TutPlayer");
 
+        if (tutPlayer == null)
+        {
+            if (initialTutPlayer != null)
+            {
+                tutPlayer = initialTutPlayer;
+                DontDestroyOnLoad(tutPlayer);
+                Debug.Log("tutPlayer GameObject found and set as persistent in GameManager.");
+            }
+            else
+            {
+                Debug.LogWarning("tutPlayer GameObject not found!");
+            }
+        }
+        else
+        {
+            if (initialTutPlayer != null && initialTutPlayer != tutPlayer)
+            {
+                initialTutPlayer.SetActive(false);
+                Debug.Log("Duplicate initial tutPlayer destroyed to prevent duplication.");
+            }
+        }
+    }
+
+    public void SetTutPlayerEntryPosition(Vector3 position)
+    {
+        tutPlayerEntryPosition = position;
+        if (tutPlayer == null) FindTutPlayer();
+        if (tutPlayer != null) tutPlayer.transform.position = tutPlayerEntryPosition;
+    }
+
+    public Vector3 GetTutPlayerEntryPosition() => tutPlayerEntryPosition;
+
+    private void FindPlayer()
+    {
+        GameObject initialPlayer = GameObject.FindWithTag("Player");
+
+        if (player == null)
+        {
+            if (initialPlayer != null)
+            {
+                player = initialPlayer;
+                DontDestroyOnLoad(player);
+                Debug.Log("Player GameObject found and set as persistent in GameManager.");
+            }
+            else
+            {
+                Debug.LogWarning("Player GameObject not found!");
+            }
+        }
+        else
+        {
+            if (initialPlayer != null && initialPlayer != player)
+            {
+                initialPlayer.SetActive(false);
+                Debug.Log("Duplicate initial player destroyed to prevent duplication.");
+            }
+        }
+    }
 
     private void FindMonster()
     {
-        // Check if the monster already exists
         if (monster != null)
         {
             Debug.Log("Monster already exists. Skipping finding a new one.");
-            return; // Exit if a monster is already assigned
+            return;
         }
 
-        // Find the monster in the scene if it's not already assigned
         monster = GameObject.FindWithTag("Monster");
         if (monster != null)
         {
-            // Ensure the monster is invisible initially by disabling its MeshRenderer
             MeshRenderer renderer = monster.GetComponent<MeshRenderer>();
             if (renderer != null)
             {
@@ -151,12 +234,11 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Monster GameObject found and made invisible in GameManager.");
             }
 
-            // Make the monster persist across scene loads
             DontDestroyOnLoad(monster);
         }
         else
         {
-            Debug.LogWarning("Monster GameObject not found in the BedroomScene!");
+            Debug.LogWarning("Monster GameObject not found in the scene!");
         }
     }
 
@@ -167,7 +249,6 @@ public class GameManager : MonoBehaviour
 
         if (monster != null)
         {
-            // Control the visibility of the monster using its MeshRenderer
             MeshRenderer renderer = monster.GetComponent<MeshRenderer>();
             if (renderer != null)
             {
@@ -186,7 +267,6 @@ public class GameManager : MonoBehaviour
         if (monster != null && player != null)
         {
             Vector3 playerPosition = player.transform.position;
-            // Adjust the monster's position to be near the player, e.g., 2 units behind
             Vector3 newMonsterPosition = playerPosition - player.transform.forward * 2;
             monster.transform.position = newMonsterPosition;
             Debug.Log("Monster position updated near the player: " + newMonsterPosition);
@@ -277,7 +357,6 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("Player has no more blood left!");
-            // Handle game over logic here if needed
         }
     }
 
@@ -305,5 +384,52 @@ public class GameManager : MonoBehaviour
         {
             if (panel != null) DontDestroyOnLoad(panel);
         }
+    }
+
+    public void SavePlayerPosition()
+    {
+        if (player != null)
+        {
+            savedPlayerPosition = player.transform.position;
+            Debug.Log("Player position saved: " + savedPlayerPosition);
+        }
+        else
+        {
+            Debug.LogWarning("Player reference is null; unable to save position.");
+        }
+    }
+
+    public void RestorePlayerPosition()
+    {
+        if (savedPlayerPosition.HasValue && player != null)
+        {
+            player.transform.position = savedPlayerPosition.Value;
+            Debug.Log("Player position restored: " + savedPlayerPosition);
+            savedPlayerPosition = null; // Clear the saved position after restoring
+        }
+        else
+        {
+            Debug.LogWarning("No saved position to restore or player reference is null.");
+        }
+    }
+
+    private bool IsInNonPersistentScene()
+    {
+        List<string> playerNonPersistentScenes = new List<string>
+        {
+            "TutLRoomDScene",
+            "TutStudyDScene",
+            "TutKitchenDScene",
+            "TutStudyCScene",
+            "TutLRoomCScene",
+            "TutKitchenCScene",
+            "TutBRoomDScene",
+            "TutBRoomCScene",
+            "TutBasementScene",
+            "LogicPuzzle",
+            "Balloon Puzzle",
+            "Phone Puzzle"
+        };
+        return playerNonPersistentScenes.Contains(SceneManager.GetActiveScene().name);
     }
 }

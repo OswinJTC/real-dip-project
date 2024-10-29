@@ -6,7 +6,6 @@ public class StudyRoomBloodElimination : MonoBehaviour
 {
     public float detectionRadius = 2f;
     public GameObject[] bloodObjects;
-    private ItemActivation itemActivation;
     private int bloodCount = 0;
     private StudyRoomVideoManager videoManager;  // Updated to match new name
 
@@ -23,7 +22,6 @@ public class StudyRoomBloodElimination : MonoBehaviour
         }
 
         bloodObjects = GameObject.FindGameObjectsWithTag("Blood");
-        itemActivation = FindObjectOfType<ItemActivation>();
 
         // Find the StudyRoomVideoManager to play the video
         videoManager = FindObjectOfType<StudyRoomVideoManager>();
@@ -35,7 +33,8 @@ public class StudyRoomBloodElimination : MonoBehaviour
 
     void Update()
     {
-        if (itemActivation.IsItemEquipped())
+        // Check if the cleaning kit is available instead of item activation
+        if (GameManager.instance.isCleaningKit)
         {
             foreach (GameObject blood in bloodObjects)
             {
