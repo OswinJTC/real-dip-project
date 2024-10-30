@@ -5,6 +5,7 @@ public class HouseEntrance : MonoBehaviour
 {
     public float detectionRadius = 5f;  // Set a custom detection radius
     public Transform player;            // Reference to the player's transform
+    public string nextScene = "TutLRoomDScene";  // Scene to load when entering
 
     void Update()
     {
@@ -12,11 +13,12 @@ public class HouseEntrance : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // Log the current distance for debugging purposes
-        //Debug.Log("Current distance to player: " + distanceToPlayer);
+        Debug.Log("Current distance to player: " + distanceToPlayer);
 
         // Check if the player is within the detection radius and presses the "E" key
         if (distanceToPlayer <= detectionRadius && Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("E pressed. Player entering the house...");
             EnterHouse();
         }
     }
@@ -25,23 +27,37 @@ public class HouseEntrance : MonoBehaviour
     {
         Debug.Log("Entering the house...");
 
-        // Use the TransitionManager to fade out and change scenes
+        // Set the player's entry position when entering the house
+        Vector3 entryPosition = GetEntryPosition(nextScene);
+        GameManager.instance.SetPlayerEntryPosition(entryPosition);
+
+        // Use the TransitionManager to change scenes
         if (TransitionManager.instance != null)
         {
-            // Call the fade transition to change scene to "TutLRoomDScene"
-            TransitionManager.instance.ChangeScene("TutLRoomDScene");
+            TransitionManager.instance.ChangeScene(nextScene);
         }
         else
         {
             Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
-            SceneManager.LoadScene("TutLRoomDScene");  // Fallback to direct scene loading if TransitionManager is not available
+            SceneManager.LoadScene(nextScene);
         }
+    }
+
+    private Vector3 GetEntryPosition(string sceneToLoad)
+    {
+        // Define the entry position for entering the living room scene
+        if (sceneToLoad == "TutLRoomDScene")
+        {
+            return new Vector3(5.23f, 5.17f, 11.34f);
+        }
+
+        // Default fallback position if no specific position is defined
+        return new Vector3(0f, 0f, 0f);
     }
 
     // Optional: Visualize the detection radius in the scene editor
     void OnDrawGizmosSelected()
     {
-        // Draw a wireframe sphere in the Scene view to visualize the detection radius
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
     }

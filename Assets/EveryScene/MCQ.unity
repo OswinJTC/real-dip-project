@@ -579,7 +579,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &582451409
 RectTransform:
@@ -613,8 +613,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a724138aa722bc64eb69c31a93434b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionText: {fileID: 0}
-  answerButtons: []
+  questionText: {fileID: 1850783556}
+  answerButtons:
+  - {fileID: 1277855562}
+  - {fileID: 531325727}
+  - {fileID: 1978103923}
+  - {fileID: 344730216}
+  selectedTextColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  defaultTextColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &647631580
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,7 +860,6 @@ GameObject:
   - component: {fileID: 992030295}
   - component: {fileID: 992030297}
   - component: {fileID: 992030296}
-  - component: {fileID: 992030298}
   m_Layer: 5
   m_Name: MCQ Panel
   m_TagString: Untagged
@@ -926,24 +931,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992030294}
   m_CullTransparentMesh: 1
---- !u!114 &992030298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992030294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a724138aa722bc64eb69c31a93434b8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionText: {fileID: 1850783556}
-  answerButtons:
-  - {fileID: 1277855562}
-  - {fileID: 531325727}
-  - {fileID: 1978103923}
-  - {fileID: 344730216}
 --- !u!1 &1088136620
 GameObject:
   m_ObjectHideFlags: 0
