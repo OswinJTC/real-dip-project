@@ -12,6 +12,12 @@ public class CapsuleMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody component is missing!");
+            return;
+        }
+
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
@@ -26,6 +32,9 @@ public class CapsuleMovement : MonoBehaviour
 
     void Update()
     {
+        // Debug for player input
+        Debug.Log($"Vertical Input: {Input.GetAxis("Vertical")}, Horizontal Input: {Input.GetAxis("Horizontal")}");
+
         // Check if the player is in the BedroomScene, near the fuel, and presses 'E'
         if (SceneManager.GetActiveScene().name == "BedroomScene" && nearFuel && Input.GetKeyDown(KeyCode.E) && !GameManager.instance.GetMonsterSpawned())
         {
@@ -35,6 +44,8 @@ public class CapsuleMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log("FixedUpdate is running");
+
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
 
@@ -49,6 +60,7 @@ public class CapsuleMovement : MonoBehaviour
 
         if (moveDirection != Vector3.zero)
         {
+            Debug.Log("Applying force for movement");
             rb.AddForce(moveDirection * speed * 50f);
         }
         else
@@ -59,7 +71,6 @@ public class CapsuleMovement : MonoBehaviour
         rb.linearVelocity = Vector3.ClampMagnitude(rb.linearVelocity, speed);
     }
 
-    // Detect when the player enters the fuel's trigger collider
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Fuel"))
@@ -69,7 +80,6 @@ public class CapsuleMovement : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the fuel's trigger collider
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Fuel"))
@@ -81,12 +91,10 @@ public class CapsuleMovement : MonoBehaviour
 
     void SpawnMonster()
     {
-        // Get the monster reference from the GameManager
         GameObject monster = GameManager.instance.monster;
 
         if (monster != null)
         {
-            // Enable the MeshRenderer to make the monster visible
             MeshRenderer renderer = monster.GetComponent<MeshRenderer>();
             if (renderer != null)
             {
@@ -94,7 +102,6 @@ public class CapsuleMovement : MonoBehaviour
                 Debug.Log("Monster made visible.");
             }
 
-            // Update the GameManager's state to reflect that the monster has been spawned
             GameManager.instance.SetMonsterSpawned(true);
             Debug.Log("Monster Spawned.");
         }
@@ -113,23 +120,20 @@ public class CapsuleMovement : MonoBehaviour
     {
         if (sceneName == "outsideTerrain")
         {
-            // Set the player's scale and speed for the outsideTerrain scene
             transform.localScale = new Vector3(0.5f, 1f, 0.5f);
-            speed = 2f; // Slower speed for the outside scene
+            speed = 2f;
             Debug.Log("Player scale and speed adjusted for outsideTerrain.");
         }
-        else
+        else if(sceneName == "BBLivingroomScene" || sceneName == "TutLRoomDScene")
         {
-            // Set the player's scale and speed for any other scene
             transform.localScale = new Vector3(2f, 4f, 2f);
-            speed = 10f; // Faster speed for indoor scenes
+            speed = 10f;
             Debug.Log("Player scale and speed adjusted for other scenes.");
         }
     }
 
     void OnDestroy()
     {
-        // Unsubscribe from the scene load event to avoid memory leaks
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

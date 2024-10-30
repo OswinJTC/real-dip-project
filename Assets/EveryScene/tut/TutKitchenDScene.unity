@@ -372,7 +372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &283577974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,6 +1103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextSceneDirty: TutLRoomDScene
   nextSceneClean: TutLRoomCScene
+  trapDoorScene: 
   doorNameForReturning: doortolroom
 --- !u!1 &629965983
 GameObject:
@@ -1166,7 +1167,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  turningSpeed: 1
   mainCamera: {fileID: 834909359}
 --- !u!136 &629965986
 CapsuleCollider:
@@ -1789,7 +1789,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1195695920
 MonoBehaviour:
   m_ObjectHideFlags: 0

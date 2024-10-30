@@ -763,7 +763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &479007396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,9 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0be93f1bdce7b41f68a95ed1c4aaf66f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 705696541}
-  chaseSpeed: 5
-  detectionRadius: 10
+  speed: 3
 --- !u!65 &479007397
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1433,7 +1431,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  turningSpeed: 1
   mainCamera: {fileID: 1672858797}
 --- !u!136 &705696538
 CapsuleCollider:
@@ -1644,7 +1641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &723815372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2079,6 +2076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextSceneDirty: TutBRoomDScene
   nextSceneClean: TutBRoomCScene
+  trapDoorScene: 
   doorNameForReturning: doortoroom
 --- !u!1 &990174316 stripped
 GameObject:
@@ -2774,6 +2772,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextSceneDirty: TutKitchenDScene
   nextSceneClean: TutKitchenCScene
+  trapDoorScene: 
   doorNameForReturning: doortokitchen
 --- !u!1001 &1179380718
 PrefabInstance:
@@ -3093,6 +3092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextSceneDirty: TutStudyDScene
   nextSceneClean: TutStudyCScene
+  trapDoorScene: 
   doorNameForReturning: doortostudy
 --- !u!1001 &1336329390
 PrefabInstance:
@@ -3799,7 +3799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1782278951
 MonoBehaviour:
   m_ObjectHideFlags: 0

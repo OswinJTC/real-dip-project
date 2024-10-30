@@ -15,10 +15,18 @@ public class DoorInteraction : MonoBehaviour
 
     void Start()
     {
-        videoManager = FindObjectOfType<TrapdoorVideoManager>();
-        if (videoManager == null)
+        // Check if this door is the trap door based on its name
+        if (gameObject.name == "trapdoor") // Customize based on the actual trap door object name in the Unity Editor
         {
-            Debug.LogError("Now in this room scene; TrapdoorVideoManager not found!");
+            isTrapDoor = true;  // Set the flag for trap door
+            Debug.Log("Trap door detected on GameObject: " + gameObject.name);
+
+            // Only look for TrapdoorVideoManager if this door is the trap door
+            videoManager = FindObjectOfType<TrapdoorVideoManager>();
+            if (videoManager == null)
+            {
+                Debug.LogError("TrapdoorVideoManager not found! This door requires a video manager for trap door functionality.");
+            }
         }
     }
 
@@ -26,11 +34,21 @@ public class DoorInteraction : MonoBehaviour
     {
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
+            Debug.Log("E pressed near door: " + gameObject.name);
+
             // If it's a trap door interaction, play video and load the basement
             if (isTrapDoor)
             {
                 Debug.Log("Player entering the trap door to basement.");
-                StartCoroutine(videoManager.PlayVideoAndChangeScene(trapDoorScene));  // Use VideoManager to play video and change scene
+                if (videoManager != null)
+                {
+                    Debug.Log("Starting trap door video and scene change...");
+                    StartCoroutine(videoManager.PlayVideoAndChangeScene(trapDoorScene));  // Use VideoManager to play video and change scene
+                }
+                else
+                {
+                    Debug.LogWarning("TrapdoorVideoManager is missing! Cannot play video for trap door.");
+                }
                 return;
             }
 
@@ -51,7 +69,7 @@ public class DoorInteraction : MonoBehaviour
                 return; // Prevent loading if no scene is set
             }
 
-            Debug.Log("Player pressed E near the door: " + gameObject.name);
+            Debug.Log("Loading scene: " + sceneToLoad);
             lastEnteredDoor = doorNameForReturning; // Store the door name for returning
             Debug.Log("Last entered door set to: " + lastEnteredDoor);
 
@@ -90,8 +108,8 @@ public class DoorInteraction : MonoBehaviour
             isPlayerNear = true;  // Player is near the door
             Debug.Log("Player is near the door: " + gameObject.name);
 
-            // Check if the door is a trap door
-            if (gameObject.name == "trapdoor") // You can customize this based on the actual name of the trap door object
+            // Check if this door is the trap door
+            if (gameObject.name == "trapdoor")
             {
                 isTrapDoor = true;  // Set the flag for trap door
             }
@@ -103,6 +121,7 @@ public class DoorInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;  // Player is no longer near the door
+            Debug.Log("Player has left the door: " + gameObject.name);
         }
     }
 
