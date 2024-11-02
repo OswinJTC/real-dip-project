@@ -31,7 +31,7 @@ public class CribInteraction : MonoBehaviour
     }
 
     // Detect when the player enters the crib's trigger collider
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -41,7 +41,7 @@ public class CribInteraction : MonoBehaviour
     }
 
     // Detect when the player exits the crib's trigger collider
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
