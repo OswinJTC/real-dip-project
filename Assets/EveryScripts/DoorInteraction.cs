@@ -101,7 +101,7 @@ public class DoorInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)  // Use 2D version for player interaction detection
     {
         if (other.CompareTag("Player"))
         {
@@ -116,7 +116,7 @@ public class DoorInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)  // Use 2D version for exit detection
     {
         if (other.CompareTag("Player"))
         {

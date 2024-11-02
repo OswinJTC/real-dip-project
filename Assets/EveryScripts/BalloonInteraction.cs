@@ -17,7 +17,7 @@ public class BalloonInteraction : MonoBehaviour
 
     private void InteractWithBalloon()
     {
-        Debug.Log("Interacting with the balloon. Saving player position and loading the Balloon Puzzle 1 scene...");
+        Debug.Log("Interacting with the balloon. Saving player position and loading the Balloon Puzzle scene...");
 
         // Save the player's current position in GameManager before loading the puzzle scene
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -26,12 +26,12 @@ public class BalloonInteraction : MonoBehaviour
             GameManager.instance.savedPlayerPosition = player.transform.position;
         }
         
-        // Load the target scene (Balloon Puzzle 1)
+        // Load the target scene (Balloon Puzzle)
         SceneManager.LoadScene(targetScene);
     }
 
-    // Detect when the player enters the balloon's trigger collider
-    private void OnTriggerEnter(Collider other)
+    // Detect when the player enters the balloon's trigger collider (2D)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
@@ -40,8 +40,8 @@ public class BalloonInteraction : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the balloon's trigger collider
-    private void OnTriggerExit(Collider other)
+    // Detect when the player exits the balloon's trigger collider (2D)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {

@@ -3,27 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class HouseEntrance : MonoBehaviour
 {
-    public float detectionRadius = 5f;  // Set a custom detection radius
     public Transform player;            // Reference to the player's transform
     public string nextScene = "TutLRoomDScene";  // Scene to load when entering
 
     void Update()
     {
-        // Calculate the distance between the player and the house
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        // Log the current distance for debugging purposes
-        Debug.Log("Current distance to player: " + distanceToPlayer);
-
-        // Check if the player is within the detection radius and presses the "E" key
-        if (distanceToPlayer <= detectionRadius && Input.GetKeyDown(KeyCode.E))
+        // Check if the player is near and presses the "E" key
+        if (Input.GetKeyDown(KeyCode.E) && isPlayerNear)
         {
             Debug.Log("E pressed. Player entering the house...");
             EnterHouse();
         }
     }
 
-    void EnterHouse()
+    private bool isPlayerNear = false; // Flag to check if the player is near the entrance
+
+    private void EnterHouse()
     {
         Debug.Log("Entering the house...");
 
@@ -55,10 +50,23 @@ public class HouseEntrance : MonoBehaviour
         return new Vector3(0f, 0f, 0f);
     }
 
-    // Optional: Visualize the detection radius in the scene editor
-    void OnDrawGizmosSelected()
+    // Detect when the player enters the entrance's trigger collider
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNear = true;
+            Debug.Log("Player is near the entrance.");
+        }
+    }
+
+    // Detect when the player exits the entrance's trigger collider
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNear = false;
+            Debug.Log("Player is no longer near the entrance.");
+        }
     }
 }
