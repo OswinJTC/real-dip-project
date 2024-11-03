@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;  // Singleton instance
+
 
     // UI Elements
     public Text timerText;
@@ -14,6 +16,8 @@ public class GameManager : MonoBehaviour
     public GameObject inventoryPanel;
     public GameObject thinkPanel;
     public GameObject pausePanel;
+    public GameObject gameoverpanel; // Assign the panel in the Unity Inspector
+    public Canvas PersistentCanvas;
 
     // Player status
     private int playerBlood = 5;
@@ -353,13 +357,28 @@ public class GameManager : MonoBehaviour
             UpdateEyeVisibility($"ClosedEye{playerBlood + 1}", false);
             UpdateEyeVisibility($"OpenEye{playerBlood + 1}", true);
             Debug.Log($"Player blood reduced! Remaining blood: {playerBlood}");
+
         }
         else
         {
+           
+/*
+            if (playerBlood == 0)
+            {
+                ActivatePanel();
+            }
+*/
             Debug.Log("Player has no more blood left!");
         }
     }
-
+    private void ActivatePanel()
+    {
+        if (gameoverpanel != null)
+        {
+            gameoverpanel.SetActive(true); // Activate the panel
+            Debug.Log("Panel activated!");
+        }
+    }
     private void UpdateEyeVisibility(string tag, bool isVisible)
     {
         GameObject eye = GameObject.FindWithTag(tag);
@@ -370,13 +389,45 @@ public class GameManager : MonoBehaviour
             {
                 eyeImage.enabled = isVisible;
                 Debug.Log($"{tag} visibility set to: {isVisible}");
+
+                //$"OpenEye{playerBlood + 1}"
+                // Check if the tag is "OpenEye1" and activate the panel if it is visible
+                if (tag == "OpenEye1" && isVisible)
+                {
+                    ActivatePanel();
+                    DeactivateCanvas(); // Call method to deactivate the game panel
+                }
+
+
             }
         }
+        
         else
         {
             Debug.LogWarning($"{tag} not found.");
         }
     }
+
+    private void DeactivateCanvas()
+    {
+        if (PersistentCanvas != null)
+        {
+            PersistentCanvas.gameObject.SetActive(false); // Deactivate the Canvas
+            Debug.Log("Canvas deactivated!");
+        }
+    }
+ /*
+    private void DeactivateGamePanel()
+    {
+        if (gamePanel != null)
+        {
+            gamePanel.SetActive(false); // Deactivate the game panel
+            Debug.Log("Game panel deactivated!");
+        }
+
+    }
+*/
+
 
     private void PersistAcrossScenes(params GameObject[] panels)
     {
