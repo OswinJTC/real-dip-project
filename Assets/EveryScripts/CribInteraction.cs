@@ -1,32 +1,39 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CribInteraction : MonoBehaviour
 {
-    public string mcqSceneName = "MCQ"; // The name of the scene with the MCQ questions
+    public GameObject panel; // Reference to the panel GameObject
     private bool isPlayerNear = false; // Flag to check if the player is near the crib
+
+    void Start()
+    {
+        // Make sure the panel starts as inactive
+        if (panel != null)
+        {
+            panel.SetActive(false);
+        }
+    }
 
     void Update()
     {
         // Check if the player is near the crib and presses the "E" key
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Player interacts with the crib. Switching to MCQ scene.");
-            EnterMCQScene();
+            TogglePanel(); // Call method to toggle panel visibility
         }
     }
 
-    private void EnterMCQScene()
+    private void TogglePanel()
     {
-        // Use the TransitionManager to load the MCQ scene with a fade effect, if available
-        if (TransitionManager.instance != null)
+        if (panel != null)
         {
-            TransitionManager.instance.ChangeScene(mcqSceneName);
+            bool isActive = panel.activeSelf; // Check current state
+            panel.SetActive(!isActive); // Toggle active state
+            Debug.Log(isActive ? "Panel closed." : "Panel opened."); // Log current action
         }
         else
         {
-            Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
-            SceneManager.LoadScene(mcqSceneName); // Fallback to direct scene loading if TransitionManager is not available
+            Debug.LogError("Panel is not assigned in the Inspector!");
         }
     }
 
@@ -47,6 +54,13 @@ public class CribInteraction : MonoBehaviour
         {
             isPlayerNear = false;
             Debug.Log("Player is no longer near the crib.");
+
+            // Optionally close the panel when player exits
+            if (panel != null && panel.activeSelf)
+            {
+                panel.SetActive(false); // Close the panel when player leaves
+                Debug.Log("Panel closed due to player exit.");
+            }
         }
     }
 }
