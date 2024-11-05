@@ -47,4 +47,14 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         buttonText.font = originalFont; // Revert to the original font
         buttonText.fontSize = originalFontSize; // Revert to the original font size
     }
+
+    // Method to reset text appearance to default
+    public void ResetToDefault()
+    {
+        if (buttonText == null) return;
+
+        buttonText.color = originalTextColor;
+        buttonText.font = originalFont;
+        buttonText.fontSize = originalFontSize;
+    }
 }

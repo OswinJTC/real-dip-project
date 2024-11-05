@@ -6,9 +6,17 @@ public class LivingRoomBloodElimination : MonoBehaviour
     public float detectionRadius = 2f;
     public GameObject[] bloodObjects;
     private int bloodCount = 0;
+    private TutCharacterSound tutCharacterSound; // Reference to TutCharacterSound
 
     void Start()
     {
+        // Initialize the TutCharacterSound reference
+        tutCharacterSound = FindObjectOfType<TutCharacterSound>();
+        if (tutCharacterSound == null)
+        {
+            Debug.LogError("TutCharacterSound script not found on any GameObject in the scene.");
+        }
+
         // Check if the living room is already clean
         if (GameManager.instance.isLivingRoomClean)
         {
@@ -42,6 +50,13 @@ public class LivingRoomBloodElimination : MonoBehaviour
                         bloodCount++;
                         Debug.Log("Blood eliminated in the living room. Total eliminated: " + bloodCount);
 
+                        // Play cleaning blood sound
+                        if (tutCharacterSound != null)
+                        {
+                            tutCharacterSound.PlayCleaningBloodSound();
+                        }
+
+                        // Check if all blood spots are cleaned
                         if (bloodCount == bloodObjects.Length)
                         {
                             GameManager.instance.isLivingRoomClean = true;

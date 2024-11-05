@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class ElectricBoxLightControl : MonoBehaviour
 {
@@ -11,10 +12,17 @@ public class ElectricBoxLightControl : MonoBehaviour
     public float spotlightHeight = 5f;
 
     private bool isLightOn = false;
+    private TutCharacterSound tutCharacterSound;
 
     void Start()
     {
         DontDestroyOnLoad(this);  // Only persist the script itself, not the GameObject
+
+        // Initialize the character sound component
+        if (player != null)
+        {
+            tutCharacterSound = player.GetComponent<TutCharacterSound>();
+        }
 
         if (GameManager.instance.isLightOn)
         {
@@ -43,12 +51,25 @@ public class ElectricBoxLightControl : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    Debug.Log("E key pressed. Going to puzzle scene.");
-                    GoToPuzzleScene();
-                    TurnOnBrightLights();
+                    Debug.Log("E key pressed. Playing electrical box sound and transitioning...");
+                    StartCoroutine(OpenElectricalBoxAfterSound());
                 }
             }
         }
+    }
+
+    private IEnumerator OpenElectricalBoxAfterSound()
+    {
+        // Play the electrical box open sound if available
+        if (tutCharacterSound != null && tutCharacterSound.electricalBoxOpenClip != null)
+        {
+            tutCharacterSound.PlayElectricalBoxOpenSound();
+        }
+
+        yield return new WaitForSeconds(1.5f); // Wait for a moment to let sound play, adjust as needed
+
+        GoToPuzzleScene();
+        TurnOnBrightLights();
     }
 
     void GoToPuzzleScene()
@@ -66,6 +87,12 @@ public class ElectricBoxLightControl : MonoBehaviour
         GameManager.instance.isLightOn = true;
 
         Debug.Log("Room lights are now on.");
+
+        // Play the electrical box hum sound on loop if lights are turned on
+        if (tutCharacterSound != null)
+        {
+            tutCharacterSound.PlayElectricalBoxHum();
+        }
     }
 
     void OnDrawGizmosSelected()

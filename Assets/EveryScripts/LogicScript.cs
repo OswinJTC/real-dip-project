@@ -7,6 +7,8 @@ public class LogicScript : MonoBehaviour
     private GameObject[] LogicTag;
     private ElectricBoxLightControl electricBoxLightControl;
 
+    private SwitchSoundManager switchSoundManager; // Reference to SwitchSoundManager
+
     void Start()
     {
         LogicTag = GameObject.FindGameObjectsWithTag("Logic");
@@ -22,6 +24,12 @@ public class LogicScript : MonoBehaviour
         {
             Debug.LogError("ElectricBoxLightControl not found!");
         }
+        // Find and assign the SwitchSoundManager component
+        switchSoundManager = FindObjectOfType<SwitchSoundManager>();
+        if (switchSoundManager == null)
+    {
+        Debug.LogError("SwitchSoundManager not found! Ensure it’s in the scene.");
+    }
     }
 
     void Update()
@@ -62,6 +70,11 @@ public class LogicScript : MonoBehaviour
                 else
                 {
                     raycastHit.transform.GetComponent<MeshRenderer>().material.color = Color.green;
+                }
+                // Play random switch sound through the SwitchSoundManager
+                if (switchSoundManager != null)
+                {
+                    switchSoundManager.PlayRandomSwitchSound();
                 }
             }
         }

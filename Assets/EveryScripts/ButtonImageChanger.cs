@@ -40,4 +40,18 @@ public class ButtonImageChanger : MonoBehaviour, IPointerEnterHandler, IPointerE
             }
         }
     }
+
+    // Method to reset images to their default state
+    public void ResetToDefault()
+    {
+        foreach (ImageChange imgChange in imagesToChange)
+        {
+            if (imgChange.defaultImage != null && imgChange.hoverImage != null)
+            {
+                // Enable the default image and disable the hover image
+                imgChange.defaultImage.gameObject.SetActive(true);
+                imgChange.hoverImage.gameObject.SetActive(false);
+            }
+        }
+    }
 }

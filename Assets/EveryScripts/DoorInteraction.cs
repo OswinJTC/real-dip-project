@@ -12,6 +12,7 @@ public class DoorInteraction : MonoBehaviour
     private static string lastEnteredDoor = "";  // Static variable to track the last entered door
 
     private TrapdoorVideoManager videoManager;  // Reference to the TrapdoorVideoManager
+    private TutCharacterSound tutCharacterSound; // Reference to TutCharacterSound
 
     void Start()
     {
@@ -28,6 +29,13 @@ public class DoorInteraction : MonoBehaviour
                 Debug.LogError("TrapdoorVideoManager not found! This door requires a video manager for trap door functionality.");
             }
         }
+
+        // Find the TutCharacterSound component on the player
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            tutCharacterSound = player.GetComponent<TutCharacterSound>();
+        }
     }
 
     void Update()
@@ -35,6 +43,16 @@ public class DoorInteraction : MonoBehaviour
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("E pressed near door: " + gameObject.name);
+
+            // Play the door open sound if available
+            if (tutCharacterSound != null)
+            {
+                tutCharacterSound.PlayDoorOpenSound();
+            }
+            else
+            {
+                Debug.LogWarning("TutCharacterSound component not found on player.");
+            }
 
             // If it's a trap door interaction, play video and load the basement
             if (isTrapDoor)
