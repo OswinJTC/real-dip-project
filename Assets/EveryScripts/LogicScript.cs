@@ -88,6 +88,7 @@ public class LogicScript : MonoBehaviour
                 {
                     LogicTag[5].GetComponent<MeshRenderer>().material.color = Color.green;
                     Debug.Log("You win");
+                    SceneManager.LoadScene("TutLRoomDScene");
                 }
             }
         }

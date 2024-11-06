@@ -6,17 +6,36 @@ public class MainMenuVideoManager : MonoBehaviour
 {
     public VideoPlayer videoPlayer;  // The VideoPlayer component
     public GameObject canvas;        // Reference to the canvas you want to hide
+    public AudioSource audioSource;  // Audio source to output video audio
 
     private void Start()
     {
         if (videoPlayer == null)
         {
             Debug.LogError("VideoPlayer not assigned to MainMenuVideoManager!");
+            return;
         }
 
         if (canvas == null)
         {
             Debug.LogError("Canvas not assigned to MainMenuVideoManager!");
+            return;
+        }
+
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource not assigned to MainMenuVideoManager!");
+            return;
+        }
+
+        // Set the Audio Output Mode to AudioSource explicitly at runtime
+        videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+        videoPlayer.SetTargetAudioSource(0, audioSource);
+
+        // Check if it successfully set
+        if (videoPlayer.audioOutputMode != VideoAudioOutputMode.AudioSource)
+        {
+            Debug.LogError("Failed to set Audio Output Mode to AudioSource!");
         }
     }
 
@@ -25,7 +44,7 @@ public class MainMenuVideoManager : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            videoPlayer.url = "https://drive.google.com/uc?export=download&id=1GTgl3EuYgct5y32wxYqM43BidkRWV4z1"; // Set the video URL
+            videoPlayer.url = "https://drive.google.com/uc?export=download&id=1BC9EBOMh4as6GrMUB5yOMesBmWrXYT_t"; // Set the video URL
 
             videoPlayer.Prepare();  // Prepare the video
             videoPlayer.prepareCompleted += (VideoPlayer vp) => StartCoroutine(PlayVideoAndFade(sceneName));  // Start the coroutine when ready

@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 public class ClayChange : MonoBehaviour
 {
     private string previousRealScene = ""; // Store the name of the real scene before switching to clay
-    private Vector3 storedPlayerPosition; // Store the player's position when switching from real to clay
 
     void Update()
     {
@@ -17,7 +16,7 @@ public class ClayChange : MonoBehaviour
 
     private void ToggleClayStatus()
     {
-        // Get the current scene name from the GameManager
+        // Get the current scene name
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         // Check the current status from GameManager to decide the transition
@@ -26,17 +25,19 @@ public class ClayChange : MonoBehaviour
             // Switch back to the real scene if currently in clay
             if (!string.IsNullOrEmpty(previousRealScene))
             {
-                GameManager.instance.SetPlayerEntryPosition(storedPlayerPosition);
-                SceneManager.LoadScene(previousRealScene);
+                // Restore player and monster positions
                 GameManager.instance.SetClayStatus(false);
+                SceneManager.LoadScene(previousRealScene);
                 Debug.Log("Switched back to the real scene: " + previousRealScene);
             }
         }
         else
         {
-            // Store the player's current position before switching to clay
-            storedPlayerPosition = GameManager.instance.player.transform.position;
-            Debug.Log($"Stored player position before switching to clay: {storedPlayerPosition}");
+            // Store the player's and monster's current positions before switching to clay
+            GameManager.instance.SavePlayerPosition(currentSceneName);
+            GameManager.instance.SaveMonsterPosition(currentSceneName);
+
+            Debug.Log("Stored player and monster positions before switching to clay.");
 
             // Determine the corresponding clay scene name based on the current scene
             string claySceneName = GetCorrespondingClayScene(currentSceneName);
@@ -44,9 +45,9 @@ public class ClayChange : MonoBehaviour
             if (!string.IsNullOrEmpty(claySceneName))
             {
                 previousRealScene = currentSceneName;
-                GameManager.instance.SetPlayerEntryPosition(storedPlayerPosition);
-                SceneManager.LoadScene(claySceneName);
                 GameManager.instance.SetClayStatus(true);
+                // Do not deactivate the monster when switching to clay
+                SceneManager.LoadScene(claySceneName);
                 Debug.Log("Switched to the clay scene: " + claySceneName);
             }
         }

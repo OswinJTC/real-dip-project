@@ -69,12 +69,13 @@
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\ButtonImageChanger.cs" />
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scenes\Example\Spin.cs" />
-    <Compile Include="Assets\EveryScripts\PhoneInteraction1.cs" />
+    <Compile Include="Assets\EveryScripts\puzzle interaction\PhoneInteraction.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\16- FramePerfect Rotation\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExampleCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\FlickeringImage.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\SceneSwitchGen.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Windows\opencloseWindow.cs" />
+    <Compile Include="Assets\EveryScripts\testing scripts\PlayerMovementOutside.cs" />
     <Compile Include="Assets\EveryScripts\MainMenu.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\MouseLook.cs" />
     <Compile Include="Assets\EveryScripts\video manager\MainMenuVideoManager.cs" />
@@ -151,7 +152,6 @@
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\BuildManager.cs" />
     <Compile Include="Assets\EveryScripts\PauseMenu.cs" />
     <Compile Include="Assets\EveryScripts\ElectricBoxLightControl.cs" />
-    <Compile Include="Assets\EveryScripts\BalloonInteraction.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\KCCSettings.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\EveryScripts\testing scripts\TimeTravelController.cs" />
@@ -160,7 +160,6 @@
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\a- Simple Jumping\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\15- Root motion example\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\PlanetManager.cs" />
-    <Compile Include="Assets\EveryScripts\PlayerMovementOutside.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\Phonepuzzle.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyLadder.cs" />
@@ -178,6 +177,7 @@
     <Compile Include="Assets\EveryScripts\SilhouetteButtons.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipL.cs" />
     <Compile Include="Assets\EveryScripts\BabyHouseDoorInteraction.cs" />
+    <Compile Include="Assets\EveryScripts\puzzle interaction\PaperInteraction.cs" />
     <Compile Include="Assets\EveryScripts\ThirdPersonCameraFollow.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\ExampleMovingPlatform.cs" />
     <Compile Include="Assets\EveryScripts\PuzzlePieceScript.cs" />
@@ -193,6 +193,7 @@
     <Compile Include="Assets\EveryScripts\PiecesScript.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\IMoverController.cs" />
     <Compile Include="Assets\EveryScripts\BabyHouseEntrance.cs" />
+    <Compile Include="Assets\EveryScripts\GlobalFlasher.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Windows\opencloseWindowApt.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\b- Double Jumping\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\LogicScript.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Assets\EveryScripts\testing scripts\PlayerMovement.cs" />
     <Compile Include="Assets\EveryScripts\video manager\TrapdoorVideoManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyMovingPlatform.cs" />
+    <Compile Include="Assets\EveryScripts\puzzle interaction\BalloonInteraction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

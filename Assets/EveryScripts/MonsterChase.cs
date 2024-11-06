@@ -1,78 +1,145 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MonsterChase : MonoBehaviour
 {
-    public float speed = 3f;  // Speed at which the monster moves
-    private Transform player;  // Reference to the player's transform
+    public static MonsterChase instance; // Singleton instance
+
+    private SpriteRenderer renderer; // Reference to the monster's SpriteRenderer
+    private bool hasCaughtPlayer = false; // To prevent multiple collision detections
+
+    [Header("Light Warning Settings")]
+    public GameObject lightWarningPanel; // The panel used for light warning effect
+    public float warningDistance = 12f;  // Distance threshold for triggering the warning
+    public float warningDuration = 1f;   // Duration of the warning effect
+    public float warningInterval = 1f; // Interval for flashing effect
+
+    private void Awake()
+    {
+        // Implementing the Singleton pattern
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to the sceneLoaded event
+            Debug.Log("MonsterChase singleton instance created.");
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            Debug.Log("Duplicate MonsterChase destroyed.");
+            return;
+        }
+    }
+
+    void OnDestroy()
+    {
+        if (instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded; // Unsubscribe from the sceneLoaded event
+            instance = null;
+            Debug.Log("MonsterChase singleton instance destroyed.");
+        }
+    }
 
     void Start()
     {
-        // Get the player from the GameManager
-        if (GameManager.instance != null && GameManager.instance.player != null)
-        {
-            player = GameManager.instance.player.transform;
-            Debug.Log("Player reference obtained from GameManager.");
-        }
-        else
-        {
-            Debug.LogWarning("Player reference in GameManager is null! Attempting to find the player.");
-            // Try to find the player in case it's not yet assigned in GameManager
-            FindPlayer();
-        }
+        GetReferences();
     }
 
     void Update()
     {
-        // Check if the monster should chase the player
-        if (!GameManager.instance.isMonsterSpawned)
+        if (GameManager.instance.isMonsterSpawned)
         {
-            // If isMonsterSpawned is false, do not chase
-            return;
+            MoveTowardsPlayer();
+        }
+    }
+
+    private void GetReferences()
+    {
+        // Get the SpriteRenderer
+        renderer = GetComponent<SpriteRenderer>();
+        if (renderer == null)
+        {
+            Debug.LogWarning("SpriteRenderer not found on the monster GameObject!");
         }
 
-        // Check if the current scene allows the monster to chase
-        string currentScene = SceneManager.GetActiveScene().name;
-        if (currentScene != "BedroomScene" && currentScene != "BBLivingroomScene" && currentScene != "KitchenScene" && currentScene != "BBHideBRoom")
+        // Find the light warning panel if not set
+        if (lightWarningPanel == null)
         {
-            // If the scene is not one of the allowed scenes, do not chase
-            return;
+            GameObject canvas = GameObject.Find("PersistentCanvas");
+            if (canvas != null)
+            {
+                lightWarningPanel = canvas.transform.Find("lightWarningPanel")?.gameObject;
+                Debug.Log("LightWarningPanel found at runtime.");
+            }
         }
+    }
 
-        // Ensure the player reference is not null
-        if (player == null)
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Ensure references are up-to-date after loading a new scene
+        GetReferences();
+    }
+
+    private void MoveTowardsPlayer()
+    {
+        Transform playerTransform = GameManager.instance.player?.transform;
+        if (playerTransform == null)
         {
-            // Try to get the player reference again
-            if (GameManager.instance != null && GameManager.instance.player != null)
-            {
-                player = GameManager.instance.player.transform;
-            }
-            else
-            {
-                FindPlayer();
-                if (player == null)
-                {
-                    // Player not found, return
-                    return;
-                }
-            }
+            Debug.LogWarning("Player reference is null. Unable to move monster.");
+            return;
         }
 
         // Move towards the player's position
-        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        float monsterSpeed = GameManager.instance.monsterSpeed;
+        transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, monsterSpeed * Time.deltaTime);
+
+        // Check distance to trigger light warning effect
+        float distance = Vector3.Distance(transform.position, playerTransform.position);
+        if (distance < warningDistance)
+        {
+            TriggerLightWarning();
+        }
     }
 
-    void FindPlayer()
+    void TriggerLightWarning()
     {
-        GameObject playerObject = GameObject.FindWithTag("Player");
-        if (playerObject != null)
+        if (lightWarningPanel != null && !lightWarningPanel.activeSelf)
         {
-            player = playerObject.transform;
-            Debug.Log("Player found by MonsterChase script.");
+            StartCoroutine(FlashEffect(warningDuration, warningInterval));
         }
-        else
+    }
+
+    private IEnumerator FlashEffect(float duration, float flashInterval)
+    {
+        float timeElapsed = 0f;
+        while (timeElapsed < duration)
         {
-            Debug.LogWarning("Player GameObject not found in the scene by MonsterChase script!");
+            lightWarningPanel.SetActive(true);
+            yield return new WaitForSeconds(flashInterval);
+
+            lightWarningPanel.SetActive(false);
+            yield return new WaitForSeconds(flashInterval);
+
+            timeElapsed += flashInterval * 2;
         }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !hasCaughtPlayer)
+        {
+            hasCaughtPlayer = true;
+            GameManager.instance.ReduceBlood(3);
+            StartCoroutine(ResetHasCaughtPlayer(2f));
+        }
+    }
+
+    private IEnumerator ResetHasCaughtPlayer(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        hasCaughtPlayer = false;
     }
 }

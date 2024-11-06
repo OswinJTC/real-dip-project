@@ -30,6 +30,8 @@ public class PhonePuzzle : MonoBehaviour // Capitalize class name for convention
         if (currentInput == correctPassword) // Compare current input with correct password
         {
             Debug.Log("Phone Unlocked!"); // Use Debug.Log instead of print for better practice
+            SceneManager.LoadScene("BedroomScene");
+
         }
         else
         {

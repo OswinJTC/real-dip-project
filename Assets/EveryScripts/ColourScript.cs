@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -79,6 +77,7 @@ public class ColourScript : MonoBehaviour
         }
 
         Debug.Log("YATTA RED");
+        SceneManager.LoadScene("BBLivingroomScene");
     }
 
     void CheckBlue()
@@ -90,19 +89,23 @@ public class ColourScript : MonoBehaviour
         }
 
         Debug.Log("YATTA BLUE");
+        SceneManager.LoadScene("BBLivingroomScene");
     }
 
     void SkipToBBLivingroom()
     {
         Debug.Log("Skipping puzzle and loading BBLivingroomScene.");
 
+        // Get the current scene name
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
         // Save the player's current position
-        GameManager.instance.SavePlayerPosition();
+        GameManager.instance.SavePlayerPosition(currentSceneName);
 
         // Load the next scene
         SceneManager.LoadScene("BBLivingroomScene");
 
         // When entering "BBLivingroomScene," restore the position
-        GameManager.instance.RestorePlayerPosition();
+        GameManager.instance.RestorePlayerPosition("BBLivingroomScene");
     }
 }
