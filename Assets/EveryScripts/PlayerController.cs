@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
         if (monster != null)
         {
             // Set the monster's position to the specific coordinates
-            Vector3 spawnPosition = new Vector3(-27.41f, 2.34f, 11.58f);
+            Vector3 spawnPosition = new Vector3(-27.41f, 8.34f, 11.58f);
             monster.transform.position = spawnPosition;
 
             SpriteRenderer renderer = monster.GetComponent<SpriteRenderer>();
