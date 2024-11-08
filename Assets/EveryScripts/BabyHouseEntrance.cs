@@ -50,8 +50,8 @@ public class BabyHouseEntrance : MonoBehaviour
         return new Vector3(0f, 0f, 0f);
     }
 
-    // Detect when the player enters the entrance's trigger collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the entrance's trigger collider (3D)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -60,8 +60,8 @@ public class BabyHouseEntrance : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the entrance's trigger collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the entrance's trigger collider (3D)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

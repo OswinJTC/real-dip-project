@@ -83,7 +83,7 @@ public class BabyHouseDoorInteraction : MonoBehaviour
         return new Vector3(0f, 0f, 0f);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)  // Use 2D version for player interaction detection
+    private void OnTriggerEnter(Collider other)  // Use 3D version for player interaction detection
     {
         if (other.CompareTag("Player"))
         {
@@ -92,7 +92,7 @@ public class BabyHouseDoorInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)  // Use 2D version for exit detection
+    private void OnTriggerExit(Collider other)  // Use 3D version for exit detection
     {
         if (other.CompareTag("Player"))
         {

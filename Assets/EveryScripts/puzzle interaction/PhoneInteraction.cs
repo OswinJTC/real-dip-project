@@ -30,8 +30,8 @@ public class PhoneInteraction : MonoBehaviour
         SceneManager.LoadScene(targetScene);
     }
 
-    // Detect when the player enters the phone's trigger collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the phone's trigger collider (3D)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -40,8 +40,8 @@ public class PhoneInteraction : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the phone's trigger collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the phone's trigger collider (3D)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

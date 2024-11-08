@@ -3,12 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class PaperInteraction1 : MonoBehaviour
 {
-    public string targetScene = "Paper Puzzle"; // The scene to load when interacting with the phone
-    private bool isPlayerNear = false; // Flag to check if the player is near the phone
+    public string targetScene = "Paper Puzzle"; // The scene to load when interacting with the paper
+    private bool isPlayerNear = false; // Flag to check if the player is near the paper
 
     void Update()
     {
-        // Check if the player is near the phone and presses the 'E' key
+        // Check if the player is near the paper and presses the 'E' key
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
             InteractWithPaper();
@@ -30,23 +30,23 @@ public class PaperInteraction1 : MonoBehaviour
         SceneManager.LoadScene(targetScene);
     }
 
-    // Detect when the player enters the phone's trigger collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the paper's trigger collider (3D)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNear = true;
-            Debug.Log("Player is near the phone.");
+            Debug.Log("Player is near the paper.");
         }
     }
 
-    // Detect when the player exits the phone's trigger collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the paper's trigger collider (3D)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
-            Debug.Log("Player is no longer near the phone.");
+            Debug.Log("Player is no longer near the paper.");
         }
     }
 }

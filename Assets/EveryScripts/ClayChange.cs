@@ -12,46 +12,39 @@ public class ClayChange : MonoBehaviour
         {
             ToggleClayStatus();
         }
-    }
+    }private void ToggleClayStatus()
+{
+    string currentSceneName = SceneManager.GetActiveScene().name;
 
-    private void ToggleClayStatus()
+    if (GameManager.instance.GetClayStatus())
     {
-        // Get the current scene name
-        string currentSceneName = SceneManager.GetActiveScene().name;
-
-        // Check the current status from GameManager to decide the transition
-        if (GameManager.instance.GetClayStatus())
+        if (!string.IsNullOrEmpty(previousRealScene))
         {
-            // Switch back to the real scene if currently in clay
-            if (!string.IsNullOrEmpty(previousRealScene))
-            {
-                // Restore player and monster positions
-                GameManager.instance.SetClayStatus(false);
-                SceneManager.LoadScene(previousRealScene);
-                Debug.Log("Switched back to the real scene: " + previousRealScene);
-            }
-        }
-        else
-        {
-            // Store the player's and monster's current positions before switching to clay
-            GameManager.instance.SavePlayerPosition(currentSceneName);
+            // Save the monster's current position before switching back to the real scene
             GameManager.instance.SaveMonsterPosition(currentSceneName);
 
-            Debug.Log("Stored player and monster positions before switching to clay.");
-
-            // Determine the corresponding clay scene name based on the current scene
-            string claySceneName = GetCorrespondingClayScene(currentSceneName);
-
-            if (!string.IsNullOrEmpty(claySceneName))
-            {
-                previousRealScene = currentSceneName;
-                GameManager.instance.SetClayStatus(true);
-                // Do not deactivate the monster when switching to clay
-                SceneManager.LoadScene(claySceneName);
-                Debug.Log("Switched to the clay scene: " + claySceneName);
-            }
+            GameManager.instance.SetClayStatus(false);
+            SceneManager.LoadScene(previousRealScene);
+            Debug.Log("Switched back to the real scene: " + previousRealScene);
         }
     }
+    else
+    {
+        // Save both player and monster positions before switching to clay
+        GameManager.instance.SavePlayerPosition(currentSceneName);
+        GameManager.instance.SaveMonsterPosition(currentSceneName);
+
+        string claySceneName = GetCorrespondingClayScene(currentSceneName);
+        if (!string.IsNullOrEmpty(claySceneName))
+        {
+            previousRealScene = currentSceneName;
+            GameManager.instance.SetClayStatus(true);
+            SceneManager.LoadScene(claySceneName);
+            Debug.Log("Switched to the clay scene: " + claySceneName);
+        }
+    }
+}
+
 
     private string GetCorrespondingClayScene(string currentScene)
     {

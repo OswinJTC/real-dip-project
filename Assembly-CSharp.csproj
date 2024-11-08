@@ -98,7 +98,6 @@
     <Compile Include="Assets\KinematicCharacterController\Core\KinematicCharacterSystem.cs" />
     <Compile Include="Assets\Bakery\AddButtons.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\c- Wall Jumping\MyPlayer.cs" />
-    <Compile Include="Assets\Bakery\GameController.cs" />
     <Compile Include="Assets\EveryScripts\DoorInteraction.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\StressTestManager.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseDoor1.cs" />
@@ -154,6 +153,8 @@
     <Compile Include="Assets\EveryScripts\ElectricBoxLightControl.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\KCCSettings.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\EveryScripts\puzzle interaction\BakeryInteraction1.cs" />
+    <Compile Include="Assets\EveryScripts\GameController.cs" />
     <Compile Include="Assets\EveryScripts\testing scripts\TimeTravelController.cs" />
     <Compile Include="Assets\EveryScripts\blood elimination\LivingRoomBloodElimination.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\First Person Player\PlayerMovement.cs" />

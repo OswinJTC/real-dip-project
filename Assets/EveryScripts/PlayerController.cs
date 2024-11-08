@@ -104,25 +104,23 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.instance.isMonsterSpawned)
         {
-            // Monster is already spawned; do not spawn again
             Debug.Log("Monster is already spawned. Skipping spawn.");
             return;
         }
 
-        GameManager.instance.isMonsterSpawned = true; // Set the flag to true
+        GameManager.instance.isMonsterSpawned = true;
 
         GameObject monster = GameManager.instance.monster;
 
         if (monster != null)
         {
-            // Set the monster's position to the specific coordinates
             Vector3 spawnPosition = new Vector3(-27.41f, 8.34f, 11.58f);
             monster.transform.position = spawnPosition;
 
             SpriteRenderer renderer = monster.GetComponent<SpriteRenderer>();
             if (renderer != null)
             {
-                renderer.enabled = true; // Make the 2D monster visible
+                renderer.enabled = true;
                 Debug.Log("2D Monster made visible at position: " + spawnPosition);
             }
             else
@@ -137,8 +135,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Detect when the player enters the "fuel" area using 2D collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the "fuel" area using 3D collider
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Fuel"))
         {
@@ -147,8 +145,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the "fuel" area using 2D collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the "fuel" area using 3D collider
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Fuel"))
         {

@@ -6,8 +6,9 @@ public class MonsterChase : MonoBehaviour
 {
     public static MonsterChase instance; // Singleton instance
 
-    private SpriteRenderer renderer; // Reference to the monster's SpriteRenderer
+    private Renderer renderer; // Reference to the monster's Renderer (3D equivalent of SpriteRenderer)
     private bool hasCaughtPlayer = false; // To prevent multiple collision detections
+    private bool isMovingTowardsSavedPosition = false; // Track if the monster is moving towards saved position
 
     [Header("Light Warning Settings")]
     public GameObject lightWarningPanel; // The panel used for light warning effect
@@ -52,17 +53,25 @@ public class MonsterChase : MonoBehaviour
     {
         if (GameManager.instance.isMonsterSpawned)
         {
-            MoveTowardsPlayer();
+            if (isMovingTowardsSavedPosition)
+            {
+                MoveTowardsPlayer();
+            }
+            else
+            {
+                // Regular behavior if not moving towards saved position
+                MoveTowardsPlayer();
+            }
         }
     }
 
     private void GetReferences()
     {
-        // Get the SpriteRenderer
-        renderer = GetComponent<SpriteRenderer>();
+        // Get the Renderer for 3D rendering
+        renderer = GetComponent<Renderer>();
         if (renderer == null)
         {
-            Debug.LogWarning("SpriteRenderer not found on the monster GameObject!");
+            Debug.LogWarning("Renderer not found on the monster GameObject!");
         }
 
         // Find the light warning panel if not set
@@ -82,25 +91,60 @@ public class MonsterChase : MonoBehaviour
         // Ensure references are up-to-date after loading a new scene
         GetReferences();
     }
-
+    
     private void MoveTowardsPlayer()
+{
+    if (GameManager.instance.GetClayStatus())
+    {
+        // Move towards the saved player position in the clay scene, starting from the last saved monster position
+        if (GameManager.instance.savedPlayerPosition.HasValue && GameManager.instance.savedMonsterPosition.HasValue)
+        {
+            Vector3 targetPosition = GameManager.instance.savedPlayerPosition.Value;
+            Vector3 startingPosition = GameManager.instance.savedMonsterPosition.Value;
+
+            if (!isMovingTowardsSavedPosition)
+            {
+                // Set the initial position to the saved monster position from the real scene
+                transform.position = startingPosition;
+                isMovingTowardsSavedPosition = true;
+                SetMonsterVisibility(false);
+            }
+
+            MoveMonsterToPosition(targetPosition);
+        }
+    }
+    else
     {
         Transform playerTransform = GameManager.instance.player?.transform;
-        if (playerTransform == null)
+        if (playerTransform != null)
         {
-            Debug.LogWarning("Player reference is null. Unable to move monster.");
-            return;
+            Vector3 targetPosition = playerTransform.position;
+            MoveMonsterToPosition(targetPosition);
         }
+    }
+}
 
-        // Move towards the player's position
+    private void MoveMonsterToPosition(Vector3 targetPosition)
+    {
+        // Move the monster toward the specified target position
         float monsterSpeed = GameManager.instance.monsterSpeed;
-        transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, monsterSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, monsterSpeed * Time.deltaTime);
 
-        // Check distance to trigger light warning effect
-        float distance = Vector3.Distance(transform.position, playerTransform.position);
+        
+        // Trigger the light warning effect if close enough to the target position
+        float distance = Vector3.Distance(transform.position, targetPosition);
         if (distance < warningDistance)
         {
             TriggerLightWarning();
+        }
+    }
+
+    private void SetMonsterVisibility(bool isVisible)
+    {
+        if (renderer != null)
+        {
+            renderer.enabled = isVisible;
+            Debug.Log("Monster visibility set to: " + isVisible);
         }
     }
 
@@ -127,7 +171,7 @@ public class MonsterChase : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider other) // Changed to OnTriggerEnter for 3D collision detection
     {
         if (other.CompareTag("Player") && !hasCaughtPlayer)
         {

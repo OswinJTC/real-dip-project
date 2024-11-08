@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;  // Singleton instance
+    public static GameManager instance; // Singleton instance
 
     // UI Elements
     public Text timerText;
@@ -36,27 +36,36 @@ public class GameManager : MonoBehaviour
     // Monster state
     public bool isMonsterSpawned = false;
     public GameObject monster; // Reference to the monster GameObject
-    public float monsterSpeed = 3f; // Monster's speed, used in calculations
+    public float monsterSpeed = 1f; // Monster's speed, used in calculations
 
     // Player references
     public GameObject player; // Reference to the player GameObject
     private Vector3 playerEntryPosition; // Entry position for the player
 
-    // Tutorial Player references
-    public GameObject tutPlayer; // Reference to the tutorial player GameObject
-    private Vector3 tutPlayerEntryPosition; // Entry position for the tutorial player
-
     public Vector3? savedPlayerPosition = null; // Nullable to indicate no saved position by default
+    public Vector3? savedMonsterPosition = null;
 
     // Dictionaries to store positions per scene
-    private Dictionary<string, PositionData> playerPositions = new Dictionary<string, PositionData>();
-    private Dictionary<string, PositionData> monsterPositions = new Dictionary<string, PositionData>();
+    private Dictionary<string, PositionData> playerPositions = new Dictionary<
+        string,
+        PositionData
+    >();
+    private Dictionary<string, PositionData> monsterPositions = new Dictionary<
+        string,
+        PositionData
+    >();
 
     // List of scenes where the monster is inactive
-    private List<string> monsterInactiveScenes = new List<string>
+    public List<string> monsterInactiveScenes = new List<string>
     {
         "MainMenuScene",
-        "CutsceneScene"
+        "BBLRoomClay",
+        "Balloon Puzzle",
+        "BBKitchenClay",
+        "BBBedroomClay",
+        "Paper Puzzle",
+        "Phone Puzzle",
+        "Bakery"
         // Add other scenes where the monster should not be active
     };
 
@@ -105,105 +114,114 @@ public class GameManager : MonoBehaviour
         UpdateTimer();
 
         // Toggle panels with keys
-        if (Input.GetKeyDown(KeyCode.I)) TogglePanel(inventoryPanel);
-        if (Input.GetKeyDown(KeyCode.Space) && SceneManager.GetActiveScene().name == "outsideTerrain")
+        if (Input.GetKeyDown(KeyCode.I))
+            TogglePanel(inventoryPanel);
+        if (
+            Input.GetKeyDown(KeyCode.Space)
+            && SceneManager.GetActiveScene().name == "outsideTerrain"
+        )
         {
             ReduceBlood();
         }
-
-        
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        string currentSceneName = scene.name;
-        Debug.Log("Scene Loaded: " + currentSceneName);
-
-        // Update references
-        UpdateReferences();
-
-        // Restore player and monster positions
-        RestorePlayerPosition(currentSceneName);
-        RestoreMonsterPosition(currentSceneName);
-
-        if (monsterInactiveScenes.Contains(currentSceneName))
-        {
-            // Monster should not be active
-            if (monster != null)
-            {
-                monster.SetActive(false);
-                Debug.Log("Monster deactivated in scene: " + currentSceneName);
-            }
-        }
-        else
-        {
-            // Monster should be active
-            if (isMonsterSpawned && monster != null)
-            {
-                monster.SetActive(true);
-                Debug.Log("Monster activated in scene: " + currentSceneName);
-            }
-        }
-    }
-private void UpdateReferences()
+    }private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 {
-    // Define the list of scenes where the player, monster, and PersistentCanvas should not be present
-    List<string> playerNonPersistentScenes = new List<string>
-    {
-        "TutLRoomDScene",
-        "TutStudyDScene",
-        "TutKitchenDScene",
-        "TutStudyCScene",
-        "TutLRoomCScene",
-        "TutKitchenCScene",
-        "TutBRoomDScene",
-        "TutBRoomCScene",
-        "TutBasementScene",
-        "LogicPuzzle",
-        "Balloon Puzzle",
-        "Phone Puzzle",
-        "Paper Puzzle"
-    };
+    string currentSceneName = scene.name;
+    Debug.Log("Scene Loaded: " + currentSceneName);
 
-    // Check if the current scene is one where the player should not persist
-    string currentSceneName = SceneManager.GetActiveScene().name;
-    bool isPlayerNonPersistentScene = playerNonPersistentScenes.Contains(currentSceneName);
- 
-    if (isPlayerNonPersistentScene)
+    // Update references
+    UpdateReferences();
+
+    // Restore player and monster positions
+    RestorePlayerPosition(currentSceneName);
+    RestoreMonsterPosition(currentSceneName);
+
+    // Check if the scene is a clay scene
+    if (GetClayStatus() && monster != null)
     {
-        MakePlayerNonPersistent();
+        // In clay scenes, keep the monster active but disable its SpriteRenderer
+        var spriteRenderer = monster.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.enabled = false;
+            Debug.Log("Monster SpriteRenderer disabled in clay scene: " + currentSceneName);
+        }
     }
-    else
+    else if (monster != null)
     {
-        FindTutPlayer();
-        FindPlayer();
-
-        if (monster == null)
+        // In real scenes, enable the monster's SpriteRenderer
+        var spriteRenderer = monster.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
         {
-            FindMonster();
+            spriteRenderer.enabled = true;
+            Debug.Log("Monster SpriteRenderer enabled in real scene: " + currentSceneName);
         }
 
-        if (player != null && !player.activeSelf)
-        {
-            player.SetActive(true);
-            Debug.Log("Persistent player re-enabled.");
-        }
-
-        if (tutPlayer != null && !tutPlayer.activeSelf)
-        {
-            tutPlayer.SetActive(true);
-            Debug.Log("Persistent tutPlayer re-enabled.");
-        }
-
-        // Ensure the monster is enabled if it should be chasing the player
-        if (!monsterInactiveScenes.Contains(currentSceneName) && isMonsterSpawned && monster != null)
+        // Ensure the monster is active in real scenes if it's spawned
+        if (isMonsterSpawned)
         {
             monster.SetActive(true);
-            Debug.Log("Persistent monster re-enabled.");
+            Debug.Log("Monster activated in scene: " + currentSceneName);
         }
     }
 }
 
+
+    private void UpdateReferences()
+    {
+        // Define the list of scenes where the player, monster, and PersistentCanvas should not be present
+        List<string> playerNonPersistentScenes = new List<string>
+        {
+            "TutLRoomDScene",
+            "TutStudyDScene",
+            "TutKitchenDScene",
+            "TutStudyCScene",
+            "TutLRoomCScene",
+            "TutKitchenCScene",
+            "TutBRoomDScene",
+            "TutBRoomCScene",
+            "TutBasementScene",
+            "LogicPuzzle",
+            "Balloon Puzzle",
+            "Phone Puzzle",
+            "Paper Puzzle",
+            "Bakery"
+        };
+
+        // Check if the current scene is one where the player should not persist
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        bool isPlayerNonPersistentScene = playerNonPersistentScenes.Contains(currentSceneName);
+
+        if (isPlayerNonPersistentScene)
+        {
+            MakePlayerNonPersistent();
+        }
+        else
+        {
+            FindPlayer();
+
+            if (monster == null)
+            {
+                FindMonster();
+            }
+
+            if (player != null && !player.activeSelf)
+            {
+                player.SetActive(true);
+                Debug.Log("Persistent player re-enabled.");
+            }
+
+            // Ensure the monster is enabled if it should be chasing the player
+            if (
+                !monsterInactiveScenes.Contains(currentSceneName)
+                && isMonsterSpawned
+                && monster != null
+            )
+            {
+                monster.SetActive(true);
+                Debug.Log("Persistent monster re-enabled.");
+            }
+        }
+    }
 
     private void MakePlayerNonPersistent()
     {
@@ -213,54 +231,12 @@ private void UpdateReferences()
             Debug.Log("Persistent player disabled in non-persistent scene.");
         }
 
-        if (tutPlayer != null)
-        {
-            tutPlayer.SetActive(false);
-            Debug.Log("Persistent tutPlayer disabled in non-persistent scene.");
-        }
-
         if (monster != null)
         {
             monster.SetActive(false);
             Debug.Log("Persistent monster disabled in non-persistent scene.");
         }
     }
-
-    private void FindTutPlayer()
-    {
-        GameObject initialTutPlayer = GameObject.FindWithTag("TutPlayer");
-
-        if (tutPlayer == null)
-        {
-            if (initialTutPlayer != null)
-            {
-                tutPlayer = initialTutPlayer;
-                DontDestroyOnLoad(tutPlayer);
-                Debug.Log("tutPlayer GameObject found and set as persistent in GameManager.");
-            }
-            else
-            {
-                Debug.LogWarning("tutPlayer GameObject not found!");
-            }
-        }
-        else
-        {
-            if (initialTutPlayer != null && initialTutPlayer != tutPlayer)
-            {
-                Destroy(initialTutPlayer);
-                Debug.Log("Duplicate initial tutPlayer destroyed to prevent duplication.");
-            }
-        }
-    }
-
-    public void SetTutPlayerEntryPosition(Vector3 position)
-    {
-        tutPlayerEntryPosition = position;
-        if (tutPlayer == null) FindTutPlayer();
-        if (tutPlayer != null) tutPlayer.transform.position = tutPlayerEntryPosition;
-    }
-
-    public Vector3 GetTutPlayerEntryPosition() => tutPlayerEntryPosition;
 
     private void FindPlayer()
     {
@@ -366,10 +342,14 @@ private void UpdateReferences()
 
     public void HideAllPanels()
     {
-        if (gamePanel != null) gamePanel.SetActive(true);
-        if (inventoryPanel != null) inventoryPanel.SetActive(false);
-        if (thinkPanel != null) thinkPanel.SetActive(false);
-        if (pausePanel != null) pausePanel.SetActive(false);
+        if (gamePanel != null)
+            gamePanel.SetActive(true);
+        if (inventoryPanel != null)
+            inventoryPanel.SetActive(false);
+        if (thinkPanel != null)
+            thinkPanel.SetActive(false);
+        if (pausePanel != null)
+            pausePanel.SetActive(false);
     }
 
     public void AddToInventory(string itemName)
@@ -487,7 +467,8 @@ private void UpdateReferences()
     {
         foreach (GameObject panel in panels)
         {
-            if (panel != null) DontDestroyOnLoad(panel);
+            if (panel != null)
+                DontDestroyOnLoad(panel);
         }
     }
 
@@ -505,28 +486,51 @@ private void UpdateReferences()
     }
 
     public void SavePlayerPosition(string sceneName)
+{
+    if (player != null)
     {
-        if (player != null)
-        {
-            Vector3 position = player.transform.position;
-            float time = Time.time;
-            PositionData data = new PositionData(position, time);
+        Vector3 position = player.transform.position;
+        savedPlayerPosition = position; // Save the player's position
+        // Save it in the dictionary as well
+        float time = Time.time;
+        PositionData data = new PositionData(position, time);
 
-            if (playerPositions.ContainsKey(sceneName))
-            {
-                playerPositions[sceneName] = data;
-            }
-            else
-            {
-                playerPositions.Add(sceneName, data);
-            }
-            Debug.Log("Player position saved for scene " + sceneName + ": " + position);
+        if (playerPositions.ContainsKey(sceneName))
+        {
+            playerPositions[sceneName] = data;
         }
         else
         {
-            Debug.LogWarning("Player reference is null; unable to save position.");
+            playerPositions.Add(sceneName, data);
         }
+        Debug.Log("Player position saved for scene " + sceneName + ": " + position);
     }
+    else
+    {
+        Debug.LogWarning("Player reference is null; unable to save position.");
+    }
+}
+
+public void SaveMonsterPosition(string sceneName)
+{
+    if (monster != null)
+    {
+        Vector3 position = monster.transform.position;
+        savedMonsterPosition = position; // Save the monster's position
+        float time = Time.time;
+        PositionData data = new PositionData(position, time);
+
+        if (monsterPositions.ContainsKey(sceneName))
+        {
+            monsterPositions[sceneName] = data;
+        }
+        else
+        {
+            monsterPositions.Add(sceneName, data);
+        }
+        Debug.Log("Monster position saved for scene " + sceneName + ": " + position);
+    }
+} 
 
     public void RestorePlayerPosition(string sceneName)
     {
@@ -550,29 +554,7 @@ private void UpdateReferences()
         }
     }
 
-    public void SaveMonsterPosition(string sceneName)
-    {
-        if (monster != null)
-        {
-            Vector3 position = monster.transform.position;
-            float time = Time.time;
-            PositionData data = new PositionData(position, time);
-
-            if (monsterPositions.ContainsKey(sceneName))
-            {
-                monsterPositions[sceneName] = data;
-            }
-            else
-            {
-                monsterPositions.Add(sceneName, data);
-            }
-            Debug.Log("Monster position saved for scene " + sceneName + ": " + position);
-        }
-        else
-        {
-            Debug.LogWarning("Monster reference is null; unable to save position.");
-        }
-    }
+   
 
     public bool MonsterExists()
     {
@@ -600,7 +582,9 @@ private void UpdateReferences()
         }
         else
         {
-            Debug.LogWarning("Monster is either not spawned or the reference is null; cannot set position.");
+            Debug.LogWarning(
+                "Monster is either not spawned or the reference is null; cannot set position."
+            );
         }
     }
 }

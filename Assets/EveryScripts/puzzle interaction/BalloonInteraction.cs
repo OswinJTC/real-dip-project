@@ -30,8 +30,8 @@ public class BalloonInteraction : MonoBehaviour
         SceneManager.LoadScene(targetScene);
     }
 
-    // Detect when the player enters the balloon's trigger collider (2D)
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the balloon's trigger collider (3D)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -40,8 +40,8 @@ public class BalloonInteraction : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the balloon's trigger collider (2D)
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the balloon's trigger collider (3D)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

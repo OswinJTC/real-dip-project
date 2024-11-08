@@ -37,8 +37,8 @@ public class CribInteraction : MonoBehaviour
         }
     }
 
-    // Detect when the player enters the crib's trigger collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the crib's trigger collider (3D)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -47,15 +47,15 @@ public class CribInteraction : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the crib's trigger collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the crib's trigger collider (3D)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
             Debug.Log("Player is no longer near the crib.");
 
-            // Optionally close the panel when player exits
+            // Optionally close the panel when the player exits
             if (panel != null && panel.activeSelf)
             {
                 panel.SetActive(false); // Close the panel when player leaves
