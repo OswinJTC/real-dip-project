@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/EveryScene/test/KemasSampleScene.unity
     guid: 49c32cfaa4b9fbb4b8b1f5615fed2cb9
   - enabled: 1
-    path: Assets/EveryScene/puzzles/Bakery.unity
+    path: Assets/EveryScene/puzzles/Bakery Puzzle.unity
     guid: b0a3a0a55ec293747b57dec2449a9129
   - enabled: 1
     path: Assets/EveryScene/tut/TutBRoomCScene.unity

@@ -123,48 +123,48 @@ public class GameManager : MonoBehaviour
         {
             ReduceBlood();
         }
-    }private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-{
-    string currentSceneName = scene.name;
-    Debug.Log("Scene Loaded: " + currentSceneName);
-
-    // Update references
-    UpdateReferences();
-
-    // Restore player and monster positions
-    RestorePlayerPosition(currentSceneName);
-    RestoreMonsterPosition(currentSceneName);
-
-    // Check if the scene is a clay scene
-    if (GetClayStatus() && monster != null)
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // In clay scenes, keep the monster active but disable its SpriteRenderer
-        var spriteRenderer = monster.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
+        string currentSceneName = scene.name;
+        Debug.Log("Scene Loaded: " + currentSceneName);
+
+        // Update references
+        UpdateReferences();
+
+        // Restore player and monster positions
+        RestorePlayerPosition(currentSceneName);
+        RestoreMonsterPosition(currentSceneName);
+
+        // Check if the scene is a clay scene
+        if (GetClayStatus() && monster != null)
         {
-            spriteRenderer.enabled = false;
-            Debug.Log("Monster SpriteRenderer disabled in clay scene: " + currentSceneName);
+            // In clay scenes, keep the monster active but disable its SpriteRenderer
+            var spriteRenderer = monster.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = false;
+                Debug.Log("Monster SpriteRenderer disabled in clay scene: " + currentSceneName);
+            }
+        }
+        else if (monster != null && isMonsterSpawned)
+        {
+            // In real scenes, enable the monster's SpriteRenderer
+            var spriteRenderer = monster.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = true;
+                Debug.Log("Monster SpriteRenderer enabled in real scene: " + currentSceneName);
+            }
+
+            // Ensure the monster is active in real scenes if it's spawned
+            if (isMonsterSpawned)
+            {
+                monster.SetActive(true);
+                Debug.Log("Monster activated in scene: " + currentSceneName);
+            }
         }
     }
-    else if (monster != null)
-    {
-        // In real scenes, enable the monster's SpriteRenderer
-        var spriteRenderer = monster.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.enabled = true;
-            Debug.Log("Monster SpriteRenderer enabled in real scene: " + currentSceneName);
-        }
-
-        // Ensure the monster is active in real scenes if it's spawned
-        if (isMonsterSpawned)
-        {
-            monster.SetActive(true);
-            Debug.Log("Monster activated in scene: " + currentSceneName);
-        }
-    }
-}
-
 
     private void UpdateReferences()
     {
@@ -180,11 +180,7 @@ public class GameManager : MonoBehaviour
             "TutBRoomDScene",
             "TutBRoomCScene",
             "TutBasementScene",
-            "LogicPuzzle",
-            "Balloon Puzzle",
-            "Phone Puzzle",
-            "Paper Puzzle",
-            "Bakery"
+            "LogicPuzzle"
         };
 
         // Check if the current scene is one where the player should not persist
@@ -486,105 +482,176 @@ public class GameManager : MonoBehaviour
     }
 
     public void SavePlayerPosition(string sceneName)
-{
-    if (player != null)
-    {
-        Vector3 position = player.transform.position;
-        savedPlayerPosition = position; // Save the player's position
-        // Save it in the dictionary as well
-        float time = Time.time;
-        PositionData data = new PositionData(position, time);
-
-        if (playerPositions.ContainsKey(sceneName))
-        {
-            playerPositions[sceneName] = data;
-        }
-        else
-        {
-            playerPositions.Add(sceneName, data);
-        }
-        Debug.Log("Player position saved for scene " + sceneName + ": " + position);
-    }
-    else
-    {
-        Debug.LogWarning("Player reference is null; unable to save position.");
-    }
-}
-
-public void SaveMonsterPosition(string sceneName)
-{
-    if (monster != null)
-    {
-        Vector3 position = monster.transform.position;
-        savedMonsterPosition = position; // Save the monster's position
-        float time = Time.time;
-        PositionData data = new PositionData(position, time);
-
-        if (monsterPositions.ContainsKey(sceneName))
-        {
-            monsterPositions[sceneName] = data;
-        }
-        else
-        {
-            monsterPositions.Add(sceneName, data);
-        }
-        Debug.Log("Monster position saved for scene " + sceneName + ": " + position);
-    }
-} 
-
-    public void RestorePlayerPosition(string sceneName)
     {
         if (player != null)
         {
+            Vector3 position = player.transform.position;
+            savedPlayerPosition = position; // Save the player's position
+            // Save it in the dictionary as well
+            float time = Time.time;
+            PositionData data = new PositionData(position, time);
+
             if (playerPositions.ContainsKey(sceneName))
             {
-                PositionData data = playerPositions[sceneName];
-                Vector3 position = data.position;
-                player.transform.position = position;
-                Debug.Log("Player position restored for scene " + sceneName + ": " + position);
+                playerPositions[sceneName] = data;
             }
             else
             {
-                Debug.Log("No saved player position for scene " + sceneName);
+                playerPositions.Add(sceneName, data);
             }
+            Debug.Log("Player position saved for scene " + sceneName + ": " + position);
         }
         else
         {
-            Debug.LogWarning("Player reference is null; unable to restore position.");
+            Debug.LogWarning("Player reference is null; unable to save position.");
         }
     }
 
-   
+    public void SaveMonsterPosition(string sceneName)
+    {
+        if (monster != null)
+        {
+            Vector3 position = monster.transform.position;
+            savedMonsterPosition = position; // Save the monster's position
+            float time = Time.time;
+            PositionData data = new PositionData(position, time);
+
+            if (monsterPositions.ContainsKey(sceneName))
+            {
+                monsterPositions[sceneName] = data;
+            }
+            else
+            {
+                monsterPositions.Add(sceneName, data);
+            }
+            Debug.Log("Monster position saved for scene " + sceneName + ": " + position);
+        }
+    }
+
+    private string GetCorrespondingSceneName(string sceneName)
+    {
+        switch (sceneName)
+        {
+            case "BedroomScene":
+                return "BBBedroomClay";
+            case "BBBedroomClay":
+                return "BedroomScene";
+            case "BBLivingroomScene":
+                return "BBLRoomClay";
+            case "BBLRoomClay":
+                return "BBLivingroomScene";
+            case "KitchenScene":
+                return "BBKitchenClay";
+            case "BBKitchenClay":
+                return "KitchenScene";
+            
+            case "Bakery Puzzle":
+                return "BBKitchenClay";
+            case "Balloon Puzzle":
+                return "BBBLRoomClay";
+            case "Paper Puzzle":
+                return "BBBedroomClay";
+            case "Phone Puzzle":
+                return "BBBedroomClay";
+            default:
+                return null;
+        }
+    }
 
     public bool MonsterExists()
     {
         return monster != null;
     }
 
-    public void RestoreMonsterPosition(string sceneName)
+    public void RestorePlayerPosition(string sceneName)
     {
-        if (monster != null && isMonsterSpawned)
+        string referenceScene = GetCorrespondingSceneName(sceneName);
+
+        if (player != null && referenceScene != null)
         {
-            if (monsterPositions.ContainsKey(sceneName))
+            // Determine if the current scene is a clay scene or real scene
+            bool isClayScene = sceneName.Contains("Clay");
+            bool isPuzzleScene = sceneName.Contains("Puzzle");
+
+            if (isPuzzleScene)
             {
-                PositionData data = monsterPositions[sceneName];
-                Vector3 position = data.position;
-                monster.transform.position = position;
-                Debug.Log("Monster position restored for scene " + sceneName + ": " + position);
+                player.transform.position = playerPositions[GameObject.FindObjectOfType<ClayChange>().previousRealScene].position;
+                Debug.Log(
+                    "Headed to puzzle, player position set in clay scene based on real scene position: "
+                        + player.transform.position
+                );
+            }
+            else if (isClayScene && playerPositions.ContainsKey(referenceScene))
+            {
+                player.transform.position = playerPositions[referenceScene].position;
+                Debug.Log(
+                    "Player position set in clay scene based on real scene position: "
+                        + player.transform.position
+                );
+            }
+            else if (!isClayScene && playerPositions.ContainsKey(sceneName))
+            {
+                player.transform.position = playerPositions[sceneName].position;
+                Debug.Log(
+                    "Player position restored in real scene based on clay scene position: "
+                        + player.transform.position
+                );
             }
             else
             {
-                // Optionally, set a default position
-                Vector3 defaultPosition = new Vector3(0, 0, 0);
-                monster.transform.position = defaultPosition;
-                Debug.Log("Monster position set to default for scene " + sceneName);
+                Debug.LogWarning("No saved player position for scene: " + referenceScene);
             }
         }
         else
         {
-            Debug.LogWarning(
-                "Monster is either not spawned or the reference is null; cannot set position."
+            Debug.LogWarning("Player reference is null or invalid scene name.");
+        }
+    }
+
+    public void RestoreMonsterPosition(string sceneName)
+    {
+        string referenceScene = GetCorrespondingSceneName(sceneName);
+
+        if (monster != null && referenceScene != null && isMonsterSpawned)
+        {
+            // Determine if the current scene is a clay scene or real scene
+            bool isClayScene = sceneName.Contains("Clay");
+            bool isPuzzleScene = sceneName.Contains("Puzzle");
+
+            // Restore monster position from the correct saved scene position
+            if (isPuzzleScene)
+            {
+                monster.transform.position = monsterPositions[referenceScene].position;
+                Debug.Log(
+                    "Headed to puzzle, monster position set in puzzle scene based on last scene position: "
+                        + monster.transform.position
+                );
+            }
+            // Restore monster position from the correct saved scene position
+            else if (isClayScene && monsterPositions.ContainsKey(referenceScene))
+            {
+                monster.transform.position = monsterPositions[referenceScene].position;
+                Debug.Log(
+                    "Monster position set in clay scene based on last scene position: "
+                        + monster.transform.position
+                );
+            }
+            else if (!isClayScene && savedMonsterPosition.HasValue)
+        {
+            monster.transform.position = savedMonsterPosition.Value; // Use .Value to get the Vector3 from Vector3?
+            Debug.Log(
+                "Monster position restored in real scene based on saved clay or puzzle position: "
+                    + monster.transform.position
             );
+        }
+            else
+            {
+                Debug.LogWarning("No saved monster position for scene: " + referenceScene);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Monster is either not spawned or invalid scene name.");
         }
     }
 }

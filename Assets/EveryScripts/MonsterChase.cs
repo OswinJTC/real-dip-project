@@ -16,6 +16,9 @@ public class MonsterChase : MonoBehaviour
     public float warningDuration = 1f;   // Duration of the warning effect
     public float warningInterval = 1f; // Interval for flashing effect
 
+    private float logTimer = 0f; // Timer to control log frequency
+    private float logInterval = 0.5f; // Interval for log updates (0.5 seconds)
+
     private void Awake()
     {
         // Implementing the Singleton pattern
@@ -91,53 +94,62 @@ public class MonsterChase : MonoBehaviour
         // Ensure references are up-to-date after loading a new scene
         GetReferences();
     }
-    
+
     private void MoveTowardsPlayer()
-{
-    if (GameManager.instance.GetClayStatus())
     {
-        // Move towards the saved player position in the clay scene, starting from the last saved monster position
-        if (GameManager.instance.savedPlayerPosition.HasValue && GameManager.instance.savedMonsterPosition.HasValue)
+        if (GameManager.instance.GetClayStatus())
         {
-            Vector3 targetPosition = GameManager.instance.savedPlayerPosition.Value;
-            Vector3 startingPosition = GameManager.instance.savedMonsterPosition.Value;
-
-            if (!isMovingTowardsSavedPosition)
+            // Move towards the saved player position in the clay scene, starting from the last saved monster position
+            if (GameManager.instance.savedPlayerPosition.HasValue && GameManager.instance.savedMonsterPosition.HasValue)
             {
-                // Set the initial position to the saved monster position from the real scene
-                transform.position = startingPosition;
-                isMovingTowardsSavedPosition = true;
-                SetMonsterVisibility(false);
-            }
+                Vector3 targetPosition = GameManager.instance.savedPlayerPosition.Value;
+                Vector3 startingPosition = GameManager.instance.savedMonsterPosition.Value;
 
-            MoveMonsterToPosition(targetPosition);
+                if (!isMovingTowardsSavedPosition)
+                {
+                    // Set the initial position to the saved monster position from the real scene
+                    transform.position = startingPosition;
+                    isMovingTowardsSavedPosition = true;
+                    SetMonsterVisibility(false);
+                }
+
+                MoveMonsterToPosition(targetPosition);
+            }
         }
-    }
-    else
-    {
-        Transform playerTransform = GameManager.instance.player?.transform;
-        if (playerTransform != null)
+        else
         {
-            Vector3 targetPosition = playerTransform.position;
-            MoveMonsterToPosition(targetPosition);
+            Transform playerTransform = GameManager.instance.player?.transform;
+            if (playerTransform != null)
+            {
+                Vector3 targetPosition = playerTransform.position;
+                MoveMonsterToPosition(targetPosition);
+            }
         }
     }
-}
 
     private void MoveMonsterToPosition(Vector3 targetPosition)
-    {
-        // Move the monster toward the specified target position
-        float monsterSpeed = GameManager.instance.monsterSpeed;
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, monsterSpeed * Time.deltaTime);
+{
+    // Move the monster toward the specified target position
+    float monsterSpeed = GameManager.instance.monsterSpeed;
+    transform.position = Vector3.MoveTowards(transform.position, targetPosition, monsterSpeed * Time.deltaTime);
 
-        
-        // Trigger the light warning effect if close enough to the target position
-        float distance = Vector3.Distance(transform.position, targetPosition);
-        if (distance < warningDistance)
-        {
-            TriggerLightWarning();
-        }
+    // Calculate the distance between the monster and the player
+    float distance = Vector3.Distance(transform.position, targetPosition);
+
+    // Update the log every 0.5 seconds
+    logTimer += Time.deltaTime;
+    if (logTimer >= logInterval)
+    {
+        Debug.Log("Distance between monster and player: " + distance);
+        logTimer = 0f; // Reset the timer
     }
+
+    // Trigger the light warning effect if close enough to the target position
+    if (distance < warningDistance)
+    {
+        TriggerLightWarning();
+    }
+}
 
     private void SetMonsterVisibility(bool isVisible)
     {

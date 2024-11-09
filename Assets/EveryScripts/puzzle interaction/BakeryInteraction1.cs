@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class BakeryInteraction1 : MonoBehaviour
 {
-    public string targetScene = "Bakery"; // The scene to load when interacting with the phone
+    public string targetScene = "Bakery Puzzle"; // The scene to load when interacting with the phone
     private bool isPlayerNear = false; // Flag to check if the player is near the phone
 
     void Update()

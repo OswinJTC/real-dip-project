@@ -58,22 +58,14 @@ public class PhonePuzzle : MonoBehaviour // Capitalize class name for convention
     private void Update()
     {
         // Check if "L" is pressed to leave the game and return to the saved position in "BedroomScene"
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Exiting the puzzle and returning to BedroomScene...");
+            Debug.Log("Exiting the puzzle and returning to the real room...");
 
-            // Save the player's current position before leaving
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null && GameManager.instance != null)
-            {
-                GameManager.instance.savedPlayerPosition = player.transform.position;
-            }
+            GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
 
-            // Load "BedroomScene"
-            SceneManager.LoadScene("BedroomScene");
-
-            // Restore player position when the scene loads
-            StartCoroutine(RestorePlayerPosition());
+            SceneManager.LoadScene(GameObject.FindObjectOfType<ClayChange>().previousRealScene);
+            
         }
     }
 
