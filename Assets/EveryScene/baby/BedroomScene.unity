@@ -5276,7 +5276,7 @@ MonoBehaviour:
   thinkPanel: {fileID: 973666476}
   pausePanel: {fileID: 1570169415}
   gameoverpanel: {fileID: 0}
-  PersistentCanvas: {fileID: 0}
+  PersistentCanvas: {fileID: 1874103765}
   isLivingRoomClean: 0
   isRoomClean: 0
   isKitchenClean: 0
@@ -5288,6 +5288,15 @@ MonoBehaviour:
   monster: {fileID: 0}
   monsterSpeed: 3
   player: {fileID: 0}
+  monsterInactiveScenes:
+  - MainMenuScene
+  - BBLRoomClay
+  - Balloon Puzzle
+  - BBKitchenClay
+  - BBBedroomClay
+  - Paper Puzzle
+  - Phone Puzzle
+  - Bakery
 --- !u!4 &972007349
 Transform:
   m_ObjectHideFlags: 0

@@ -1,11 +1,13 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;  // Add this to use SceneManager
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MainMenu : MonoBehaviour
 {
     public MainMenuVideoManager videoManager;  // Reference to the video manager
-    public string scene_a = "outsideTerrain";  // Set your new game scene name in the Inspector
-    public string scene_b = "outsideTerrain";  // Set your continue scene name in the Inspector
+    public Canvas videoCanvas;  // Reference to the Canvas to show during video playback
+    public string scene_a = "outsideTerrain";  // New game scene
+    public string scene_b = "outsideTerrain";  // Continue scene
 
     void Start()
     {
@@ -17,6 +19,12 @@ public class MainMenu : MonoBehaviour
                 Debug.LogError("MainMenuVideoManager not found!");
             }
         }
+
+        // Ensure the canvas is hidden initially
+        if (videoCanvas != null)
+        {
+            videoCanvas.gameObject.SetActive(false);
+        }
     }
 
     public void OnNewGameButton()
@@ -24,6 +32,7 @@ public class MainMenu : MonoBehaviour
         if (videoManager != null)
         {
             Debug.Log("Playing video for New Game...");
+            StartCoroutine(DelayedShowCanvas());  // Start the coroutine with delay
             videoManager.PlayNewGameVideo(scene_a);  // Play the video and load scene_a
         }
     }
@@ -33,6 +42,7 @@ public class MainMenu : MonoBehaviour
         if (videoManager != null)
         {
             Debug.Log("Playing video for Continue...");
+            StartCoroutine(DelayedShowCanvas());  // Start the coroutine with delay
             videoManager.PlayNewGameVideo(scene_b);  // Play the video and load scene_b
         }
     }
@@ -47,5 +57,24 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Exiting the application...");
         Application.Quit();  // Exit the game
+    }
+
+    // Coroutine to show the canvas with a delay
+    private IEnumerator DelayedShowCanvas()
+    {
+        yield return new WaitForSeconds(7);  // Wait for 5 seconds
+        if (videoCanvas != null)
+        {
+            videoCanvas.gameObject.SetActive(true);  // Show the canvas after delay
+        }
+    }
+
+    // Method to hide the canvas, called when the video ends
+    public void HideVideoCanvas()
+    {
+        if (videoCanvas != null)
+        {
+            videoCanvas.gameObject.SetActive(false);
+        }
     }
 }
