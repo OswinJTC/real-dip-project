@@ -6258,7 +6258,15 @@ MonoBehaviour:
   monster: {fileID: 0}
   monsterSpeed: 3
   player: {fileID: 0}
-  tutPlayer: {fileID: 0}
+  monsterInactiveScenes:
+  - MainMenuScene
+  - BBLRoomClay
+  - Balloon Puzzle
+  - BBKitchenClay
+  - BBBedroomClay
+  - Paper Puzzle
+  - Phone Puzzle
+  - Bakery
 --- !u!4 &979949773
 Transform:
   m_ObjectHideFlags: 0
