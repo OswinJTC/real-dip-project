@@ -60,5 +60,6 @@ public class TrapdoorVideoManager : MonoBehaviour
         // Transition to the new scene
         Debug.Log("Video finished. Transitioning to " + sceneName);
         SceneManager.LoadScene(sceneName);  // Load the scene after the video
+        UIManager.instance.ShowPrompt("Enter the trunk zone to get the hourglass...", 4f);
     }
 }

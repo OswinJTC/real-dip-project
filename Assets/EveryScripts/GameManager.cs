@@ -1,3 +1,4 @@
+//UIManager.instance.ShowPrompt("You need the hourglass to use this ability.", 2f);
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -9,12 +10,27 @@ public class GameManager : MonoBehaviour
 
     // UI Elements
     public Text timerText;
-    public GameObject hourglassUIIcon;
     public GameObject gamePanel;
     public GameObject inventoryPanel;
     public GameObject thinkPanel;
     public GameObject pausePanel;
     public GameObject gameoverpanel; // Assign the panel in the Unity Inspector
+
+    public GameObject hourglassUIIcon;
+    public GameObject balloonUIIcon;
+    public GameObject paperIcon;
+    public GameObject phoneIcon;
+    public GameObject breadUIIcon;
+    public GameObject coinIcon;
+    public GameObject keyUIIcon;
+    public GameObject HourGlassButton;
+    public GameObject CloseEye;
+    public GameObject CloseEye1;
+    public GameObject CloseEye2;
+    public GameObject CloseEye3;
+    public GameObject CloseEye4;
+    public GameObject thinkButton;
+
     public Canvas PersistentCanvas;
 
     // Player status
@@ -32,6 +48,19 @@ public class GameManager : MonoBehaviour
     public bool isLightOn = false;
     public bool isInClayStatus = false;
     public bool isCleaningKit = true; // New variable initialized to true
+
+    public bool isHourglassActive = false;
+    public bool isBalloonActive = false;
+    public bool isPaperActive = false;
+    public bool isPhoneActive = false;
+    public bool isBreadActive = false;
+    public bool isCoinActive = false;
+    public bool isKeyActive = false;
+
+    public bool isBreadInUsed = false;
+    public bool isKeyInUsed = false;
+    public bool isCleaningKitInUsed = false;
+
 
     // Monster state
     public bool isMonsterSpawned = false;
@@ -99,6 +128,12 @@ public class GameManager : MonoBehaviour
         // Check if the player or monster references need to be updated initially
         UpdateReferences();
 
+        // Initialize the inventory UI based on item states
+        UpdateInventoryUI();
+        UpdateHourglassAndEye();
+        UpdateThinkButton();
+        
+
         // Subscribe to sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -108,7 +143,6 @@ public class GameManager : MonoBehaviour
         // Unsubscribe from sceneLoaded event
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
     private void Update()
     {
         UpdateTimer();
@@ -116,14 +150,26 @@ public class GameManager : MonoBehaviour
         // Toggle panels with keys
         if (Input.GetKeyDown(KeyCode.I))
             TogglePanel(inventoryPanel);
+
+        // Check if the player is in "outsideTerrain", has the hourglass, and presses Space
         if (
             Input.GetKeyDown(KeyCode.Space)
             && SceneManager.GetActiveScene().name == "outsideTerrain"
         )
         {
-            ReduceBlood();
+            if (isHourglassActive) // Check if hourglass is active
+            {
+                ReduceBlood();
+                Debug.Log("Hourglass is active. Blood reduced.");
+            }
+            else
+            {
+                Debug.Log("Hourglass is not active. Cannot use hourglass.");
+                UIManager.instance.ShowPrompt("You need the hourglass to use this ability.", 2f);
+            }
         }
     }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         string currentSceneName = scene.name;
@@ -180,7 +226,9 @@ public class GameManager : MonoBehaviour
             "TutBRoomDScene",
             "TutBRoomCScene",
             "TutBasementScene",
-            "LogicPuzzle"
+            "LogicPuzzle",
+            "outsideTerrain",
+            "BakeryScene"
         };
 
         // Check if the current scene is one where the player should not persist
@@ -544,7 +592,7 @@ public class GameManager : MonoBehaviour
                 return "BBKitchenClay";
             case "BBKitchenClay":
                 return "KitchenScene";
-            
+
             case "Bakery Puzzle":
                 return "BBKitchenClay";
             case "Balloon Puzzle":
@@ -575,7 +623,10 @@ public class GameManager : MonoBehaviour
 
             if (isPuzzleScene)
             {
-                player.transform.position = playerPositions[GameObject.FindObjectOfType<ClayChange>().previousRealScene].position;
+                player.transform.position =
+                    playerPositions[
+                        GameObject.FindObjectOfType<ClayChange>().previousRealScene
+                    ].position;
                 Debug.Log(
                     "Headed to puzzle, player position set in clay scene based on real scene position: "
                         + player.transform.position
@@ -637,13 +688,13 @@ public class GameManager : MonoBehaviour
                 );
             }
             else if (!isClayScene && savedMonsterPosition.HasValue)
-        {
-            monster.transform.position = savedMonsterPosition.Value; // Use .Value to get the Vector3 from Vector3?
-            Debug.Log(
-                "Monster position restored in real scene based on saved clay or puzzle position: "
-                    + monster.transform.position
-            );
-        }
+            {
+                monster.transform.position = savedMonsterPosition.Value; // Use .Value to get the Vector3 from Vector3?
+                Debug.Log(
+                    "Monster position restored in real scene based on saved clay or puzzle position: "
+                        + monster.transform.position
+                );
+            }
             else
             {
                 Debug.LogWarning("No saved monster position for scene: " + referenceScene);
@@ -653,5 +704,59 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("Monster is either not spawned or invalid scene name.");
         }
+    }
+
+    public void UpdateThinkButton(){
+        
+        if(thinkButton != null){
+            thinkButton.SetActive(isMonsterSpawned);
+        }
+    }
+
+    public void UpdateHourglassAndEye()
+    {
+        if (HourGlassButton != null)
+            HourGlassButton.SetActive(isHourglassActive);
+
+        if (CloseEye != null)
+            CloseEye.SetActive(isHourglassActive);
+        
+        if (CloseEye1 != null)
+            CloseEye1.SetActive(isHourglassActive);
+        
+        if (CloseEye2 != null)
+            CloseEye2.SetActive(isHourglassActive);
+        
+        if (CloseEye3 != null)
+            CloseEye3.SetActive(isHourglassActive);
+        
+        if (CloseEye4 != null)
+            CloseEye4.SetActive(isHourglassActive);
+    }
+
+
+    // Method to update item icons' visibility in the inventory
+    public void UpdateInventoryUI()
+    {
+        if (hourglassUIIcon != null)
+            hourglassUIIcon.SetActive(isHourglassActive);
+
+        if (breadUIIcon != null)
+            breadUIIcon.SetActive(isBreadActive);
+
+        if (keyUIIcon != null)
+            keyUIIcon.SetActive(isKeyActive);
+
+        if (balloonUIIcon != null)
+            balloonUIIcon.SetActive(isBalloonActive);
+
+        if (paperIcon != null)
+            paperIcon.SetActive(isPaperActive);
+
+        if (phoneIcon != null)
+            phoneIcon.SetActive(isPhoneActive);
+
+        if (coinIcon != null)
+            coinIcon.SetActive(isCoinActive);
     }
 }

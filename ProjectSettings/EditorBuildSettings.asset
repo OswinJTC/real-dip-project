@@ -75,7 +75,7 @@ EditorBuildSettings:
     path: Assets/EveryScene/baby/KitchenScene.unity
     guid: caf4b5903dd0b8a4db43eb6ba7131ae3
   - enabled: 1
-    path: Assets/EveryScene/baby/BakeryScene.unity
+    path: Assets/EveryScene/BakeryScene.unity
     guid: 9c8056cf5e590fc46b90f6143da85abb
   - enabled: 1
     path: Assets/EveryScene/baby/hide/BBHideBRoom.unity

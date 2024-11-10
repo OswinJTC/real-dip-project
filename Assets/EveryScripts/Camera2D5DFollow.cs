@@ -46,30 +46,31 @@ public class Camera2D5DFollow : MonoBehaviour
     }
 
     void AdjustCameraDistanceAndHeight(string sceneName)
+{
+    if (sceneName == "outsideTerrain")
     {
-        if (sceneName == "outsideTerrain")
-        {
-            // Set distance and height for the outsideTerrain scene
-            distance = 2.5f;
-            height = 2f;
-            gameObject.SetActive(true); // Ensure the camera is active
-            Debug.Log("Camera distance and height adjusted for outsideTerrain.");
-        }
-        else if (sceneName == "BBHideBRoom" || sceneName == "BBHideLRoom")
-        {
-            // Disable the camera in the hiding scenes
-            gameObject.SetActive(false);
-            Debug.Log("Camera disabled for BBHideBRoom or BBHideLRoom.");
-        }
-        else
-        {
-            // Set distance and height for any other scene
-            distance = 10f;
-            height = 8f;
-            gameObject.SetActive(true); // Ensure the camera is active
-            Debug.Log("Camera distance and height adjusted for other scenes.");
-        }
+        // Set distance and height for the outsideTerrain scene
+        distance = 2.5f;
+        height = 2f;
+        gameObject.SetActive(true); // Ensure the camera is active
+        Debug.Log("Camera distance and height adjusted for outsideTerrain.");
     }
+    else if (sceneName == "BBHideBRoom" || sceneName == "BBHideLRoom" || sceneName == "Balloon Puzzle" || sceneName == "BakeryScene")
+    {
+        // Disable the camera in the hiding scenes and Balloon Puzzle
+        gameObject.SetActive(false);
+        Debug.Log("Camera disabled for BBHideBRoom, BBHideLRoom, or Balloon Puzzle.");
+    }
+    else
+    {
+        // Set distance and height for any other scene
+        distance = 10f;
+        height = 8f;
+        gameObject.SetActive(true); // Ensure the camera is active
+        Debug.Log("Camera distance and height adjusted for other scenes.");
+    }
+}
+
 
     void OnDestroy()
     {

@@ -61,6 +61,7 @@ public class StudyRoomVideoManager  : MonoBehaviour
     private void EndVideo(VideoPlayer vp)
     {
         Debug.Log("Video finished playing.");
+        UIManager.instance.ShowPrompt("Find out the trapdoor to enter the basement...", 5f);
 
         // Show the canvas again after the video ends
         if (canvas != null)

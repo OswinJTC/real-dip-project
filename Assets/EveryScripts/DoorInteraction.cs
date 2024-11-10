@@ -101,7 +101,8 @@ public class DoorInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)  // Use 2D version for player interaction detection
+    // Detect when the player enters the entrance's trigger collider (3D version)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -116,7 +117,8 @@ public class DoorInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)  // Use 2D version for exit detection
+    // Detect when the player exits the entrance's trigger collider (3D version)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

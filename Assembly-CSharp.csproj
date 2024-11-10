@@ -1,21 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="Current">
   <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <BaseIntermediateOutputPath>Temp\obj\$(Configuration)\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)</IntermediateOutputPath>
   </PropertyGroup>
+  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Include="Unity" />
+  </ItemGroup>
   <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>9.0</LangVersion>
+    <Configurations>Debug;Release</Configurations>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{FAF19922-D86E-A6A4-525A-2A939E243352}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -39,23 +44,21 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <NoConfig>true</NoConfig>
+    <NoStandardLibraries>true</NoStandardLibraries>
     <NoStdLib>true</NoStdLib>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
-    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
+    <NoConfig>true</NoConfig>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
     <UnityProjectGeneratorVersion>2.0.22</UnityProjectGeneratorVersion>
-    <UnityProjectGeneratorStyle>Legacy</UnityProjectGeneratorStyle>
+    <UnityProjectGeneratorStyle>SDK</UnityProjectGeneratorStyle>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>6000.0.16f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.16f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
@@ -81,7 +84,6 @@
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\Teleporter.cs" />
     <Compile Include="Assets\EveryScripts\DisablePersistentCanvas.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Z Axis -1\Drawer_Pull_Zopp.cs" />
-    <Compile Include="Assets\EveryScripts\InventoryUI.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\c- Wall Jumping\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\testing scripts\MCQTrigger.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipR.cs" />
@@ -91,12 +93,13 @@
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\10- Multiple movement states setup\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\4- Landing and leaving ground\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Drawer\X Axis\Drawer_Pull_X.cs" />
-    <Compile Include="Assets\EveryScripts\InventoryButton.cs" />
     <Compile Include="Assets\EveryScripts\testing scripts\FirstIntroduceStory.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\KinematicCharacterSystem.cs" />
     <Compile Include="Assets\Bakery\AddButtons.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\c- Wall Jumping\MyPlayer.cs" />
     <Compile Include="Assets\EveryScripts\DoorInteraction.cs" />
+    <Compile Include="Assets\EveryScripts\ReturnToOutsideButton.cs" />
+    <Compile Include="Assets\EveryScripts\UIManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\StressTestManager.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseDoor1.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\6- Crouching\Scripts\MyPlayer.cs" />
@@ -115,6 +118,7 @@
     <Compile Include="Assets\KinematicCharacterController\Core\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\EveryScripts\Camera2D5DFollow.cs" />
     <Compile Include="Assets\EveryScripts\HouseEntrance.cs" />
+    <Compile Include="Assets\EveryScripts\Inventory.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\15- Root motion example\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\ColourScript.cs" />
     <Compile Include="Assets\EveryScripts\GameButtons.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Drawer\Z Axis\Drawer_Pull_Z.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\9- Custom collision filtering\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\5- Adding velocities and impulses\Scripts\MyCharacterController.cs" />
+    <Compile Include="Assets\EveryScripts\NPCInteraction.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\KinematicCharacterMotor.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Slide\opencloseSlide.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseDoor.cs" />
@@ -171,6 +176,7 @@
     <Compile Include="Assets\KinematicCharacterController\Core\ICharacterController.cs" />
     <Compile Include="Assets\EveryScripts\TransitionManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\PhysicsMover.cs" />
+    <Compile Include="Assets\EveryScripts\BakeryHouseEntrance.cs" />
     <Compile Include="Assets\EveryScripts\GameManager.cs" />
     <Compile Include="Assets\EveryScripts\BasementInteraction.cs" />
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scripts\SnapToPixel.cs" />
@@ -1424,13 +1430,16 @@
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
+  <ItemGroup>
+    <ProjectCapability Remove="LaunchProfiles" />
+    <ProjectCapability Remove="SharedProjectReferences" />
+    <ProjectCapability Remove="ReferenceManagerSharedProjects" />
+    <ProjectCapability Remove="ProjectReferences" />
+    <ProjectCapability Remove="ReferenceManagerProjects" />
+    <ProjectCapability Remove="COMReferences" />
+    <ProjectCapability Remove="ReferenceManagerCOM" />
+    <ProjectCapability Remove="AssemblyReferences" />
+    <ProjectCapability Remove="ReferenceManagerAssemblies" />
+  </ItemGroup>
 </Project>

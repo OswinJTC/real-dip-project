@@ -15,6 +15,14 @@ public class ClayChange : MonoBehaviour
     }
     private void ToggleClayStatus()
     {
+        // Check if the player has the hourglass before allowing clay/real switch
+        if (!GameManager.instance.isHourglassActive)
+        {
+            Debug.Log("Hourglass is not active. Cannot switch between clay and real scenes.");
+            UIManager.instance.ShowPrompt("Hourglass is not active. Cannot switch between clay and real scenes.", 2f);
+            return; // Exit the function if the hourglass is not active
+        }
+
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         if (GameManager.instance.GetClayStatus())
@@ -32,7 +40,6 @@ public class ClayChange : MonoBehaviour
         {
             // Save both player and monster positions before switching to clay
             GameManager.instance.SavePlayerPosition(currentSceneName);
-            Debug.Log("Oswinnnnnnnnnnnnnnnnnnnnnnnnn");
             GameManager.instance.SaveMonsterPosition(currentSceneName);
 
             string claySceneName = GetCorrespondingClayScene(currentSceneName);

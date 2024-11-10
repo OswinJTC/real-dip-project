@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 733a56836496bfa43b1dae750ba598f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: Bakery
+  targetScene: Bakery Puzzle
 --- !u!1001 &1446694143
 PrefabInstance:
   m_ObjectHideFlags: 0

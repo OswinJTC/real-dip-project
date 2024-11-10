@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PaperInteraction: MonoBehaviour
+public class PaperInteraction : MonoBehaviour
 {
     public string targetScene = "Paper Puzzle"; // The scene to load when interacting with the paper
     private bool isPlayerNear = false; // Flag to check if the player is near the paper
@@ -17,9 +17,9 @@ public class PaperInteraction: MonoBehaviour
 
     private void InteractWithPaper()
     {
-        Debug.Log("Interacting with the paper. Saving positions and loading the paper Puzzle scene...");
+        Debug.Log("Interacting with the paper. Saving positions and loading the Paper Puzzle scene...");
 
-        // Save the player's and monster's positions in GameManager before loading the puzzle scene
+        // Save the player's and monster's positions and set isPaperActive to true in GameManager
         if (GameManager.instance != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -35,9 +35,14 @@ public class PaperInteraction: MonoBehaviour
                 GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
             }
 
+            // Set the paper's active status in the GameManager
+            GameManager.instance.isPaperActive = true;
+            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+            UIManager.instance.ShowPrompt("Paper collected...all the best for the puzzle...", 2f);
+            
             // Set clay status to false before switching to the puzzle scene
             GameManager.instance.SetClayStatus(false);
-            Debug.Log("Clay status set to false.");
+            Debug.Log("Clay status set to false and paper marked active.");
         }
 
         // Load the target puzzle scene

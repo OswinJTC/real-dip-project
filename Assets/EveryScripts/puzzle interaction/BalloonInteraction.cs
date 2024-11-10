@@ -19,6 +19,14 @@ public class BalloonInteraction : MonoBehaviour
     {
         Debug.Log("Interacting with the balloon. Saving player position and loading the Balloon Puzzle scene...");
 
+        // Set the balloon's active status in GameManager
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.isBalloonActive = true;
+            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+            UIManager.instance.ShowPrompt("Balloon collected...all the best for the puzzle...", 2f);
+        }
+
         // Save the player's current position in GameManager before loading the puzzle scene
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null && GameManager.instance != null)

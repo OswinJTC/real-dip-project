@@ -5,36 +5,46 @@ public class BabyHouseEntrance : MonoBehaviour
 {
     public Transform player;            // Reference to the player's transform
     public string nextScene = "BBLivingroomScene";  // Scene to load when entering
-
     private bool isPlayerNear = false; // Flag to check if the player is near the entrance
 
     void Update()
     {
         // Check if the player is near and presses the "E" key
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("E pressed. Player entering the house...");
+            Debug.Log("E pressed. Attempting to enter the house...");
             EnterHouse();
+            UIManager.instance.ShowPrompt("Go to the fuel...", 5f);
         }
     }
 
     private void EnterHouse()
     {
-        Debug.Log("Entering the house...");
-
-        // Set the player's entry position when entering the house
-        Vector3 entryPosition = GetEntryPosition(nextScene);
-        GameManager.instance.SetPlayerEntryPosition(entryPosition);
-
-        // Use the TransitionManager to change scenes
-        if (TransitionManager.instance != null)
+        // Check if the player has the key
+        if (GameManager.instance != null && GameManager.instance.isKeyActive && GameManager.instance.isKeyInUsed)
         {
-            TransitionManager.instance.ChangeScene(nextScene);
+            Debug.Log("Player has the key. Entering the house...");
+            UIManager.instance.ShowPrompt("Entering the baby house...", 2f);
+
+            // Set the player's entry position when entering the house
+            Vector3 entryPosition = GetEntryPosition(nextScene);
+            GameManager.instance.SetPlayerEntryPosition(entryPosition);
+
+            // Use the TransitionManager to change scenes
+            if (TransitionManager.instance != null)
+            {
+                TransitionManager.instance.ChangeScene(nextScene);
+            }
+            else
+            {
+                Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
+                SceneManager.LoadScene(nextScene);
+            }
         }
         else
         {
-            Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
-            SceneManager.LoadScene(nextScene);
+            Debug.Log("Player does not have the key. Cannot enter the house.");
+            UIManager.instance.ShowPrompt("Player does not have the key. Cannot enter the house.", 2f);
         }
     }
 

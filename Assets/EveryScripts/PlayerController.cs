@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Camera Holder is not assigned in PlayerController.");
         }
 
-        // Adjust the player's scale and speed based on the current scene
+        // Adjust the player's scale, speed, and visibility based on the current scene
         AdjustPlayerAttributes(SceneManager.GetActiveScene().name);
 
         // Subscribe to the scene load event to adjust attributes on scene change
@@ -77,20 +77,32 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.flipX = movementInputX < 0;
     }
 
-    // Adjust player's scale and speed based on the scene
+    // Adjust player's scale, speed, and visibility based on the scene
     private void AdjustPlayerAttributes(string sceneName)
     {
-        if (sceneName == "outsideTerrain")
+        // Adjust visibility for specific puzzle scenes
+        if (sceneName == "Balloon Puzzle" || sceneName == "Paper Puzzle" || sceneName == "Phone Puzzle" || sceneName == "Bakery Puzzle")
         {
-            transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-            speed = 2f;
-            Debug.Log("Player scale and speed adjusted for outsideTerrain.");
+            spriteRenderer.enabled = false; // Hide the player
+            Debug.Log("Player made invisible for puzzle scenes.");
         }
-        else if (sceneName == "BBLivingroomScene" || sceneName == "BedroomScene" || sceneName == "KitchenScene" || sceneName == "BBBedroomClay" || sceneName == "BBKitchenClay" || sceneName == "BBLRoomClay")
+        else
         {
-            transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
-            speed = 20f;
-            Debug.Log("Player scale and speed adjusted for other scenes.");
+            spriteRenderer.enabled = true; // Show the player in other scenes
+
+            // Adjust player scale and speed based on the scene
+            if (sceneName == "outsideTerrain")
+            {
+                transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                speed = 4f;
+                Debug.Log("Player scale and speed adjusted for outsideTerrain.");
+            }
+            else if (sceneName == "BBLivingroomScene" || sceneName == "BedroomScene" || sceneName == "KitchenScene" || sceneName == "BBBedroomClay" || sceneName == "BBKitchenClay" || sceneName == "BBLRoomClay")
+            {
+                transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                speed = 20f;
+                Debug.Log("Player scale and speed adjusted for other scenes.");
+            }
         }
     }
 
@@ -121,17 +133,19 @@ public class PlayerController : MonoBehaviour
             if (renderer != null)
             {
                 renderer.enabled = true;
-                Debug.Log("2D Monster made visible at position: " + spawnPosition);
+                Debug.Log("3D Monster made visible at position: " + spawnPosition);
             }
             else
             {
                 Debug.LogWarning("SpriteRenderer not found on the monster GameObject!");
             }
-            Debug.Log("2D Monster Spawned at position: " + spawnPosition);
+            UIManager.instance.ShowPrompt("Monster spawned...faster run!!!", 2f);
+            GameManager.instance.UpdateThinkButton(); // Update the inventory UI to reflect the change
+            Debug.Log("3D Monster Spawned at position: " + spawnPosition);
         }
         else
         {
-            Debug.LogWarning("2D Monster reference not found in GameManager.");
+            Debug.LogWarning("3D Monster reference not found in GameManager.");
         }
     }
 

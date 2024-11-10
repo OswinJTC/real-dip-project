@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MonsterChase : MonoBehaviour
 {
@@ -19,9 +20,16 @@ public class MonsterChase : MonoBehaviour
     private float logTimer = 0f; // Timer to control log frequency
     private float logInterval = 0.5f; // Interval for log updates (0.5 seconds)
 
+    // List of scenes where the monster and warning panel should be active
+    private readonly HashSet<string> allowedScenes = new HashSet<string>
+    {
+        "BedroomScene", "BBBedroomClay", "BBLivingroomScene", "BBLRoomClay",
+        "KitchenScene", "BBKitchenClay", "Bakery Puzzle",
+        "Balloon Puzzle", "Paper Puzzle", "Phone Puzzle"
+    };
+
     private void Awake()
     {
-        // Implementing the Singleton pattern
         if (instance == null)
         {
             instance = this;
@@ -62,7 +70,6 @@ public class MonsterChase : MonoBehaviour
             }
             else
             {
-                // Regular behavior if not moving towards saved position
                 MoveTowardsPlayer();
             }
         }
@@ -70,14 +77,12 @@ public class MonsterChase : MonoBehaviour
 
     private void GetReferences()
     {
-        // Get the Renderer for 3D rendering
         renderer = GetComponent<Renderer>();
         if (renderer == null)
         {
             Debug.LogWarning("Renderer not found on the monster GameObject!");
         }
 
-        // Find the light warning panel if not set
         if (lightWarningPanel == null)
         {
             GameObject canvas = GameObject.Find("PersistentCanvas");
@@ -91,7 +96,25 @@ public class MonsterChase : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Ensure references are up-to-date after loading a new scene
+        if (allowedScenes.Contains(scene.name))
+        {
+            gameObject.SetActive(true); // Enable the monster in allowed scenes
+            if (lightWarningPanel != null)
+            {
+                lightWarningPanel.SetActive(false); // Ensure it's initially off and ready for flashing
+            }
+            Debug.Log("Monster activated in scene: " + scene.name);
+        }
+        else
+        {
+            gameObject.SetActive(false); // Disable the monster in other scenes
+            if (lightWarningPanel != null)
+            {
+                lightWarningPanel.SetActive(false); // Disable the light warning panel in other scenes
+            }
+            Debug.Log("Monster disabled in scene: " + scene.name);
+        }
+        
         GetReferences();
     }
 
@@ -99,7 +122,6 @@ public class MonsterChase : MonoBehaviour
     {
         if (GameManager.instance.GetClayStatus())
         {
-            // Move towards the saved player position in the clay scene, starting from the last saved monster position
             if (GameManager.instance.savedPlayerPosition.HasValue && GameManager.instance.savedMonsterPosition.HasValue)
             {
                 Vector3 targetPosition = GameManager.instance.savedPlayerPosition.Value;
@@ -107,7 +129,6 @@ public class MonsterChase : MonoBehaviour
 
                 if (!isMovingTowardsSavedPosition)
                 {
-                    // Set the initial position to the saved monster position from the real scene
                     transform.position = startingPosition;
                     isMovingTowardsSavedPosition = true;
                     SetMonsterVisibility(false);
@@ -128,28 +149,24 @@ public class MonsterChase : MonoBehaviour
     }
 
     private void MoveMonsterToPosition(Vector3 targetPosition)
-{
-    // Move the monster toward the specified target position
-    float monsterSpeed = GameManager.instance.monsterSpeed;
-    transform.position = Vector3.MoveTowards(transform.position, targetPosition, monsterSpeed * Time.deltaTime);
-
-    // Calculate the distance between the monster and the player
-    float distance = Vector3.Distance(transform.position, targetPosition);
-
-    // Update the log every 0.5 seconds
-    logTimer += Time.deltaTime;
-    if (logTimer >= logInterval)
     {
-        Debug.Log("Distance between monster and player: " + distance);
-        logTimer = 0f; // Reset the timer
-    }
+        float monsterSpeed = GameManager.instance.monsterSpeed;
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, monsterSpeed * Time.deltaTime);
 
-    // Trigger the light warning effect if close enough to the target position
-    if (distance < warningDistance)
-    {
-        TriggerLightWarning();
+        float distance = Vector3.Distance(transform.position, targetPosition);
+
+        logTimer += Time.deltaTime;
+        if (logTimer >= logInterval)
+        {
+            Debug.Log("Distance between monster and player: " + distance);
+            logTimer = 0f;
+        }
+
+        if (distance < warningDistance)
+        {
+            TriggerLightWarning();
+        }
     }
-}
 
     private void SetMonsterVisibility(bool isVisible)
     {
@@ -183,7 +200,7 @@ public class MonsterChase : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other) // Changed to OnTriggerEnter for 3D collision detection
+    void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !hasCaughtPlayer)
         {
