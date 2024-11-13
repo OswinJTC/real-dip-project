@@ -61,9 +61,12 @@ public class StudyRoomBloodElimination : MonoBehaviour
                             if (TransitionManager.instance != null)
                             {
                                 TransitionManager.instance.ChangeScene("TutStudyCScene");
+                                UIManager.instance.ShowPrompt("Whoa, what the hell...? Well, well... Someone’s got secrets. Guess I’m not done yet.", 14f);
+
                             }else{
                                 Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
                                 SceneManager.LoadScene("TutStudyCScene");
+
                             }
                         }
                     }

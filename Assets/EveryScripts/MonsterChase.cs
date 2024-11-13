@@ -205,7 +205,7 @@ public class MonsterChase : MonoBehaviour
         if (other.CompareTag("Player") && !hasCaughtPlayer)
         {
             hasCaughtPlayer = true;
-            GameManager.instance.ReduceBlood(3);
+            GameManager.instance.ReduceBlood(1);
             StartCoroutine(ResetHasCaughtPlayer(2f));
         }
     }

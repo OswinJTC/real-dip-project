@@ -407,7 +407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af939987dabe1e41a8e1f188b13c40c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hourglassIcon: {fileID: 58062525}
 --- !u!114 &41198739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1909,12 +1908,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 998910306}
-  hourglassUIIcon: {fileID: 58062523}
   gamePanel: {fileID: 1446145360}
   inventoryPanel: {fileID: 843860548}
   thinkPanel: {fileID: 1916677052}
   pausePanel: {fileID: 1007811519}
   gameoverpanel: {fileID: 0}
+  hourglassUIIcon: {fileID: 58062523}
+  balloonUIIcon: {fileID: 0}
+  paperIcon: {fileID: 0}
+  phoneIcon: {fileID: 0}
+  breadUIIcon: {fileID: 0}
+  coinIcon: {fileID: 0}
+  keyUIIcon: {fileID: 0}
+  HourGlassButton: {fileID: 0}
+  CloseEye: {fileID: 0}
+  CloseEye1: {fileID: 0}
+  CloseEye2: {fileID: 0}
+  CloseEye3: {fileID: 0}
+  CloseEye4: {fileID: 0}
+  thinkButton: {fileID: 0}
   PersistentCanvas: {fileID: 0}
   isLivingRoomClean: 0
   isRoomClean: 0
@@ -1923,6 +1935,16 @@ MonoBehaviour:
   isLightOn: 0
   isInClayStatus: 0
   isCleaningKit: 1
+  isHourglassActive: 0
+  isBalloonActive: 0
+  isPaperActive: 0
+  isPhoneActive: 0
+  isBreadActive: 0
+  isCoinActive: 0
+  isKeyActive: 0
+  isBreadInUsed: 0
+  isKeyInUsed: 0
+  isCleaningKitInUsed: 0
   isMonsterSpawned: 0
   monster: {fileID: 0}
   monsterSpeed: 1
@@ -5917,6 +5939,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1043708110}
   m_CullTransparentMesh: 1
+--- !u!1001 &1055608616
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3509992881491741605, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_Name
+      value: Hourglass
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4322944649812988191, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7afea917000bb496d8d190d162e6faca, type: 3}
 --- !u!1001 &1115607985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11245,3 +11336,4 @@ SceneRoots:
   - {fileID: 1570493024}
   - {fileID: 1149788832}
   - {fileID: 1568768120}
+  - {fileID: 1055608616}

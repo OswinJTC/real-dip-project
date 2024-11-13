@@ -60,5 +60,6 @@ public class BasementVideoManager : MonoBehaviour
         // Transition to the new scene
         Debug.Log("Video finished. Transitioning to " + sceneName);
         SceneManager.LoadScene(sceneName);  // Load the scene after the video
+        UIManager.instance.ShowPrompt("Look around for help..", 8f);
     }
 }

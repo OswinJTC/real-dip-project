@@ -14,7 +14,7 @@ public class BabyHouseEntrance : MonoBehaviour
         {
             Debug.Log("E pressed. Attempting to enter the house...");
             EnterHouse();
-            UIManager.instance.ShowPrompt("Go to the fuel...", 5f);
+            UIManager.instance.ShowPrompt("I need to find the fuel...", 5f);
         }
     }
 

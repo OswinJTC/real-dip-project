@@ -23,7 +23,7 @@ public class NPCInteraction : MonoBehaviour
             GameManager.instance.UpdateInventoryUI();
 
             Debug.Log("Player has bread. Key added to inventory.");
-            UIManager.instance.ShowPrompt("Player has bread. Key added to inventory.", 2f);
+            UIManager.instance.ShowPrompt("Mister: Take this key. It unlocks a house with fuel.", 5f);
         }
         else
         {

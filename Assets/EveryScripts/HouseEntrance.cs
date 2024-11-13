@@ -15,7 +15,7 @@ public class HouseEntrance : MonoBehaviour
         {
             Debug.Log("E pressed. Player entering the house...");
             EnterHouse();
-            UIManager.instance.ShowPrompt("Find out the electric box...to turn on the light", 5f);
+            UIManager.instance.ShowPrompt("Ugh.. It is too dark. Where's the electrical box..", 5f);
         }
     }
 

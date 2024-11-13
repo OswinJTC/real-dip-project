@@ -73,8 +73,12 @@ public class PlayerController : MonoBehaviour
         // Animation control
         animator.SetBool("Walk", movementInputX != 0 || movementInputZ != 0);
 
-        // Sprite flip
+        //Sprite Flip
+        if (movementInputX != 0) // Only change the direction if there is horizontal input
+        {
         spriteRenderer.flipX = movementInputX < 0;
+        }
+
     }
 
     // Adjust player's scale, speed, and visibility based on the scene
@@ -139,7 +143,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.LogWarning("SpriteRenderer not found on the monster GameObject!");
             }
-            UIManager.instance.ShowPrompt("Monster spawned...faster run!!!", 2f);
+            UIManager.instance.ShowPrompt("WHAT IS THAT!? I need to *THINK* and find a way to get the fuel *(???)*", 20f);
             GameManager.instance.UpdateThinkButton(); // Update the inventory UI to reflect the change
             Debug.Log("3D Monster Spawned at position: " + spawnPosition);
         }
