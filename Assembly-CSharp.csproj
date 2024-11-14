@@ -83,6 +83,7 @@
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Z Axis -1\Drawer_Pull_Zopp.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\c- Wall Jumping\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\testing scripts\MCQTrigger.cs" />
+    <Compile Include="Assets\EveryScripts\video manager\TwoCorrectVideoManager1.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\TableFlip\TableFlipR.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\ExampleAIController.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\7- Orienting towards arbitrary up direction\Scripts\MyCharacterController.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\6- Crouching\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\EveryScripts\video manager\BasementVideoManager1.cs" />
     <Compile Include="Assets\EveryScripts\ClayChange.cs" />
+    <Compile Include="Assets\EveryScripts\video manager\ThreeCorrectVideoManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\16- FramePerfect Rotation\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\Examples\Scripts\PlayableMover.cs" />
@@ -155,6 +157,7 @@
     <Compile Include="Assets\EveryScripts\ElectricBoxLightControl.cs" />
     <Compile Include="Assets\KinematicCharacterController\Core\KCCSettings.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyPlayer.cs" />
+    <Compile Include="Assets\EveryScripts\video manager\ZeroCorrectVideoManager3.cs" />
     <Compile Include="Assets\EveryScripts\puzzle interaction\BakeryInteraction1.cs" />
     <Compile Include="Assets\EveryScripts\GameController.cs" />
     <Compile Include="Assets\EveryScripts\testing scripts\TimeTravelController.cs" />
@@ -166,6 +169,7 @@
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyCharacterController.cs" />
     <Compile Include="Assets\EveryScripts\Phonepuzzle.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\14- Climbing Ladders\Scripts\MyLadder.cs" />
+    <Compile Include="Assets\EveryScripts\ReturnFromMcq.cs" />
     <Compile Include="Assets\Wolv Interactive\Pixel Perfect Retro Camera\Scenes\Example\MoveCamera.cs" />
     <Compile Include="Assets\Brick Project Studio\_BPS Basic Assets\Common\Scripts and Animations\Doors\opencloseStallDoor.cs" />
     <Compile Include="Assets\EveryScripts\TypingEffect.cs" />
@@ -201,6 +205,7 @@
     <Compile Include="Assets\EveryScripts\GlobalFlasher.cs" />
     <Compile Include="Assets\Brick Project Studio\Apartment Kit\Common\Scripts &amp; Animation\Windows\opencloseWindowApt.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\3- Jumping\Scripts\b- Double Jumping\MyCharacterController.cs" />
+    <Compile Include="Assets\EveryScripts\video manager\BBHouseEntranceVideoManager.cs" />
     <Compile Include="Assets\EveryScripts\LogicScript.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\11- Charging state\Scripts\MyPlayer.cs" />
     <Compile Include="Assets\KinematicCharacterController\ExampleCharacter\Scripts\ExampleCharacterCamera.cs" />
@@ -211,6 +216,7 @@
     <Compile Include="Assets\EveryScripts\video manager\TrapdoorVideoManager.cs" />
     <Compile Include="Assets\KinematicCharacterController\Walkthrough\8- Creating a moving platform\Scripts\MyMovingPlatform.cs" />
     <Compile Include="Assets\EveryScripts\puzzle interaction\BalloonInteraction.cs" />
+    <Compile Include="Assets\EveryScripts\video manager\OneCorrectVideoManager2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

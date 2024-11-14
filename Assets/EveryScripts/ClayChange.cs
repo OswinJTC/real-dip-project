@@ -32,7 +32,8 @@ public class ClayChange : MonoBehaviour
                 // Save the monster's current position before switching back to the real scene
                 GameManager.instance.SaveMonsterPosition(currentSceneName);
                 GameManager.instance.SetClayStatus(false);
-                SceneManager.LoadScene(previousRealScene);
+                TransitionManager.instance.ChangeScene(previousRealScene);
+                //SceneManager.LoadScene(previousRealScene);
                 Debug.Log("Switched back to the real scene: " + previousRealScene);
             }
         }
@@ -47,7 +48,8 @@ public class ClayChange : MonoBehaviour
             {
                 previousRealScene = currentSceneName;
                 GameManager.instance.SetClayStatus(true);
-                SceneManager.LoadScene(claySceneName);
+                TransitionManager.instance.ChangeScene(claySceneName);
+                //SceneManager.LoadScene(claySceneName);
                 Debug.Log("Switched to the clay scene: " + claySceneName);
             }
         }

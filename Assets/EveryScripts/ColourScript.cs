@@ -77,6 +77,13 @@ public class ColourScript : MonoBehaviour
         }
 
         Debug.Log("YATTA RED");
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.isBalloonActive = true;
+            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+            UIManager.instance.ShowPrompt("Balloon collected...all the best...", 3f);
+        }
         SceneManager.LoadScene("BBLivingroomScene");
     }
 
@@ -89,6 +96,13 @@ public class ColourScript : MonoBehaviour
         }
 
         Debug.Log("YATTA BLUE");
+        
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.isBalloonActive = true;
+            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+            UIManager.instance.ShowPrompt("Balloon collected...all the best...", 3f);
+        }
         SceneManager.LoadScene("BBLivingroomScene");
     }
 

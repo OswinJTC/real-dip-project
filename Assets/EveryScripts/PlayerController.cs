@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.LogWarning("SpriteRenderer not found on the monster GameObject!");
             }
-            UIManager.instance.ShowPrompt("WHAT IS THAT!? I need to *THINK* and find a way to get the fuel *(???)*", 20f);
+            UIManager.instance.ShowPrompt("WHAT IS THAT!? I need to *THINK* and find a way to get the fuel *(???)*", 10f);
             GameManager.instance.UpdateThinkButton(); // Update the inventory UI to reflect the change
             Debug.Log("3D Monster Spawned at position: " + spawnPosition);
         }
