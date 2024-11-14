@@ -34,11 +34,6 @@ public class PhoneInteraction : MonoBehaviour
             {
                 GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
             }
-
-            // Set the phone's active status in the GameManager
-            GameManager.instance.isPhoneActive = true;
-            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
-            UIManager.instance.ShowPrompt("Phone collected...all the best for the puzzle...", 2f);
             
             // Set clay status to false before switching to the puzzle scene
             GameManager.instance.SetClayStatus(false);

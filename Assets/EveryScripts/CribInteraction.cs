@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CribInteraction : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class CribInteraction : MonoBehaviour
     {
         if (panel != null)
         {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            GameManager.instance.SavePlayerPosition(currentSceneName);
             bool isActive = panel.activeSelf; // Check current state
             panel.SetActive(!isActive); // Toggle active state
             Debug.Log(isActive ? "Panel closed." : "Panel opened."); // Log current action

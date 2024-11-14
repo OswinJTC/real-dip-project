@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     public bool isKeyInUsed = false;
     public bool isCleaningKitInUsed = false;
 
-
     // Monster state
     public bool isMonsterSpawned = false;
     public GameObject monster; // Reference to the monster GameObject
@@ -132,7 +131,6 @@ public class GameManager : MonoBehaviour
         UpdateInventoryUI();
         UpdateHourglassAndEye();
         UpdateThinkButton();
-        
 
         // Subscribe to sceneLoaded event
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -191,6 +189,23 @@ public class GameManager : MonoBehaviour
             {
                 spriteRenderer.enabled = false;
                 Debug.Log("Monster SpriteRenderer disabled in clay scene: " + currentSceneName);
+            }
+        }
+        else if (currentSceneName == "Phone Puzzle" && monster != null && player != null)
+        {
+            // In Phone Puzzle, make both monster and player invisible
+            var monsterSpriteRenderer = monster.GetComponent<SpriteRenderer>();
+            if (monsterSpriteRenderer != null)
+            {
+                monsterSpriteRenderer.enabled = false;
+                Debug.Log("Monster SpriteRenderer disabled in Phone Puzzle scene.");
+            }
+
+            var playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
+            if (playerSpriteRenderer != null)
+            {
+                playerSpriteRenderer.enabled = false;
+                Debug.Log("Player SpriteRenderer disabled in Phone Puzzle scene.");
             }
         }
         else if (monster != null && isMonsterSpawned)
@@ -706,9 +721,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateThinkButton(){
-        
-        if(thinkButton != null){
+    public void UpdateThinkButton()
+    {
+        if (thinkButton != null)
+        {
             thinkButton.SetActive(isMonsterSpawned);
         }
     }
@@ -720,20 +736,19 @@ public class GameManager : MonoBehaviour
 
         if (CloseEye != null)
             CloseEye.SetActive(isHourglassActive);
-        
+
         if (CloseEye1 != null)
             CloseEye1.SetActive(isHourglassActive);
-        
+
         if (CloseEye2 != null)
             CloseEye2.SetActive(isHourglassActive);
-        
+
         if (CloseEye3 != null)
             CloseEye3.SetActive(isHourglassActive);
-        
+
         if (CloseEye4 != null)
             CloseEye4.SetActive(isHourglassActive);
     }
-
 
     // Method to update item icons' visibility in the inventory
     public void UpdateInventoryUI()

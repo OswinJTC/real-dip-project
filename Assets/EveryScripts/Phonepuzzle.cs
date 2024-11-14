@@ -8,7 +8,8 @@ public class PhonePuzzle : MonoBehaviour // Capitalize class name for convention
 {
     public TextMeshProUGUI displayText;
     private string currentInput = "";
-    private string correctPassword = ".-.. . ..-. -"; // Change to string for the correct password
+    //private string correctPassword = ".-.. . ..-. -"; // Change to string for the correct password
+    private string correctPassword = "."; // Change to string for the correct password
 
     public void OnButtonClick(string buttonValue)
     {
@@ -30,6 +31,12 @@ public class PhonePuzzle : MonoBehaviour // Capitalize class name for convention
         if (currentInput == correctPassword) // Compare current input with correct password
         {
             Debug.Log("Phone Unlocked!"); // Use Debug.Log instead of print for better practice
+            GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
+
+            // Set the phone's active status in the GameManager
+            GameManager.instance.isPhoneActive = true;
+            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+            UIManager.instance.ShowPrompt("Phone collected...all the best for the puzzle...", 2f);
             SceneManager.LoadScene("BedroomScene");
 
         }

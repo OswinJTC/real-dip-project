@@ -6,6 +6,7 @@ public class BabyHouseEntrance : MonoBehaviour
     public Transform player;            // Reference to the player's transform
     public string nextScene = "BBLivingroomScene";  // Scene to load when entering
     private bool isPlayerNear = false; // Flag to check if the player is near the entrance
+    private BBHouseEntranceVideoManager videoManager; // Reference to the video manager
 
     void Update()
     {
@@ -14,7 +15,15 @@ public class BabyHouseEntrance : MonoBehaviour
         {
             Debug.Log("E pressed. Attempting to enter the house...");
             EnterHouse();
-            UIManager.instance.ShowPrompt("I need to find the fuel...", 5f);
+        }
+    }
+
+    void Start()
+    {
+        videoManager = FindObjectOfType<BBHouseEntranceVideoManager>();
+        if (videoManager == null)
+        {
+            Debug.LogError("TrapdoorVideoManager not found! This door requires a video manager for trap door functionality.");
         }
     }
 
@@ -24,7 +33,7 @@ public class BabyHouseEntrance : MonoBehaviour
         if (GameManager.instance != null && GameManager.instance.isKeyActive && GameManager.instance.isKeyInUsed)
         {
             Debug.Log("Player has the key. Entering the house...");
-            UIManager.instance.ShowPrompt("Entering the baby house...", 2f);
+        
 
             // Set the player's entry position when entering the house
             Vector3 entryPosition = GetEntryPosition(nextScene);
@@ -33,7 +42,8 @@ public class BabyHouseEntrance : MonoBehaviour
             // Use the TransitionManager to change scenes
             if (TransitionManager.instance != null)
             {
-                TransitionManager.instance.ChangeScene(nextScene);
+                StartCoroutine(videoManager.PlayVideoAndChangeScene(nextScene));  // Use VideoManager to play video and change scene
+                //TransitionManager.instance.ChangeScene(nextScene);
             }
             else
             {
