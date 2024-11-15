@@ -45,6 +45,15 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Exiting the puzzle and returning to the real room...");
+
+            GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
+
+            SceneManager.LoadScene(GameObject.FindObjectOfType<ClayChange>().previousRealScene);
+            
+        }
         
     }
 
@@ -151,6 +160,11 @@ public class GameController : MonoBehaviour
         if (countCorrectGuesses == gameGuesses)
         {
             Debug.Log("Game Finished");
+
+            GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
+
+            UIManager.instance.ShowPrompt("Bakery Puzzle Solved..good luck", 2f);
+
             SceneManager.LoadScene("KitchenScene");
         }
     }

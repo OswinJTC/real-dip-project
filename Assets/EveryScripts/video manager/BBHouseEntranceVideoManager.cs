@@ -25,7 +25,7 @@ public class BBHouseEntranceVideoManager : MonoBehaviour
     public IEnumerator PlayVideoAndChangeScene(string sceneName)
     {
         // Set your video URL or clip (or configure in Inspector)
-        videoPlayer.url = "https://drive.google.com/uc?export=download&id=1GTgl3EuYgct5y32wxYqM43BidkRWV4z1";
+        videoPlayer.url = "https://drive.google.com/uc?export=download&id=1qFcVGC0lueytq7uEDdZYS9_6x91l4WpR";
         Debug.Log("Video URL set: " + videoPlayer.url);
 
         // Prepare the video

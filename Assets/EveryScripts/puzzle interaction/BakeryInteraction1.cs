@@ -17,16 +17,28 @@ public class BakeryInteraction1 : MonoBehaviour
 
     private void InteractWithBakery()
     {
-        Debug.Log("Interacting with the Bakery. Saving player position and loading the Bakery Puzzle scene...");
-
-        // Save the player's current position in GameManager before loading the puzzle scene
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null && GameManager.instance != null)
+        // Save the player's and monster's positions and set isPhoneActive to true in GameManager
+        if (GameManager.instance != null)
         {
-            GameManager.instance.savedPlayerPosition = player.transform.position;
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject monster = GameObject.FindGameObjectWithTag("Monster");
+
+            if (player != null)
+            {
+                GameManager.instance.savedPlayerPosition = player.transform.position;
+            }
+
+            if (monster != null)
+            {
+                GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
+            }
+            
+            // Set clay status to false before switching to the puzzle scene
+            GameManager.instance.SetClayStatus(false);
+            Debug.Log("Clay status set to false and phone marked active.");
         }
 
-        // Load the target scene
+        // Load the target puzzle scene
         SceneManager.LoadScene(targetScene);
     }
 

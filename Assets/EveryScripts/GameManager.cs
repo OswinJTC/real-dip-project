@@ -124,6 +124,15 @@ public class GameManager : MonoBehaviour
             gamePanel.SetActive(true);
         }
 
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.ShowPrompt("Heh, this place looks straight outta the 1700s. Doesn’t seem like people live anymore... Let’s see what needs cleaning.", 15f);
+        }
+        else
+        {
+            Debug.LogWarning("UIManager instance not found. Ensure PersistentCanvas is initialized.");
+        }
+
         // Check if the player or monster references need to be updated initially
         UpdateReferences();
 

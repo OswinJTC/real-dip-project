@@ -44,7 +44,7 @@ public class MainMenuVideoManager : MonoBehaviour
     {
         if (videoPlayer != null)
         {
-            videoPlayer.url = "https://drive.google.com/uc?export=download&id=1BC9EBOMh4as6GrMUB5yOMesBmWrXYT_t"; // Set the video URL
+            videoPlayer.url = "https://drive.google.com/uc?export=download&id=1vTkW13ZneX47TTWMzeQx1KKxY2WoSPbV"; // Set the video URL
 
             videoPlayer.Prepare();  // Prepare the video
             videoPlayer.prepareCompleted += (VideoPlayer vp) => StartCoroutine(PlayVideoAndFade(sceneName));  // Start the coroutine when ready
@@ -80,7 +80,6 @@ public class MainMenuVideoManager : MonoBehaviour
     if (TransitionManager.instance != null)
     {
         TransitionManager.instance.ChangeScene(sceneName);  // Use fade-out transition to change scene
-        UIManager.instance.ShowPrompt("Whyet.", 50f);
     }
     else
     {

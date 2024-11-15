@@ -55,7 +55,7 @@ public class Camera2D5DFollow : MonoBehaviour
         gameObject.SetActive(true); // Ensure the camera is active
         Debug.Log("Camera distance and height adjusted for outsideTerrain.");
     }
-    else if (sceneName == "BBHideBRoom" || sceneName == "BBHideLRoom" || sceneName == "Balloon Puzzle" || sceneName == "BakeryScene")
+    else if (sceneName == "MCQ" || sceneName == "BBHideLRoom" || sceneName == "Balloon Puzzle" || sceneName == "BakeryScene")
     {
         // Disable the camera in the hiding scenes and Balloon Puzzle
         gameObject.SetActive(false);

@@ -25,7 +25,7 @@ public class StudyRoomVideoManager  : MonoBehaviour
         if (videoPlayer != null)
         {
             // Set your video URL or clip
-            videoPlayer.url = "https://drive.google.com/uc?export=download&id=1GTgl3EuYgct5y32wxYqM43BidkRWV4z1";
+            videoPlayer.url = "https://drive.google.com/uc?export=download&id=1zc2DCIpDbFmkxPWTjbwAeuETUhyn34_I";
             Debug.Log("Video URL set: " + videoPlayer.url);
 
             videoPlayer.Prepare();

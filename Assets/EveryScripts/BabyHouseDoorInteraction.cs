@@ -5,9 +5,8 @@ public class BabyHouseDoorInteraction : MonoBehaviour
 {
     public string nextScenePixel;        // The pixel version of the next scene
     public string nextSceneClay;         // The clay version of the next scene
-    public string doorNameForReturning;  // The name to set when returning from the next scene
+    public static string lastEnteredDoor;  // The name to set when returning from the next scene
     private bool isPlayerNear = false;   // Flag to check if the player is near
-    private static string lastEnteredDoor = "";  // Static variable to track the last entered door
 
     private void Update()
     {

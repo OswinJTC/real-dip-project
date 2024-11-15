@@ -35,10 +35,6 @@ public class PaperInteraction : MonoBehaviour
                 GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
             }
 
-            // Set the paper's active status in the GameManager
-            GameManager.instance.isPaperActive = true;
-            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
-            UIManager.instance.ShowPrompt("Paper collected...all the best for the puzzle...", 2f);
             
             // Set clay status to false before switching to the puzzle scene
             GameManager.instance.SetClayStatus(false);

@@ -15,10 +15,11 @@ public class QuestionAnswer : MonoBehaviour
     private int correctAnswersCount = 0;
     private List<int> selectedAnswers = new List<int>();
 
-    private ThreeCorrectVideoManager videoManager3; // Reference to the video manager
-    private TwoCorrectVideoManager videoManager2; // Reference to the video manager
-    private OneCorrectVideoManager videoManager1; // Reference to the video manager
-    private ZeroCorrectVideoManager videoManager0; // Reference to the video manager
+    private ThreeCorrectVideoManager videoManager3;
+    private TwoCorrectVideoManager videoManager2;
+    private OneCorrectVideoManager videoManager1;
+    private ZeroCorrectVideoManager videoManager0;
+    private GameObject transitionCanvas; // To reference the TransitionCanvas
 
     void Start()
     {
@@ -31,28 +32,11 @@ public class QuestionAnswer : MonoBehaviour
         }
 
         videoManager3 = FindObjectOfType<ThreeCorrectVideoManager>();
-        if (videoManager3 == null)
-        {
-            Debug.LogError("ThreeCorrectVideoManager not found! Ensure it is added to the scene.");
-        }
-
         videoManager2 = FindObjectOfType<TwoCorrectVideoManager>();
-        if (videoManager2 == null)
-        {
-            Debug.LogError("TwoCorrectVideoManager not found! Ensure it is added to the scene.");
-        }
-
         videoManager1 = FindObjectOfType<OneCorrectVideoManager>();
-        if (videoManager1 == null)
-        {
-            Debug.LogError("OneCorrectVideoManager not found! Ensure it is added to the scene.");
-        }
-
         videoManager0 = FindObjectOfType<ZeroCorrectVideoManager>();
-        if (videoManager0 == null)
-        {
-            Debug.LogError("ZeroCorrectVideoManager not found! Ensure it is added to the scene.");
-        }
+
+        LocateTransitionCanvas();
     }
 
     void InitializeQuestions()
@@ -71,12 +55,6 @@ public class QuestionAnswer : MonoBehaviour
         }
 
         Question q = questions[questionIndex];
-        if (questionText == null)
-        {
-            Debug.LogError("questionText is not assigned!");
-            return;
-        }
-
         questionText.text = q.questionText;
         selectedAnswers.Clear();
 
@@ -84,7 +62,7 @@ public class QuestionAnswer : MonoBehaviour
         {
             if (button != null)
             {
-                TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+                var buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
                 if (buttonText != null)
                 {
                     buttonText.color = defaultTextColor;
@@ -101,12 +79,8 @@ public class QuestionAnswer : MonoBehaviour
                 {
                     answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = q.answers[i];
                 }
-                else
-                {
-                    Debug.LogError($"Answer button at index {i} is not assigned!");
-                }
             }
-            else
+            else if (answerButtons[i] != null)
             {
                 answerButtons[i].gameObject.SetActive(false);
             }
@@ -119,66 +93,16 @@ public class QuestionAnswer : MonoBehaviour
 
         if (selectedIndex < 0 || selectedIndex >= answerButtons.Length)
         {
-            Debug.LogError("Selected button index is out of range: " + selectedIndex);
+            Debug.LogError("Selected button index out of range!");
             return;
         }
 
         Question currentQuestion = questions[currentQuestionIndex];
 
-        if (currentQuestionIndex == 1)
+        if (!selectedAnswers.Contains(selectedIndex))
         {
-            if (currentQuestion.correctAnswers.Count == 2)
-            {
-                if (selectedAnswers.Contains(selectedIndex))
-                {
-                    selectedAnswers.Remove(selectedIndex);
-                    TextMeshProUGUI buttonText = selectedButton.GetComponentInChildren<TextMeshProUGUI>();
-                    if (buttonText != null)
-                    {
-                        buttonText.color = defaultTextColor;
-                    }
-                }
-                else
-                {
-                    if (selectedAnswers.Count < 2)
-                    {
-                        selectedAnswers.Add(selectedIndex);
-                        TextMeshProUGUI buttonText = selectedButton.GetComponentInChildren<TextMeshProUGUI>();
-                        if (buttonText != null)
-                        {
-                            buttonText.color = selectedTextColor;
-                        }
-                    }
-                    else
-                    {
-                        questionText.text = "Please select only 2 answers.";
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                selectedAnswers.Clear();
-                selectedAnswers.Add(selectedIndex);
-                foreach (Button button in answerButtons)
-                {
-                    TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-                    if (buttonText != null)
-                    {
-                        buttonText.color = defaultTextColor;
-                    }
-                }
-                TextMeshProUGUI selectedText = selectedButton.GetComponentInChildren<TextMeshProUGUI>();
-                if (selectedText != null)
-                {
-                    selectedText.color = selectedTextColor;
-                }
-            }
-        }
-        else
-        {
-            selectedAnswers.Clear();
             selectedAnswers.Add(selectedIndex);
+            selectedButton.GetComponentInChildren<TextMeshProUGUI>().color = selectedTextColor;
         }
 
         if (selectedAnswers.Count == currentQuestion.correctAnswers.Count &&
@@ -196,34 +120,61 @@ public class QuestionAnswer : MonoBehaviour
             }
             else
             {
-                DisplayResults();  // Display results and transition logic handled by the video manager
+                DisplayResults();
             }
         }
     }
 
     void DisplayResults()
     {
-        Debug.Log($"Total Correct Answers: {correctAnswersCount}");
+        ToggleTransitionCanvas(true);
 
-        if (correctAnswersCount == 3)
+        if (correctAnswersCount == 3 && videoManager3 != null)
         {
             StartCoroutine(videoManager3.PlayVideoAndChangeScene("After MCQ"));
-            Debug.Log("You got all three questions correct!");
         }
-        else if (correctAnswersCount == 2)
+        else if (correctAnswersCount == 2 && videoManager2 != null)
         {
             StartCoroutine(videoManager2.PlayVideoAndChangeScene("After MCQ"));
-            Debug.Log("You got two questions correct.");
         }
-        else if (correctAnswersCount == 1)
+        else if (correctAnswersCount == 1 && videoManager1 != null)
         {
             StartCoroutine(videoManager1.PlayVideoAndChangeScene("After MCQ"));
-            Debug.Log("You got one question correct.");
+        }
+        else if (videoManager0 != null)
+        {
+            StartCoroutine(videoManager0.PlayVideoAndChangeScene("After MCQ"));
+        }
+
+        ToggleTransitionCanvas(false);
+    }
+
+    void LocateTransitionCanvas()
+    {
+        var allCanvases = FindObjectsOfType<Canvas>();
+        foreach (var canvas in allCanvases)
+        {
+            if (canvas.name == "TransitionCanvas")
+            {
+                transitionCanvas = canvas.gameObject;
+                Debug.Log("TransitionCanvas found successfully.");
+                return;
+            }
+        }
+
+        Debug.LogWarning("TransitionCanvas not found in the scene!");
+    }
+
+    void ToggleTransitionCanvas(bool state)
+    {
+        if (transitionCanvas != null)
+        {
+            transitionCanvas.SetActive(state);
+            Debug.Log($"TransitionCanvas set to {(state ? "Active" : "Inactive")}.");
         }
         else
         {
-            StartCoroutine(videoManager0.PlayVideoAndChangeScene("After MCQ"));
-            Debug.Log("You got all questions wrong.");
+            Debug.LogWarning("Cannot toggle TransitionCanvas because it is not assigned.");
         }
     }
 }

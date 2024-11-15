@@ -8,8 +8,7 @@ public class PhonePuzzle : MonoBehaviour // Capitalize class name for convention
 {
     public TextMeshProUGUI displayText;
     private string currentInput = "";
-    //private string correctPassword = ".-.. . ..-. -"; // Change to string for the correct password
-    private string correctPassword = "."; // Change to string for the correct password
+    private string correctPassword = ".-.. . ..-. -"; // Change to string for the correct password
 
     public void OnButtonClick(string buttonValue)
     {

@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     private Text promptText;
+    private Image background;
 
     private void Awake()
     {
@@ -41,17 +42,31 @@ public class UIManager : MonoBehaviour
                     promptText.alignment = TextAnchor.MiddleCenter;
                     promptText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
                     promptText.fontSize = 50;
-                    promptText.color = Color.white;
+                    promptText.color = Color.black; // Set text color to black
 
-                    // Position the text lower on the screen
+                    // Add a background image
+                    GameObject backgroundObject = new GameObject("PromptBackground");
+                    backgroundObject.transform.SetParent(canvas.transform);
+
+                    background = backgroundObject.AddComponent<Image>();
+                    background.color = Color.white; // Set background color to white
+
+                    RectTransform backgroundRect = background.GetComponent<RectTransform>();
+                    backgroundRect.sizeDelta = new Vector2(1000, 150);
+                    backgroundRect.anchorMin = new Vector2(0.5f, 0.5f);
+                    backgroundRect.anchorMax = new Vector2(0.5f, 0.5f);
+                    backgroundRect.pivot = new Vector2(0.5f, 0.5f);
+                    backgroundRect.anchoredPosition = new Vector2(0, -425);
+
                     RectTransform rectTransform = promptText.GetComponent<RectTransform>();
-                    rectTransform.sizeDelta = new Vector2(1000, 150);  
+                    rectTransform.sizeDelta = new Vector2(1000, 150);
                     rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
                     rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
                     rectTransform.pivot = new Vector2(0.5f, 0.5f);
+                    rectTransform.anchoredPosition = new Vector2(0, -425);
 
-                    // Adjust this value to move the text lower
-                    rectTransform.anchoredPosition = new Vector2(0, -450); 
+                    // Ensure the text is on top of the background
+                    newPromptText.transform.SetSiblingIndex(backgroundObject.transform.GetSiblingIndex() + 1);
                 }
                 else
                 {
@@ -68,7 +83,7 @@ public class UIManager : MonoBehaviour
             FindPromptText(); // Try to find it again in case of scene reload
         }
 
-        if (promptText != null)
+        if (promptText != null && background != null)
         {
             StartCoroutine(DisplayPrompt(message, duration));
         }
@@ -78,9 +93,11 @@ public class UIManager : MonoBehaviour
     {
         promptText.text = message;
         promptText.gameObject.SetActive(true);
+        background.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(duration);
 
         promptText.gameObject.SetActive(false);
+        background.gameObject.SetActive(false);
     }
 }

@@ -39,17 +39,8 @@ public class BabyHouseEntrance : MonoBehaviour
             Vector3 entryPosition = GetEntryPosition(nextScene);
             GameManager.instance.SetPlayerEntryPosition(entryPosition);
 
-            // Use the TransitionManager to change scenes
-            if (TransitionManager.instance != null)
-            {
-                StartCoroutine(videoManager.PlayVideoAndChangeScene(nextScene));  // Use VideoManager to play video and change scene
-                //TransitionManager.instance.ChangeScene(nextScene);
-            }
-            else
-            {
-                Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
-                SceneManager.LoadScene(nextScene);
-            }
+            StartCoroutine(videoManager.PlayVideoAndChangeScene(nextScene)); 
+
         }
         else
         {

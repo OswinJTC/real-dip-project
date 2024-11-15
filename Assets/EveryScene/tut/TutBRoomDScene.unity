@@ -1034,8 +1034,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e35b29f182114506abd207ccd4d5ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneDirty: TutBRoomDScene
-  nextSceneClean: TutBRoomCScene
+  nextSceneDirty: TutKitchenDScene
+  nextSceneClean: TutKitchenCScene
   trapDoorScene: 
   doorNameForReturning: 'doortoBroom '
 --- !u!65 &675019003

@@ -20,7 +20,7 @@ public class ZeroCorrectVideoManager : MonoBehaviour
     public IEnumerator PlayVideoAndChangeScene(string sceneName)
     {
         // Set your video URL or clip (or configure in Inspector)
-        videoPlayer.url = "https://drive.google.com/uc?export=download&id=1GTgl3EuYgct5y32wxYqM43BidkRWV4z1";
+        videoPlayer.url = "https://drive.google.com/uc?export=download&id=1CyVTziHf3s8A3DhK0Qvv8VJFpLSqFV4U";
         Debug.Log("Video URL set: " + videoPlayer.url);
 
         // Prepare the video

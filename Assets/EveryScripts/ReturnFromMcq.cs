@@ -13,15 +13,6 @@ public class ReturnFromMcq: MonoBehaviour
     private void ReturnToOutside()
     {
         Debug.Log("Returning to game.");
-
-        // Switch scene
-        if (TransitionManager.instance != null)
-        {
-            TransitionManager.instance.ChangeScene("BedroomScene");
-        }
-        else
-        {
-            SceneManager.LoadScene("BedroomScene");
-        }
+        SceneManager.LoadScene("BedroomScene");
     }
 }
