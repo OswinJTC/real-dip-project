@@ -37,6 +37,7 @@ public class LogicScript : MonoBehaviour
             SolvePuzzle();
             TurnOnLights();
             ReturnToRoom();  // Transition back to the room after skipping the puzzle
+            UIManager.instance.ShowPrompt("Well, ain’t this a lovely sight... Seen worse, but not by much. Time to roll up my sleeves.", 10f);
         }
 
         CheckGreen();
@@ -88,6 +89,8 @@ public class LogicScript : MonoBehaviour
                 {
                     LogicTag[5].GetComponent<MeshRenderer>().material.color = Color.green;
                     Debug.Log("You win");
+                    SceneManager.LoadScene("TutLRoomDScene");
+                    UIManager.instance.ShowPrompt("Well, ain’t this a lovely sight... Seen worse, but not by much. Time to roll up my sleeves.", 10f);
                 }
             }
         }

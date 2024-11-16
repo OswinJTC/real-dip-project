@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -79,6 +77,14 @@ public class ColourScript : MonoBehaviour
         }
 
         Debug.Log("YATTA RED");
+
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.isBalloonActive = true;
+            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+            UIManager.instance.ShowPrompt("Balloon collected...all the best...", 3f);
+        }
+        SceneManager.LoadScene("BBLivingroomScene");
     }
 
     void CheckBlue()
@@ -90,19 +96,30 @@ public class ColourScript : MonoBehaviour
         }
 
         Debug.Log("YATTA BLUE");
+        
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.isBalloonActive = true;
+            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+            UIManager.instance.ShowPrompt("Balloon collected...all the best...", 3f);
+        }
+        SceneManager.LoadScene("BBLivingroomScene");
     }
 
     void SkipToBBLivingroom()
     {
         Debug.Log("Skipping puzzle and loading BBLivingroomScene.");
 
+        // Get the current scene name
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
         // Save the player's current position
-        GameManager.instance.SavePlayerPosition();
+        GameManager.instance.SavePlayerPosition(currentSceneName);
 
         // Load the next scene
         SceneManager.LoadScene("BBLivingroomScene");
 
         // When entering "BBLivingroomScene," restore the position
-        GameManager.instance.RestorePlayerPosition();
+        GameManager.instance.RestorePlayerPosition("BBLivingroomScene");
     }
 }

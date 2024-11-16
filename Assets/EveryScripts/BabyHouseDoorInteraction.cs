@@ -5,9 +5,8 @@ public class BabyHouseDoorInteraction : MonoBehaviour
 {
     public string nextScenePixel;        // The pixel version of the next scene
     public string nextSceneClay;         // The clay version of the next scene
-    public string doorNameForReturning;  // The name to set when returning from the next scene
+    public static string lastEnteredDoor;  // The name to set when returning from the next scene
     private bool isPlayerNear = false;   // Flag to check if the player is near
-    private static string lastEnteredDoor = "";  // Static variable to track the last entered door
 
     private void Update()
     {
@@ -83,7 +82,7 @@ public class BabyHouseDoorInteraction : MonoBehaviour
         return new Vector3(0f, 0f, 0f);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)  // Use 2D version for player interaction detection
+    private void OnTriggerEnter(Collider other)  // Use 3D version for player interaction detection
     {
         if (other.CompareTag("Player"))
         {
@@ -92,7 +91,7 @@ public class BabyHouseDoorInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)  // Use 2D version for exit detection
+    private void OnTriggerExit(Collider other)  // Use 3D version for exit detection
     {
         if (other.CompareTag("Player"))
         {

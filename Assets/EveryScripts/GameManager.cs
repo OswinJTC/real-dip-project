@@ -1,22 +1,36 @@
+//UIManager.instance.ShowPrompt("You need the hourglass to use this ability.", 2f);
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;  // Singleton instance
-
+    public static GameManager instance; // Singleton instance
 
     // UI Elements
     public Text timerText;
-    public GameObject hourglassUIIcon;
     public GameObject gamePanel;
     public GameObject inventoryPanel;
     public GameObject thinkPanel;
     public GameObject pausePanel;
     public GameObject gameoverpanel; // Assign the panel in the Unity Inspector
+
+    public GameObject hourglassUIIcon;
+    public GameObject balloonUIIcon;
+    public GameObject paperIcon;
+    public GameObject phoneIcon;
+    public GameObject breadUIIcon;
+    public GameObject coinIcon;
+    public GameObject keyUIIcon;
+    public GameObject HourGlassButton;
+    public GameObject CloseEye;
+    public GameObject CloseEye1;
+    public GameObject CloseEye2;
+    public GameObject CloseEye3;
+    public GameObject CloseEye4;
+    public GameObject thinkButton;
+
     public Canvas PersistentCanvas;
 
     // Player status
@@ -35,19 +49,53 @@ public class GameManager : MonoBehaviour
     public bool isInClayStatus = false;
     public bool isCleaningKit = true; // New variable initialized to true
 
+    public bool isHourglassActive = false;
+    public bool isBalloonActive = false;
+    public bool isPaperActive = false;
+    public bool isPhoneActive = false;
+    public bool isBreadActive = false;
+    public bool isCoinActive = false;
+    public bool isKeyActive = false;
+
+    public bool isBreadInUsed = false;
+    public bool isKeyInUsed = false;
+    public bool isCleaningKitInUsed = false;
+
     // Monster state
     public bool isMonsterSpawned = false;
     public GameObject monster; // Reference to the monster GameObject
+    public float monsterSpeed = 1f; // Monster's speed, used in calculations
 
     // Player references
     public GameObject player; // Reference to the player GameObject
     private Vector3 playerEntryPosition; // Entry position for the player
 
-    // Tutorial Player references
-    public GameObject tutPlayer; // Reference to the tutorial player GameObject
-    private Vector3 tutPlayerEntryPosition; // Entry position for the tutorial player
-
     public Vector3? savedPlayerPosition = null; // Nullable to indicate no saved position by default
+    public Vector3? savedMonsterPosition = null;
+
+    // Dictionaries to store positions per scene
+    private Dictionary<string, PositionData> playerPositions = new Dictionary<
+        string,
+        PositionData
+    >();
+    private Dictionary<string, PositionData> monsterPositions = new Dictionary<
+        string,
+        PositionData
+    >();
+
+    // List of scenes where the monster is inactive
+    public List<string> monsterInactiveScenes = new List<string>
+    {
+        "MainMenuScene",
+        "BBLRoomClay",
+        "Balloon Puzzle",
+        "BBKitchenClay",
+        "BBBedroomClay",
+        "Paper Puzzle",
+        "Phone Puzzle",
+        "Bakery"
+        // Add other scenes where the monster should not be active
+    };
 
     private void Awake()
     {
@@ -76,28 +124,121 @@ public class GameManager : MonoBehaviour
             gamePanel.SetActive(true);
         }
 
+        if (UIManager.instance != null)
+        {
+            UIManager.instance.ShowPrompt("Heh, this place looks straight outta the 1700s. Doesn’t seem like people live anymore... Let’s see what needs cleaning.", 15f);
+        }
+        else
+        {
+            Debug.LogWarning("UIManager instance not found. Ensure PersistentCanvas is initialized.");
+        }
+
         // Check if the player or monster references need to be updated initially
         UpdateReferences();
+
+        // Initialize the inventory UI based on item states
+        UpdateInventoryUI();
+        UpdateHourglassAndEye();
+        UpdateThinkButton();
+
+        // Subscribe to sceneLoaded event
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void OnDestroy()
+    {
+        // Unsubscribe from sceneLoaded event
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
     private void Update()
     {
         UpdateTimer();
 
-        // Check if the player or monster references need to be updated based on the current scene
+        // Toggle panels with keys
+        if (Input.GetKeyDown(KeyCode.I))
+            TogglePanel(inventoryPanel);
+
+        // Check if the player is in "outsideTerrain", has the hourglass, and presses Space
+        if (
+            Input.GetKeyDown(KeyCode.Space)
+            && SceneManager.GetActiveScene().name == "outsideTerrain"
+        )
+        {
+            if (isHourglassActive) // Check if hourglass is active
+            {
+                ReduceBlood();
+                Debug.Log("Hourglass is active. Blood reduced.");
+            }
+            else
+            {
+                Debug.Log("Hourglass is not active. Cannot use hourglass.");
+                UIManager.instance.ShowPrompt("You need the hourglass to use this ability.", 2f);
+            }
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        string currentSceneName = scene.name;
+        Debug.Log("Scene Loaded: " + currentSceneName);
+
+        // Update references
         UpdateReferences();
 
-        // Toggle panels with keys
-        if (Input.GetKeyDown(KeyCode.I)) TogglePanel(inventoryPanel);
-        if (Input.GetKeyDown(KeyCode.Space) && SceneManager.GetActiveScene().name == "outsideTerrain")
+        // Restore player and monster positions
+        RestorePlayerPosition(currentSceneName);
+        RestoreMonsterPosition(currentSceneName);
+
+        // Check if the scene is a clay scene
+        if (GetClayStatus() && monster != null)
         {
-            ReduceBlood();
+            // In clay scenes, keep the monster active but disable its SpriteRenderer
+            var spriteRenderer = monster.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = false;
+                Debug.Log("Monster SpriteRenderer disabled in clay scene: " + currentSceneName);
+            }
+        }
+        else if (currentSceneName == "Phone Puzzle" && monster != null && player != null)
+        {
+            // In Phone Puzzle, make both monster and player invisible
+            var monsterSpriteRenderer = monster.GetComponent<SpriteRenderer>();
+            if (monsterSpriteRenderer != null)
+            {
+                monsterSpriteRenderer.enabled = false;
+                Debug.Log("Monster SpriteRenderer disabled in Phone Puzzle scene.");
+            }
+
+            var playerSpriteRenderer = player.GetComponent<SpriteRenderer>();
+            if (playerSpriteRenderer != null)
+            {
+                playerSpriteRenderer.enabled = false;
+                Debug.Log("Player SpriteRenderer disabled in Phone Puzzle scene.");
+            }
+        }
+        else if (monster != null && isMonsterSpawned)
+        {
+            // In real scenes, enable the monster's SpriteRenderer
+            var spriteRenderer = monster.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                spriteRenderer.enabled = true;
+                Debug.Log("Monster SpriteRenderer enabled in real scene: " + currentSceneName);
+            }
+
+            // Ensure the monster is active in real scenes if it's spawned
+            if (isMonsterSpawned)
+            {
+                monster.SetActive(true);
+                Debug.Log("Monster activated in scene: " + currentSceneName);
+            }
         }
     }
 
     private void UpdateReferences()
     {
-        // Define the list of scenes where only the player should not persist
+        // Define the list of scenes where the player, monster, and PersistentCanvas should not be present
         List<string> playerNonPersistentScenes = new List<string>
         {
             "TutLRoomDScene",
@@ -110,8 +251,8 @@ public class GameManager : MonoBehaviour
             "TutBRoomCScene",
             "TutBasementScene",
             "LogicPuzzle",
-            "Balloon Puzzle",
-            "Phone Puzzle"
+            "outsideTerrain",
+            "BakeryScene"
         };
 
         // Check if the current scene is one where the player should not persist
@@ -124,9 +265,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            FindTutPlayer();
             FindPlayer();
-            FindMonster();
+
+            if (monster == null)
+            {
+                FindMonster();
+            }
 
             if (player != null && !player.activeSelf)
             {
@@ -134,10 +278,15 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Persistent player re-enabled.");
             }
 
-            if (tutPlayer != null && !tutPlayer.activeSelf)
+            // Ensure the monster is enabled if it should be chasing the player
+            if (
+                !monsterInactiveScenes.Contains(currentSceneName)
+                && isMonsterSpawned
+                && monster != null
+            )
             {
-                tutPlayer.SetActive(true);
-                Debug.Log("Persistent tutPlayer re-enabled.");
+                monster.SetActive(true);
+                Debug.Log("Persistent monster re-enabled.");
             }
         }
     }
@@ -150,48 +299,12 @@ public class GameManager : MonoBehaviour
             Debug.Log("Persistent player disabled in non-persistent scene.");
         }
 
-        if (tutPlayer != null)
+        if (monster != null)
         {
-            tutPlayer.SetActive(false);
-            Debug.Log("Persistent tutPlayer disabled in non-persistent scene.");
+            monster.SetActive(false);
+            Debug.Log("Persistent monster disabled in non-persistent scene.");
         }
     }
-
-    private void FindTutPlayer()
-    {
-        GameObject initialTutPlayer = GameObject.FindWithTag("TutPlayer");
-
-        if (tutPlayer == null)
-        {
-            if (initialTutPlayer != null)
-            {
-                tutPlayer = initialTutPlayer;
-                DontDestroyOnLoad(tutPlayer);
-                Debug.Log("tutPlayer GameObject found and set as persistent in GameManager.");
-            }
-            else
-            {
-                Debug.LogWarning("tutPlayer GameObject not found!");
-            }
-        }
-        else
-        {
-            if (initialTutPlayer != null && initialTutPlayer != tutPlayer)
-            {
-                initialTutPlayer.SetActive(false);
-                Debug.Log("Duplicate initial tutPlayer destroyed to prevent duplication.");
-            }
-        }
-    }
-
-    public void SetTutPlayerEntryPosition(Vector3 position)
-    {
-        tutPlayerEntryPosition = position;
-        if (tutPlayer == null) FindTutPlayer();
-        if (tutPlayer != null) tutPlayer.transform.position = tutPlayerEntryPosition;
-    }
-
-    public Vector3 GetTutPlayerEntryPosition() => tutPlayerEntryPosition;
 
     private void FindPlayer()
     {
@@ -214,7 +327,7 @@ public class GameManager : MonoBehaviour
         {
             if (initialPlayer != null && initialPlayer != player)
             {
-                initialPlayer.SetActive(false);
+                Destroy(initialPlayer);
                 Debug.Log("Duplicate initial player destroyed to prevent duplication.");
             }
         }
@@ -222,23 +335,23 @@ public class GameManager : MonoBehaviour
 
     private void FindMonster()
     {
-        if (monster != null)
-        {
-            Debug.Log("Monster already exists. Skipping finding a new one.");
-            return;
-        }
+        // If the monster already exists, destroy any duplicates
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
-        monster = GameObject.FindWithTag("Monster");
-        if (monster != null)
+        if (monsters.Length > 0)
         {
-            MeshRenderer renderer = monster.GetComponent<MeshRenderer>();
-            if (renderer != null)
+            foreach (GameObject m in monsters)
             {
-                renderer.enabled = false;
-                Debug.Log("Monster GameObject found and made invisible in GameManager.");
+                MonsterChase monsterChase = m.GetComponent<MonsterChase>();
+                if (monsterChase != null && monsterChase != MonsterChase.instance)
+                {
+                    Destroy(m);
+                    Debug.Log("Duplicate Monster destroyed.");
+                }
             }
-
+            monster = MonsterChase.instance.gameObject;
             DontDestroyOnLoad(monster);
+            Debug.Log("Monster GameObject set in GameManager.");
         }
         else
         {
@@ -253,12 +366,8 @@ public class GameManager : MonoBehaviour
 
         if (monster != null)
         {
-            MeshRenderer renderer = monster.GetComponent<MeshRenderer>();
-            if (renderer != null)
-            {
-                renderer.enabled = spawned;
-                Debug.Log("Monster visibility updated: " + (spawned ? "visible" : "invisible"));
-            }
+            monster.SetActive(spawned);
+            Debug.Log("Monster visibility updated: " + (spawned ? "visible" : "invisible"));
         }
         else
         {
@@ -301,10 +410,14 @@ public class GameManager : MonoBehaviour
 
     public void HideAllPanels()
     {
-        if (gamePanel != null) gamePanel.SetActive(true);
-        if (inventoryPanel != null) inventoryPanel.SetActive(false);
-        if (thinkPanel != null) thinkPanel.SetActive(false);
-        if (pausePanel != null) pausePanel.SetActive(false);
+        if (gamePanel != null)
+            gamePanel.SetActive(true);
+        if (inventoryPanel != null)
+            inventoryPanel.SetActive(false);
+        if (thinkPanel != null)
+            thinkPanel.SetActive(false);
+        if (pausePanel != null)
+            pausePanel.SetActive(false);
     }
 
     public void AddToInventory(string itemName)
@@ -349,28 +462,32 @@ public class GameManager : MonoBehaviour
 
     public Vector3 GetPlayerEntryPosition() => playerEntryPosition;
 
-    public void ReduceBlood()
+    public void ReduceBlood(int amount = 1)
     {
-        if (playerBlood > 0)
+        playerBlood -= amount;
+        if (playerBlood < 0)
         {
-            playerBlood--;
-            UpdateEyeVisibility($"ClosedEye{playerBlood + 1}", false);
-            UpdateEyeVisibility($"OpenEye{playerBlood + 1}", true);
-            Debug.Log($"Player blood reduced! Remaining blood: {playerBlood}");
-
+            playerBlood = 0;
         }
-        else
+
+        // Update the eyes accordingly
+        for (int i = playerBlood + 1; i <= 5; i++)
         {
-           
-/*
-            if (playerBlood == 0)
-            {
-                ActivatePanel();
-            }
-*/
-            Debug.Log("Player has no more blood left!");
+            UpdateEyeVisibility($"ClosedEye{i}", false);
+            UpdateEyeVisibility($"OpenEye{i}", true);
+        }
+
+        Debug.Log($"Player blood reduced by {amount}! Remaining blood: {playerBlood}");
+
+        // Check if player is dead and handle game over
+        if (playerBlood <= 0)
+        {
+            ActivatePanel();
+            DeactivateCanvas();
+            Debug.Log("Game Over!");
         }
     }
+
     private void ActivatePanel()
     {
         if (gameoverpanel != null)
@@ -379,6 +496,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Panel activated!");
         }
     }
+
     private void UpdateEyeVisibility(string tag, bool isVisible)
     {
         GameObject eye = GameObject.FindWithTag(tag);
@@ -390,18 +508,14 @@ public class GameManager : MonoBehaviour
                 eyeImage.enabled = isVisible;
                 Debug.Log($"{tag} visibility set to: {isVisible}");
 
-                //$"OpenEye{playerBlood + 1}"
                 // Check if the tag is "OpenEye1" and activate the panel if it is visible
                 if (tag == "OpenEye1" && isVisible)
                 {
                     ActivatePanel();
                     DeactivateCanvas(); // Call method to deactivate the game panel
                 }
-
-
             }
         }
-        
         else
         {
             Debug.LogWarning($"{tag} not found.");
@@ -416,33 +530,48 @@ public class GameManager : MonoBehaviour
             Debug.Log("Canvas deactivated!");
         }
     }
- /*
-    private void DeactivateGamePanel()
-    {
-        if (gamePanel != null)
-        {
-            gamePanel.SetActive(false); // Deactivate the game panel
-            Debug.Log("Game panel deactivated!");
-        }
-
-    }
-*/
-
 
     private void PersistAcrossScenes(params GameObject[] panels)
     {
         foreach (GameObject panel in panels)
         {
-            if (panel != null) DontDestroyOnLoad(panel);
+            if (panel != null)
+                DontDestroyOnLoad(panel);
         }
     }
 
-    public void SavePlayerPosition()
+    // Class to store position and time
+    public class PositionData
+    {
+        public Vector3 position;
+        public float time;
+
+        public PositionData(Vector3 pos, float t)
+        {
+            position = pos;
+            time = t;
+        }
+    }
+
+    public void SavePlayerPosition(string sceneName)
     {
         if (player != null)
         {
-            savedPlayerPosition = player.transform.position;
-            Debug.Log("Player position saved: " + savedPlayerPosition);
+            Vector3 position = player.transform.position;
+            savedPlayerPosition = position; // Save the player's position
+            // Save it in the dictionary as well
+            float time = Time.time;
+            PositionData data = new PositionData(position, time);
+
+            if (playerPositions.ContainsKey(sceneName))
+            {
+                playerPositions[sceneName] = data;
+            }
+            else
+            {
+                playerPositions.Add(sceneName, data);
+            }
+            Debug.Log("Player position saved for scene " + sceneName + ": " + position);
         }
         else
         {
@@ -450,37 +579,208 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RestorePlayerPosition()
+    public void SaveMonsterPosition(string sceneName)
     {
-        if (savedPlayerPosition.HasValue && player != null)
+        if (monster != null)
         {
-            player.transform.position = savedPlayerPosition.Value;
-            Debug.Log("Player position restored: " + savedPlayerPosition);
-            savedPlayerPosition = null; // Clear the saved position after restoring
-        }
-        else
-        {
-            Debug.LogWarning("No saved position to restore or player reference is null.");
+            Vector3 position = monster.transform.position;
+            savedMonsterPosition = position; // Save the monster's position
+            float time = Time.time;
+            PositionData data = new PositionData(position, time);
+
+            if (monsterPositions.ContainsKey(sceneName))
+            {
+                monsterPositions[sceneName] = data;
+            }
+            else
+            {
+                monsterPositions.Add(sceneName, data);
+            }
+            Debug.Log("Monster position saved for scene " + sceneName + ": " + position);
         }
     }
 
-    private bool IsInNonPersistentScene()
+    private string GetCorrespondingSceneName(string sceneName)
     {
-        List<string> playerNonPersistentScenes = new List<string>
+        switch (sceneName)
         {
-            "TutLRoomDScene",
-            "TutStudyDScene",
-            "TutKitchenDScene",
-            "TutStudyCScene",
-            "TutLRoomCScene",
-            "TutKitchenCScene",
-            "TutBRoomDScene",
-            "TutBRoomCScene",
-            "TutBasementScene",
-            "LogicPuzzle",
-            "Balloon Puzzle",
-            "Phone Puzzle"
-        };
-        return playerNonPersistentScenes.Contains(SceneManager.GetActiveScene().name);
+            case "BedroomScene":
+                return "BBBedroomClay";
+            case "BBBedroomClay":
+                return "BedroomScene";
+            case "BBLivingroomScene":
+                return "BBLRoomClay";
+            case "BBLRoomClay":
+                return "BBLivingroomScene";
+            case "KitchenScene":
+                return "BBKitchenClay";
+            case "BBKitchenClay":
+                return "KitchenScene";
+
+            case "Bakery Puzzle":
+                return "BBKitchenClay";
+            case "Balloon Puzzle":
+                return "BBBLRoomClay";
+            case "Paper Puzzle":
+                return "BBBedroomClay";
+            case "Phone Puzzle":
+                return "BBBedroomClay";
+            default:
+                return null;
+        }
+    }
+
+    public bool MonsterExists()
+    {
+        return monster != null;
+    }
+
+    public void RestorePlayerPosition(string sceneName)
+    {
+        string referenceScene = GetCorrespondingSceneName(sceneName);
+
+        if (player != null && referenceScene != null)
+        {
+            // Determine if the current scene is a clay scene or real scene
+            bool isClayScene = sceneName.Contains("Clay");
+            bool isPuzzleScene = sceneName.Contains("Puzzle");
+
+            if (isPuzzleScene)
+            {
+                player.transform.position =
+                    playerPositions[
+                        GameObject.FindObjectOfType<ClayChange>().previousRealScene
+                    ].position;
+                Debug.Log(
+                    "Headed to puzzle, player position set in clay scene based on real scene position: "
+                        + player.transform.position
+                );
+            }
+            else if (isClayScene && playerPositions.ContainsKey(referenceScene))
+            {
+                player.transform.position = playerPositions[referenceScene].position;
+                Debug.Log(
+                    "Player position set in clay scene based on real scene position: "
+                        + player.transform.position
+                );
+            }
+            else if (!isClayScene && playerPositions.ContainsKey(sceneName))
+            {
+                player.transform.position = playerPositions[sceneName].position;
+                Debug.Log(
+                    "Player position restored in real scene based on clay scene position: "
+                        + player.transform.position
+                );
+            }
+            else
+            {
+                Debug.LogWarning("No saved player position for scene: " + referenceScene);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Player reference is null or invalid scene name.");
+        }
+    }
+
+    public void RestoreMonsterPosition(string sceneName)
+    {
+        string referenceScene = GetCorrespondingSceneName(sceneName);
+
+        if (monster != null && referenceScene != null && isMonsterSpawned)
+        {
+            // Determine if the current scene is a clay scene or real scene
+            bool isClayScene = sceneName.Contains("Clay");
+            bool isPuzzleScene = sceneName.Contains("Puzzle");
+
+            // Restore monster position from the correct saved scene position
+            if (isPuzzleScene)
+            {
+                monster.transform.position = monsterPositions[referenceScene].position;
+                Debug.Log(
+                    "Headed to puzzle, monster position set in puzzle scene based on last scene position: "
+                        + monster.transform.position
+                );
+            }
+            // Restore monster position from the correct saved scene position
+            else if (isClayScene && monsterPositions.ContainsKey(referenceScene))
+            {
+                monster.transform.position = monsterPositions[referenceScene].position;
+                Debug.Log(
+                    "Monster position set in clay scene based on last scene position: "
+                        + monster.transform.position
+                );
+            }
+            else if (!isClayScene && savedMonsterPosition.HasValue)
+            {
+                monster.transform.position = savedMonsterPosition.Value; // Use .Value to get the Vector3 from Vector3?
+                Debug.Log(
+                    "Monster position restored in real scene based on saved clay or puzzle position: "
+                        + monster.transform.position
+                );
+            }
+            else
+            {
+                Debug.LogWarning("No saved monster position for scene: " + referenceScene);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Monster is either not spawned or invalid scene name.");
+        }
+    }
+
+    public void UpdateThinkButton()
+    {
+        if (thinkButton != null)
+        {
+            thinkButton.SetActive(isMonsterSpawned);
+        }
+    }
+
+    public void UpdateHourglassAndEye()
+    {
+        if (HourGlassButton != null)
+            HourGlassButton.SetActive(isHourglassActive);
+
+        if (CloseEye != null)
+            CloseEye.SetActive(isHourglassActive);
+
+        if (CloseEye1 != null)
+            CloseEye1.SetActive(isHourglassActive);
+
+        if (CloseEye2 != null)
+            CloseEye2.SetActive(isHourglassActive);
+
+        if (CloseEye3 != null)
+            CloseEye3.SetActive(isHourglassActive);
+
+        if (CloseEye4 != null)
+            CloseEye4.SetActive(isHourglassActive);
+    }
+
+    // Method to update item icons' visibility in the inventory
+    public void UpdateInventoryUI()
+    {
+        if (hourglassUIIcon != null)
+            hourglassUIIcon.SetActive(isHourglassActive);
+
+        if (breadUIIcon != null)
+            breadUIIcon.SetActive(isBreadActive);
+
+        if (keyUIIcon != null)
+            keyUIIcon.SetActive(isKeyActive);
+
+        if (balloonUIIcon != null)
+            balloonUIIcon.SetActive(isBalloonActive);
+
+        if (paperIcon != null)
+            paperIcon.SetActive(isPaperActive);
+
+        if (phoneIcon != null)
+            phoneIcon.SetActive(isPhoneActive);
+
+        if (coinIcon != null)
+            coinIcon.SetActive(isCoinActive);
     }
 }

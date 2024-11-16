@@ -7,7 +7,7 @@ public class StudyRoomBloodElimination : MonoBehaviour
     public float detectionRadius = 2f;
     public GameObject[] bloodObjects;
     private int bloodCount = 0;
-    private StudyRoomVideoManager videoManager;  // Updated to match new name
+    // private StudyRoomVideoManager videoManager;  // Updated to match new name
 
     void Start()
     {
@@ -24,11 +24,11 @@ public class StudyRoomBloodElimination : MonoBehaviour
         bloodObjects = GameObject.FindGameObjectsWithTag("Blood");
 
         // Find the StudyRoomVideoManager to play the video
-        videoManager = FindObjectOfType<StudyRoomVideoManager>();
-        if (videoManager == null)
-        {
-            Debug.LogError("StudyRoomVideoManager not found!");
-        }
+        // videoManager = FindObjectOfType<StudyRoomVideoManager>();
+        // if (videoManager == null)
+        // {
+        //     Debug.LogError("StudyRoomVideoManager not found!");
+        // }
     }
 
     void Update()
@@ -42,7 +42,7 @@ public class StudyRoomBloodElimination : MonoBehaviour
                 {
                     float distanceToBlood = Vector3.Distance(transform.position, blood.transform.position);
 
-                    if (distanceToBlood <= detectionRadius && Input.GetKeyDown(KeyCode.Q))
+                    if (distanceToBlood <= detectionRadius && Input.GetKeyDown(KeyCode.Q) && GameManager.instance.isCleaningKitInUsed)
                     {
                         Destroy(blood);
                         bloodCount++;
@@ -53,10 +53,20 @@ public class StudyRoomBloodElimination : MonoBehaviour
                             GameManager.instance.isStudyRoomClean = true;
 
                             // Play the video first, then change the scene
-                            if (videoManager != null)
+                            // if (videoManager != null)
+                            // {
+                            //     Debug.Log("Playing video before changing scene...");
+                            //     StartCoroutine(PlayVideoAndChangeScene("TutStudyCScene"));
+                            // }
+                            if (TransitionManager.instance != null)
                             {
-                                Debug.Log("Playing video before changing scene...");
-                                StartCoroutine(PlayVideoAndChangeScene("TutStudyCScene"));
+                                TransitionManager.instance.ChangeScene("TutStudyCScene");
+                                UIManager.instance.ShowPrompt("Whoa, what the hell...? Well, well... Someone’s got secrets. Guess I’m not done yet.", 14f);
+
+                            }else{
+                                Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
+                                SceneManager.LoadScene("TutStudyCScene");
+
                             }
                         }
                     }
@@ -66,16 +76,16 @@ public class StudyRoomBloodElimination : MonoBehaviour
     }
 
     // Coroutine to handle video playback, then change the scene
-    private IEnumerator PlayVideoAndChangeScene(string sceneName)
-    {
-        Debug.Log("Calling PlayVideo...");
-        videoManager.PlayVideo();  // Play the video
-        Debug.Log("Waiting for video to finish...");
+    // private IEnumerator PlayVideoAndChangeScene(string sceneName)
+    // {
+    //     Debug.Log("Calling PlayVideo...");
+    //     videoManager.PlayVideo();  // Play the video
+    //     Debug.Log("Waiting for video to finish...");
 
-        yield return new WaitUntil(() => videoManager.videoPlayer.isPrepared);  // Wait for the video to be prepared
-        yield return new WaitUntil(() => !videoManager.videoPlayer.isPlaying);  // Wait for video to finish
+    //     yield return new WaitUntil(() => videoManager.videoPlayer.isPrepared);  // Wait for the video to be prepared
+    //     yield return new WaitUntil(() => !videoManager.videoPlayer.isPlaying);  // Wait for video to finish
 
-        Debug.Log("Video finished, changing scene...");
-        SceneManager.LoadScene(sceneName);  // Change the scene after the video
-    }
+    //     Debug.Log("Video finished, changing scene...");
+    //     SceneManager.LoadScene(sceneName);  // Change the scene after the video
+    // }
 }

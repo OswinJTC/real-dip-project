@@ -22,6 +22,9 @@ TagManager:
   - Monster
   - Fuel
   - TutPlayer
+  - PersistentCanvas
+  - PersistentGameOverCanvas
+  - PersistentCanvas3
   layers:
   - Default
   - TransparentFX

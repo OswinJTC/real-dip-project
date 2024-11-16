@@ -50,33 +50,39 @@ public class BasementInteraction : MonoBehaviour
     }
 
     void ExitBasement()
+{
+    Debug.Log("Attempting to exit basement...");
+
+    // Check if GameManager instance is null
+    if (GameManager.instance == null)
     {
-        Debug.Log("Attempting to exit basement...");
-
-        // Check if GameManager instance is null
-        if (GameManager.instance == null)
-        {
-            Debug.LogError("GameManager instance is null! Make sure GameManager is present in the scene.");
-            return;
-        }
-
-        // Set the player's entry position when exiting the basement
-        Vector3 entryPosition = GetEntryPosition(nextScene);
-        GameManager.instance.SetPlayerEntryPosition(entryPosition);
-        Debug.Log("Player entry position set to: " + entryPosition);
-
-        // Check if videoManager is null before trying to use it
-        if (videoManager != null)
-        {
-            Debug.Log("Playing video before exiting the basement...");
-            StartCoroutine(videoManager.PlayVideoAndChangeScene(nextScene));
-        }
-        else
-        {
-            Debug.LogWarning("BasementVideoManager is missing! Loading the scene directly.");
-            SceneManager.LoadScene(nextScene);
-        }
+        Debug.LogError("GameManager instance is null! Make sure GameManager is present in the scene.");
+        return;
     }
+
+    // Set the player's entry position when exiting the basement
+    Vector3 entryPosition = GetEntryPosition(nextScene);
+    GameManager.instance.SetPlayerEntryPosition(entryPosition);
+    Debug.Log("Player entry position set to: " + entryPosition);
+
+    // Activate the hourglass item in the GameManager
+    GameManager.instance.isHourglassActive = true;
+    GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+    GameManager.instance.UpdateHourglassAndEye();
+
+    // Check if videoManager is null before trying to use it
+    if (videoManager != null)
+    {
+        Debug.Log("Playing video before exiting the basement...");
+        StartCoroutine(videoManager.PlayVideoAndChangeScene(nextScene));
+    }
+    else
+    {
+        Debug.LogWarning("BasementVideoManager is missing! Loading the scene directly.");
+        SceneManager.LoadScene(nextScene);
+    }
+}
+
 
     private Vector3 GetEntryPosition(string sceneToLoad)
     {

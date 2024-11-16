@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 118b369d3341c404b9ba48e04d830dfb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 218163
+  packageName: Medieval Models Pack
+  packageVersion: 1.0
+  assetPath: Assets/Medieval Models Pack/GraphicsSettings/UniversalRenderPipelineAsset_Renderer.asset
+  uploadId: 492567

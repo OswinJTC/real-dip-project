@@ -5,36 +5,47 @@ public class BabyHouseEntrance : MonoBehaviour
 {
     public Transform player;            // Reference to the player's transform
     public string nextScene = "BBLivingroomScene";  // Scene to load when entering
-
     private bool isPlayerNear = false; // Flag to check if the player is near the entrance
+    private BBHouseEntranceVideoManager videoManager; // Reference to the video manager
 
     void Update()
     {
         // Check if the player is near and presses the "E" key
-        if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerNear && Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("E pressed. Player entering the house...");
+            Debug.Log("E pressed. Attempting to enter the house...");
             EnterHouse();
+        }
+    }
+
+    void Start()
+    {
+        videoManager = FindObjectOfType<BBHouseEntranceVideoManager>();
+        if (videoManager == null)
+        {
+            Debug.LogError("TrapdoorVideoManager not found! This door requires a video manager for trap door functionality.");
         }
     }
 
     private void EnterHouse()
     {
-        Debug.Log("Entering the house...");
-
-        // Set the player's entry position when entering the house
-        Vector3 entryPosition = GetEntryPosition(nextScene);
-        GameManager.instance.SetPlayerEntryPosition(entryPosition);
-
-        // Use the TransitionManager to change scenes
-        if (TransitionManager.instance != null)
+        // Check if the player has the key
+        if (GameManager.instance != null && GameManager.instance.isKeyActive && GameManager.instance.isKeyInUsed)
         {
-            TransitionManager.instance.ChangeScene(nextScene);
+            Debug.Log("Player has the key. Entering the house...");
+        
+
+            // Set the player's entry position when entering the house
+            Vector3 entryPosition = GetEntryPosition(nextScene);
+            GameManager.instance.SetPlayerEntryPosition(entryPosition);
+
+            StartCoroutine(videoManager.PlayVideoAndChangeScene(nextScene)); 
+
         }
         else
         {
-            Debug.LogWarning("TransitionManager instance not found, loading the scene directly.");
-            SceneManager.LoadScene(nextScene);
+            Debug.Log("Player does not have the key. Cannot enter the house.");
+            UIManager.instance.ShowPrompt("Player does not have the key. Cannot enter the house.", 2f);
         }
     }
 
@@ -50,8 +61,8 @@ public class BabyHouseEntrance : MonoBehaviour
         return new Vector3(0f, 0f, 0f);
     }
 
-    // Detect when the player enters the entrance's trigger collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the entrance's trigger collider (3D)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -60,8 +71,8 @@ public class BabyHouseEntrance : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the entrance's trigger collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the entrance's trigger collider (3D)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

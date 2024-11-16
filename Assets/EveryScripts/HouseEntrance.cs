@@ -3,8 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class HouseEntrance : MonoBehaviour
 {
-    public Transform player;            // Reference to the player's transform
-    public string nextScene = "TutLRoomDScene";  // Scene to load when entering
+    public Transform player;                    // Reference to the player's transform
+    public string nextScene = "TutLRoomDScene"; // Scene to load when entering
+
+    private bool isPlayerNear = false;          // Flag to check if the player is near the entrance
 
     void Update()
     {
@@ -13,10 +15,9 @@ public class HouseEntrance : MonoBehaviour
         {
             Debug.Log("E pressed. Player entering the house...");
             EnterHouse();
+            UIManager.instance.ShowPrompt("Ugh.. It is too dark. Where's the electrical box..", 5f);
         }
     }
-
-    private bool isPlayerNear = false; // Flag to check if the player is near the entrance
 
     private void EnterHouse()
     {
@@ -50,8 +51,8 @@ public class HouseEntrance : MonoBehaviour
         return new Vector3(0f, 0f, 0f);
     }
 
-    // Detect when the player enters the entrance's trigger collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the entrance's trigger collider (3D version)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -60,8 +61,8 @@ public class HouseEntrance : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the entrance's trigger collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the entrance's trigger collider (3D version)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

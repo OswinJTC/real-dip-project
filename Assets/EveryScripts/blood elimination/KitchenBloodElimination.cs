@@ -33,7 +33,7 @@ public class KitchenBloodElimination : MonoBehaviour
                 {
                     float distanceToBlood = Vector3.Distance(transform.position, blood.transform.position);
 
-                    if (distanceToBlood <= detectionRadius && Input.GetKeyDown(KeyCode.Q))
+                    if (distanceToBlood <= detectionRadius && Input.GetKeyDown(KeyCode.Q) && GameManager.instance.isCleaningKitInUsed)
                     {
                         Destroy(blood);
                         bloodCount++;

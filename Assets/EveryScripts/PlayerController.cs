@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Camera Holder is not assigned in PlayerController.");
         }
 
-        // Adjust the player's scale and speed based on the current scene
+        // Adjust the player's scale, speed, and visibility based on the current scene
         AdjustPlayerAttributes(SceneManager.GetActiveScene().name);
 
         // Subscribe to the scene load event to adjust attributes on scene change
@@ -47,9 +47,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-        
+
         // Check if the player is in the designated scene, near the fuel, and the monster is not already spawned
-        if (SceneManager.GetActiveScene().name == "BedroomScene" && nearFuel && !GameManager.instance.GetMonsterSpawned())
+        if (SceneManager.GetActiveScene().name == "BedroomScene" && nearFuel && !GameManager.instance.isMonsterSpawned)
         {
             SpawnMonster();
         }
@@ -73,26 +73,42 @@ public class PlayerController : MonoBehaviour
         // Animation control
         animator.SetBool("Walk", movementInputX != 0 || movementInputZ != 0);
 
-        // Sprite flip
+        //Sprite Flip
+        if (movementInputX != 0) // Only change the direction if there is horizontal input
+        {
         spriteRenderer.flipX = movementInputX < 0;
+        }
+
     }
 
-    // Adjust player's scale and speed based on the scene
+    // Adjust player's scale, speed, and visibility based on the scene
     private void AdjustPlayerAttributes(string sceneName)
     {
-        if (sceneName == "outsideTerrain")
+        // Adjust visibility for specific puzzle scenes
+        if (sceneName == "Balloon Puzzle" || sceneName == "Paper Puzzle" || sceneName == "Phone Puzzle" || sceneName == "Bakery Puzzle")
         {
-            transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-            speed = 2f;
-            Debug.Log("Player scale and speed adjusted for outsideTerrain.");
+            spriteRenderer.enabled = false; // Hide the player
+            Debug.Log("Player made invisible for puzzle scenes.");
         }
-        else if(sceneName == "BBLivingroomScene" || sceneName == "BedroomScene" || sceneName == "KitchenScene" || sceneName == "BBBedroomClay" || sceneName == "BBKitchenClay" || sceneName == "BBLRoomClay")
+        else
         {
-            transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
-            speed = 20f;
-            Debug.Log("Player scale and speed adjusted for other scenes.");
+            spriteRenderer.enabled = true; // Show the player in other scenes
+
+            // Adjust player scale and speed based on the scene
+            if (sceneName == "outsideTerrain")
+            {
+                transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                speed = 4f;
+                Debug.Log("Player scale and speed adjusted for outsideTerrain.");
+            }
+            else if (sceneName == "BBLivingroomScene" || sceneName == "BedroomScene" || sceneName == "KitchenScene" || sceneName == "BBBedroomClay" || sceneName == "BBKitchenClay" || sceneName == "BBLRoomClay")
+            {
+                transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                speed = 20f;
+                Debug.Log("Player scale and speed adjusted for other scenes.");
+            }
         }
-    }  
+    }
 
     // Event handler for when a new scene is loaded
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -100,34 +116,45 @@ public class PlayerController : MonoBehaviour
         AdjustPlayerAttributes(scene.name);
     }
 
-    // Spawn the monster if conditions are met
     private void SpawnMonster()
     {
-        GameManager.instance.SetMonsterSpawned(true);
+        if (GameManager.instance.isMonsterSpawned)
+        {
+            Debug.Log("Monster is already spawned. Skipping spawn.");
+            return;
+        }
+
+        GameManager.instance.isMonsterSpawned = true;
+
         GameObject monster = GameManager.instance.monster;
 
         if (monster != null)
         {
+            Vector3 spawnPosition = new Vector3(-27.41f, 8.34f, 11.58f);
+            monster.transform.position = spawnPosition;
+
             SpriteRenderer renderer = monster.GetComponent<SpriteRenderer>();
             if (renderer != null)
             {
-                renderer.enabled = true; // Make the 2D monster visible
-                Debug.Log("2D Monster made visible.");
+                renderer.enabled = true;
+                Debug.Log("3D Monster made visible at position: " + spawnPosition);
             }
             else
             {
                 Debug.LogWarning("SpriteRenderer not found on the monster GameObject!");
             }
-            Debug.Log("2D Monster Spawned.");
+            UIManager.instance.ShowPrompt("WHAT IS THAT!? I need to *THINK* and find a way to get the fuel *(???)*", 10f);
+            GameManager.instance.UpdateThinkButton(); // Update the inventory UI to reflect the change
+            Debug.Log("3D Monster Spawned at position: " + spawnPosition);
         }
         else
         {
-            Debug.LogWarning("2D Monster reference not found in GameManager.");
+            Debug.LogWarning("3D Monster reference not found in GameManager.");
         }
     }
 
-    // Detect when the player enters the "fuel" area using 2D collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the "fuel" area using 3D collider
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Fuel"))
         {
@@ -136,8 +163,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the "fuel" area using 2D collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the "fuel" area using 3D collider
+    private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Fuel"))
         {

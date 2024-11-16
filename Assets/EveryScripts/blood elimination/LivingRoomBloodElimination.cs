@@ -36,7 +36,7 @@ public class LivingRoomBloodElimination : MonoBehaviour
                     // Use Vector2.Distance for 2D distance checking
                     float distanceToBlood = Vector2.Distance(transform.position, blood.transform.position);
 
-                    if (distanceToBlood <= detectionRadius && Input.GetKeyDown(KeyCode.Q))
+                    if (distanceToBlood <= detectionRadius && Input.GetKeyDown(KeyCode.Q) && GameManager.instance.isCleaningKitInUsed)
                     {
                         Destroy(blood);
                         bloodCount++;

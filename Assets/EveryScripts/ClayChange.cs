@@ -3,8 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ClayChange : MonoBehaviour
 {
-    private string previousRealScene = ""; // Store the name of the real scene before switching to clay
-    private Vector3 storedPlayerPosition; // Store the player's position when switching from real to clay
+    public string previousRealScene = ""; // Store the name of the real scene before switching to clay
 
     void Update()
     {
@@ -14,39 +13,43 @@ public class ClayChange : MonoBehaviour
             ToggleClayStatus();
         }
     }
-
     private void ToggleClayStatus()
     {
-        // Get the current scene name from the GameManager
+        // Check if the player has the hourglass before allowing clay/real switch
+        if (!GameManager.instance.isHourglassActive)
+        {
+            Debug.Log("Hourglass is not active. Cannot switch between clay and real scenes.");
+            UIManager.instance.ShowPrompt("Hourglass is not active. Cannot switch between clay and real scenes.", 2f);
+            return; // Exit the function if the hourglass is not active
+        }
+
         string currentSceneName = SceneManager.GetActiveScene().name;
 
-        // Check the current status from GameManager to decide the transition
         if (GameManager.instance.GetClayStatus())
         {
-            // Switch back to the real scene if currently in clay
             if (!string.IsNullOrEmpty(previousRealScene))
             {
-                GameManager.instance.SetPlayerEntryPosition(storedPlayerPosition);
-                SceneManager.LoadScene(previousRealScene);
+                // Save the monster's current position before switching back to the real scene
+                GameManager.instance.SaveMonsterPosition(currentSceneName);
                 GameManager.instance.SetClayStatus(false);
+                TransitionManager.instance.ChangeScene(previousRealScene);
+                //SceneManager.LoadScene(previousRealScene);
                 Debug.Log("Switched back to the real scene: " + previousRealScene);
             }
         }
         else
         {
-            // Store the player's current position before switching to clay
-            storedPlayerPosition = GameManager.instance.player.transform.position;
-            Debug.Log($"Stored player position before switching to clay: {storedPlayerPosition}");
+            // Save both player and monster positions before switching to clay
+            GameManager.instance.SavePlayerPosition(currentSceneName);
+            GameManager.instance.SaveMonsterPosition(currentSceneName);
 
-            // Determine the corresponding clay scene name based on the current scene
             string claySceneName = GetCorrespondingClayScene(currentSceneName);
-
             if (!string.IsNullOrEmpty(claySceneName))
             {
                 previousRealScene = currentSceneName;
-                GameManager.instance.SetPlayerEntryPosition(storedPlayerPosition);
-                SceneManager.LoadScene(claySceneName);
                 GameManager.instance.SetClayStatus(true);
+                TransitionManager.instance.ChangeScene(claySceneName);
+                //SceneManager.LoadScene(claySceneName);
                 Debug.Log("Switched to the clay scene: " + claySceneName);
             }
         }
@@ -57,11 +60,15 @@ public class ClayChange : MonoBehaviour
         // Map each real scene to its corresponding clay scene
         switch (currentScene)
         {
-            case "BedroomScene": return "BBBedroomClay";
-            case "BBLivingroomScene": return "BBLRoomClay";
-            case "KitchenScene": return "BBKitchenClay";
+            case "BedroomScene":
+                return "BBBedroomClay";
+            case "BBLivingroomScene":
+                return "BBLRoomClay";
+            case "KitchenScene":
+                return "BBKitchenClay";
             // Add more mappings as needed
-            default: return "";
+            default:
+                return "";
         }
     }
 }

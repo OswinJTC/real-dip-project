@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CribInteraction : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class CribInteraction : MonoBehaviour
         // Check if the player is near the crib and presses the "E" key
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
+            UIManager.instance.ShowPrompt("Going to the MCQs...", 2f);
             TogglePanel(); // Call method to toggle panel visibility
         }
     }
@@ -27,6 +29,8 @@ public class CribInteraction : MonoBehaviour
     {
         if (panel != null)
         {
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            GameManager.instance.SavePlayerPosition(currentSceneName);
             bool isActive = panel.activeSelf; // Check current state
             panel.SetActive(!isActive); // Toggle active state
             Debug.Log(isActive ? "Panel closed." : "Panel opened."); // Log current action
@@ -37,8 +41,8 @@ public class CribInteraction : MonoBehaviour
         }
     }
 
-    // Detect when the player enters the crib's trigger collider
-    private void OnTriggerEnter2D(Collider2D other)
+    // Detect when the player enters the crib's trigger collider (3D)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -47,15 +51,15 @@ public class CribInteraction : MonoBehaviour
         }
     }
 
-    // Detect when the player exits the crib's trigger collider
-    private void OnTriggerExit2D(Collider2D other)
+    // Detect when the player exits the crib's trigger collider (3D)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
             Debug.Log("Player is no longer near the crib.");
 
-            // Optionally close the panel when player exits
+            // Optionally close the panel when the player exits
             if (panel != null && panel.activeSelf)
             {
                 panel.SetActive(false); // Close the panel when player leaves

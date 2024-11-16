@@ -54,6 +54,7 @@ public class ElectricBoxLightControl : MonoBehaviour
     void GoToPuzzleScene()
     {
         SceneManager.LoadScene("LogicPuzzle");
+        UIManager.instance.ShowPrompt("Solve the logic puzzle to turn the light on..", 4f);
     }
 
     public void TurnOnBrightLights()

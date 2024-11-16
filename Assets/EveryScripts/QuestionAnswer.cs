@@ -1,37 +1,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;  // Import TextMeshPro
-using UnityEngine.SceneManagement;  // Import SceneManager
+using TMPro;
 
 public class QuestionAnswer : MonoBehaviour
 {
-    public TextMeshProUGUI questionText;  // TextMeshPro for question text
-    public Button[] answerButtons;  // Array of buttons for the answers
-    public Color selectedTextColor = Color.yellow;  // Color for the selected text
-    public Color defaultTextColor = Color.white;  // Default color for button text
+    public TextMeshProUGUI questionText;
+    public Button[] answerButtons;
+    public Color selectedTextColor = Color.yellow;
+    public Color defaultTextColor = Color.white;
 
-    private List<Question> questions = new List<Question>();  // List of questions
-    private int currentQuestionIndex = 0;  // Track the current question
-    private int correctAnswersCount = 0;  // Counter for correct answers
-    private List<int> selectedAnswers = new List<int>();  // List to track selected answers
+    private List<Question> questions = new List<Question>();
+    private int currentQuestionIndex = 0;
+    private int correctAnswersCount = 0;
+    private List<int> selectedAnswers = new List<int>();
+
+    private ThreeCorrectVideoManager videoManager3;
+    private TwoCorrectVideoManager videoManager2;
+    private OneCorrectVideoManager videoManager1;
+    private ZeroCorrectVideoManager videoManager0;
+    private GameObject transitionCanvas; // To reference the TransitionCanvas
 
     void Start()
     {
-        // Initialize questions
         InitializeQuestions();
-
-        // Display the first question
         DisplayQuestion(currentQuestionIndex);
 
-        // Attach OnClick listener to each button
         foreach (var button in answerButtons)
         {
             button.onClick.AddListener(delegate { OnAnswerSelected(button); });
         }
+
+        videoManager3 = FindObjectOfType<ThreeCorrectVideoManager>();
+        videoManager2 = FindObjectOfType<TwoCorrectVideoManager>();
+        videoManager1 = FindObjectOfType<OneCorrectVideoManager>();
+        videoManager0 = FindObjectOfType<ZeroCorrectVideoManager>();
+
+        LocateTransitionCanvas();
     }
 
-    // Initialize a set of questions and correct answers
     void InitializeQuestions()
     {
         questions.Add(new Question("How did Balloon Baby die?", new List<string> { "Food Poisoning", "Sliced up", "Strangled to Death", "Drowned to death" }, new List<int> { 2 }));
@@ -39,10 +46,8 @@ public class QuestionAnswer : MonoBehaviour
         questions.Add(new Question("What was the weapon used on Balloon Baby?", new List<string> { "Axe", "Balloon", "Knife", "Cake" }, new List<int> { 1 }));
     }
 
-    // Display the question and reset the buttons
     void DisplayQuestion(int questionIndex)
     {
-        // Safety check for the question index
         if (questionIndex < 0 || questionIndex >= questions.Count)
         {
             Debug.LogError("Question index is out of range: " + questionIndex);
@@ -50,141 +55,62 @@ public class QuestionAnswer : MonoBehaviour
         }
 
         Question q = questions[questionIndex];
-
-        // Safety check for questionText
-        if (questionText == null)
-        {
-            Debug.LogError("questionText is not assigned!");
-            return;
-        }
-
         questionText.text = q.questionText;
-
-        // Clear the selected answers for the new question
         selectedAnswers.Clear();
 
-        // Reset button text colors
         foreach (Button button in answerButtons)
         {
             if (button != null)
             {
-                TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+                var buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
                 if (buttonText != null)
                 {
-                    buttonText.color = defaultTextColor;  // Reset button text color
+                    buttonText.color = defaultTextColor;
                 }
-                button.interactable = true;  // Enable buttons
+                button.interactable = true;
             }
         }
 
-        // Set text for each answer button using TextMeshProUGUI
         for (int i = 0; i < answerButtons.Length; i++)
         {
-            if (i < q.answers.Count) // Check if there are enough answers
+            if (i < q.answers.Count)
             {
                 if (answerButtons[i] != null)
                 {
-                    answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = q.answers[i];  // Update answer text
-                }
-                else
-                {
-                    Debug.LogError($"Answer button at index {i} is not assigned!");
+                    answerButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = q.answers[i];
                 }
             }
-            else
+            else if (answerButtons[i] != null)
             {
-                answerButtons[i].gameObject.SetActive(false); // Hide buttons if there are no answers
+                answerButtons[i].gameObject.SetActive(false);
             }
         }
     }
 
-    // Called when any answer button is clicked
     void OnAnswerSelected(Button selectedButton)
     {
-        // Get the index of the selected button
         int selectedIndex = System.Array.IndexOf(answerButtons, selectedButton);
 
-        // Safety check for selected index
         if (selectedIndex < 0 || selectedIndex >= answerButtons.Length)
         {
-            Debug.LogError("Selected button index is out of range: " + selectedIndex);
+            Debug.LogError("Selected button index out of range!");
             return;
         }
 
-        // Check if the current question allows multiple answers or single answer
         Question currentQuestion = questions[currentQuestionIndex];
 
-        if (currentQuestionIndex == 1)  // Only change text color for question 2
+        if (!selectedAnswers.Contains(selectedIndex))
         {
-            if (currentQuestion.correctAnswers.Count == 2)
-            {
-                // Toggle the selection of the answer for multiple-choice questions
-                if (selectedAnswers.Contains(selectedIndex))
-                {
-                    selectedAnswers.Remove(selectedIndex);  // Deselect if already selected
-                    // Reset the button text color if deselected
-                    TextMeshProUGUI buttonText = selectedButton.GetComponentInChildren<TextMeshProUGUI>();
-                    if (buttonText != null)
-                    {
-                        buttonText.color = defaultTextColor;  // Reset text color
-                    }
-                }
-                else
-                {
-                    if (selectedAnswers.Count < 2)
-                    {
-                        selectedAnswers.Add(selectedIndex);  // Select the answer
-                        // Change the button text color to indicate selection
-                        TextMeshProUGUI buttonText = selectedButton.GetComponentInChildren<TextMeshProUGUI>();
-                        if (buttonText != null)
-                        {
-                            buttonText.color = selectedTextColor;  // Change text color
-                        }
-                    }
-                    else
-                    {
-                        // Provide feedback for selecting more than 2 answers
-                        questionText.text = "Please select only 2 answers.";
-                        return; // Exit if more than 2 answers are selected
-                    }
-                }
-            }
-            else
-            {
-                // For single answer questions, replace the selection
-                selectedAnswers.Clear();  // Clear previous selections
-                selectedAnswers.Add(selectedIndex);  // Add the new selection
-                // Reset color for all buttons and change text color of the selected button
-                foreach (Button button in answerButtons)
-                {
-                    TextMeshProUGUI buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-                    if (buttonText != null)
-                    {
-                        buttonText.color = defaultTextColor;  // Reset button text color
-                    }
-                }
-                TextMeshProUGUI selectedText = selectedButton.GetComponentInChildren<TextMeshProUGUI>();
-                if (selectedText != null)
-                {
-                    selectedText.color = selectedTextColor;  // Change text color of selected button
-                }
-            }
-        }
-        else
-        {
-            // For other questions, just clear previous selections without changing text color
-            selectedAnswers.Clear();
             selectedAnswers.Add(selectedIndex);
+            selectedButton.GetComponentInChildren<TextMeshProUGUI>().color = selectedTextColor;
         }
 
-        // Check if the correct answers are selected
         if (selectedAnswers.Count == currentQuestion.correctAnswers.Count &&
             selectedAnswers.TrueForAll(answer => currentQuestion.correctAnswers.Contains(answer)))
         {
-            correctAnswersCount++;  // Increment counter for correct answers
+            correctAnswersCount++;
         }
 
-        // Move to the next question if the correct number of answers is selected
         if (selectedAnswers.Count == currentQuestion.correctAnswers.Count)
         {
             currentQuestionIndex++;
@@ -194,14 +120,65 @@ public class QuestionAnswer : MonoBehaviour
             }
             else
             {
-                // Handle scene transition after the third question
-                SceneManager.LoadScene("After MCQ");  // Replace "After MCQ" with the actual name of your scene
+                DisplayResults();
             }
+        }
+    }
+
+    void DisplayResults()
+    {
+        ToggleTransitionCanvas(true);
+
+        if (correctAnswersCount == 3 && videoManager3 != null)
+        {
+            StartCoroutine(videoManager3.PlayVideoAndChangeScene("After MCQ"));
+        }
+        else if (correctAnswersCount == 2 && videoManager2 != null)
+        {
+            StartCoroutine(videoManager2.PlayVideoAndChangeScene("After MCQ"));
+        }
+        else if (correctAnswersCount == 1 && videoManager1 != null)
+        {
+            StartCoroutine(videoManager1.PlayVideoAndChangeScene("After MCQ"));
+        }
+        else if (videoManager0 != null)
+        {
+            StartCoroutine(videoManager0.PlayVideoAndChangeScene("After MCQ"));
+        }
+
+        ToggleTransitionCanvas(false);
+    }
+
+    void LocateTransitionCanvas()
+    {
+        var allCanvases = FindObjectsOfType<Canvas>();
+        foreach (var canvas in allCanvases)
+        {
+            if (canvas.name == "TransitionCanvas")
+            {
+                transitionCanvas = canvas.gameObject;
+                Debug.Log("TransitionCanvas found successfully.");
+                return;
+            }
+        }
+
+        Debug.LogWarning("TransitionCanvas not found in the scene!");
+    }
+
+    void ToggleTransitionCanvas(bool state)
+    {
+        if (transitionCanvas != null)
+        {
+            transitionCanvas.SetActive(state);
+            Debug.Log($"TransitionCanvas set to {(state ? "Active" : "Inactive")}.");
+        }
+        else
+        {
+            Debug.LogWarning("Cannot toggle TransitionCanvas because it is not assigned.");
         }
     }
 }
 
-// Define a Question class to store the question text and answers
 [System.Serializable]
 public class Question
 {

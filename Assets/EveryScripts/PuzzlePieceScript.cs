@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PuzzlePieceScript : MonoBehaviour
 {
@@ -55,7 +56,24 @@ public class PuzzlePieceScript : MonoBehaviour
 
         if (IsAllMissionComplete())
         {
-            Debug.Log("You win");
+            GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
+
+            // Set the paper's active status in the GameManager
+            GameManager.instance.isPaperActive = true;
+            GameManager.instance.UpdateInventoryUI(); // Update the inventory UI to reflect the change
+            UIManager.instance.ShowPrompt("Paper collected...all the best for the puzzle...", 2f);
+
+            SceneManager.LoadScene("BedroomScene");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Exiting the puzzle and returning to the real room...");
+
+            GameManager.instance.SaveMonsterPosition(SceneManager.GetActiveScene().name);
+
+            SceneManager.LoadScene(GameObject.FindObjectOfType<ClayChange>().previousRealScene);
+            
         }
 
        
@@ -75,4 +93,3 @@ public class PuzzlePieceScript : MonoBehaviour
         return true;
     }
 }
-

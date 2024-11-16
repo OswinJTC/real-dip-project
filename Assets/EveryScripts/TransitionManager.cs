@@ -3,12 +3,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
-
 public class TransitionManager : MonoBehaviour
 {
     public static TransitionManager instance;   // Singleton pattern to persist across scenes
     public Image fadeImage;                     // Reference to the fade image for transitions
     public float fadeDuration = 1f;             // Duration of the fade
+
+    private GameObject transitionCanvas;        // Reference to the TransitionCanvas
 
     private void Awake()
     {
@@ -16,10 +17,45 @@ public class TransitionManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);      // Ensure this object persists across scenes
+            SceneManager.sceneLoaded += OnSceneLoaded; // Subscribe to sceneLoaded event
         }
         else
         {
             Destroy(gameObject);                // Prevent duplicate instances
+        }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded; // Unsubscribe to avoid memory leaks
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (transitionCanvas == null)
+        {
+            transitionCanvas = GameObject.Find("TransitionCanvas"); // Find the TransitionCanvas in the scene
+        }
+
+        if (scene.name == "MCQ")
+        {
+            if (transitionCanvas != null)
+            {
+                transitionCanvas.SetActive(false); // Deactivate the TransitionCanvas
+                Debug.Log("TransitionCanvas deactivated in scene: " + scene.name);
+            }
+            else
+            {
+                Debug.LogWarning("TransitionCanvas not found in scene: " + scene.name);
+            }
+        }
+        else
+        {
+            if (transitionCanvas != null)
+            {
+                transitionCanvas.SetActive(true); // Reactivate the TransitionCanvas
+                Debug.Log("TransitionCanvas reactivated in scene: " + scene.name);
+            }
         }
     }
 

@@ -25,7 +25,7 @@ public class StudyRoomVideoManager  : MonoBehaviour
         if (videoPlayer != null)
         {
             // Set your video URL or clip
-            videoPlayer.url = "https://drive.google.com/uc?export=download&id=1GTgl3EuYgct5y32wxYqM43BidkRWV4z1";
+            videoPlayer.url = "https://drive.google.com/uc?export=download&id=1zc2DCIpDbFmkxPWTjbwAeuETUhyn34_I";
             Debug.Log("Video URL set: " + videoPlayer.url);
 
             videoPlayer.Prepare();
@@ -61,6 +61,7 @@ public class StudyRoomVideoManager  : MonoBehaviour
     private void EndVideo(VideoPlayer vp)
     {
         Debug.Log("Video finished playing.");
+        UIManager.instance.ShowPrompt("Find out the trapdoor to enter the basement...", 5f);
 
         // Show the canvas again after the video ends
         if (canvas != null)

@@ -6,26 +6,45 @@ using UnityEngine.SceneManagement;
 public class TrapdoorVideoManager : MonoBehaviour
 {
     public VideoPlayer videoPlayer;  // The VideoPlayer component
-    public GameObject canvas;  // Reference to the canvas you want to hide
+    private GameObject persistentCanvas;  // Reference to the PersistentCanvas
 
     void Start()
     {
+        // Check if VideoPlayer is assigned
         if (videoPlayer == null)
         {
-            Debug.LogError("VideoPlayer not assigned to TrapdoorVideoManager!");
+            Debug.LogError("VideoPlayer not assigned to BasementVideoManager!");
         }
 
-        if (canvas == null)
+        // Find the PersistentCanvas through GameManager
+        AllocatePersistentCanvas();
+    }
+
+    private void AllocatePersistentCanvas()
+    {
+        // Access the PersistentCanvas from GameManager
+        if (GameManager.instance != null && GameManager.instance.PersistentCanvas != null)
         {
-            Debug.LogError("Canvas not assigned to TrapdoorVideoManager!");
+            persistentCanvas = GameManager.instance.PersistentCanvas.gameObject;
+            Debug.Log("PersistentCanvas found successfully via GameManager.");
+        }
+        else
+        {
+            Debug.LogError("PersistentCanvas not found! Ensure it is assigned in the GameManager.");
         }
     }
 
     // Method to play the video and transition to the basement scene
     public IEnumerator PlayVideoAndChangeScene(string sceneName)
     {
-        // Set your video URL or clip (or configure in Inspector)
-        videoPlayer.url = "https://drive.google.com/uc?export=download&id=1GTgl3EuYgct5y32wxYqM43BidkRWV4z1";
+        if (videoPlayer == null)
+        {
+            Debug.LogError("VideoPlayer is not assigned!");
+            yield break;
+        }
+
+        // Set your video URL or clip
+        videoPlayer.url = "https://drive.google.com/uc?export=download&id=1zc2DCIpDbFmkxPWTjbwAeuETUhyn34_I";
         Debug.Log("Video URL set: " + videoPlayer.url);
 
         // Prepare the video
@@ -35,10 +54,15 @@ public class TrapdoorVideoManager : MonoBehaviour
             yield return null; // Wait until the video is fully prepared
         }
 
-        // Hide the canvas before playing the video
-        if (canvas != null)
+        // Hide the PersistentCanvas before playing the video
+        if (persistentCanvas != null)
         {
-            canvas.SetActive(false);  // Hide the canvas
+            persistentCanvas.SetActive(false);  // Hide the canvas
+            Debug.Log("PersistentCanvas hidden.");
+        }
+        else
+        {
+            Debug.LogWarning("PersistentCanvas is null. Cannot hide.");
         }
 
         // Play the video
@@ -51,14 +75,20 @@ public class TrapdoorVideoManager : MonoBehaviour
             yield return null;
         }
 
-        // Re-enable the canvas after the video ends
-        if (canvas != null)
+        // Re-enable the PersistentCanvas after the video ends
+        if (persistentCanvas != null)
         {
-            canvas.SetActive(true);  // Show the canvas
+            persistentCanvas.SetActive(true);  // Show the canvas
+            Debug.Log("PersistentCanvas shown.");
+        }
+        else
+        {
+            Debug.LogWarning("PersistentCanvas is null. Cannot show.");
         }
 
         // Transition to the new scene
         Debug.Log("Video finished. Transitioning to " + sceneName);
         SceneManager.LoadScene(sceneName);  // Load the scene after the video
+        UIManager.instance.ShowPrompt("Look around for help..", 8f);
     }
 }
